@@ -1,0 +1,224 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta charset="utf-8">
+<title>The Reality Check</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --paper:#F7F8F6;--surface:#FFFFFF;--surface-2:#EFF1ED;--ink:#14201C;--ink-soft:#3A4640;
+    --muted:#5F6B63;--hair:#DBE0D9;--hair-strong:#C4CCC3;--pine:#1E5E45;--pine-soft:#E4EEE7;
+    --brass:#9C6B1E;--brass-soft:#F3E9D6;--oxblood:#A6382E;--oxblood-soft:#F5E2DE;
+    --shadow:0 1px 2px rgba(20,32,28,.05),0 12px 30px -18px rgba(20,32,28,.20);
+    --shadow-lift:0 2px 4px rgba(20,32,28,.06),0 22px 46px -24px rgba(20,32,28,.28);
+  }
+  :root:not([data-theme="light"]){@media (prefers-color-scheme:dark){
+    --paper:#0F1512;--surface:#161D19;--surface-2:#1D2621;--ink:#E8EDE8;--ink-soft:#C3CCC5;
+    --muted:#8E9A91;--hair:#2A342E;--hair-strong:#3A463F;--pine:#5FB489;--pine-soft:#17271F;
+    --brass:#D2A257;--brass-soft:#2A2214;--oxblood:#E08B7F;--oxblood-soft:#2E1A17;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 14px 34px -18px rgba(0,0,0,.7);--shadow-lift:0 2px 6px rgba(0,0,0,.5),0 24px 48px -24px rgba(0,0,0,.8);
+  }}
+  :root[data-theme="dark"]{
+    --paper:#0F1512;--surface:#161D19;--surface-2:#1D2621;--ink:#E8EDE8;--ink-soft:#C3CCC5;
+    --muted:#8E9A91;--hair:#2A342E;--hair-strong:#3A463F;--pine:#5FB489;--pine-soft:#17271F;
+    --brass:#D2A257;--brass-soft:#2A2214;--oxblood:#E08B7F;--oxblood-soft:#2E1A17;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 14px 34px -18px rgba(0,0,0,.7);--shadow-lift:0 2px 6px rgba(0,0,0,.5),0 24px 48px -24px rgba(0,0,0,.8);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"IBM Plex Sans",system-ui,sans-serif;font-size:15.5px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:880px;margin:0 auto;padding:0 22px}
+  h1,h2,h3{font-family:"Newsreader",Georgia,serif;font-weight:600;text-wrap:balance;line-height:1.12;margin:0}
+  p{margin:0 0 .9em}p:last-child{margin-bottom:0}
+  strong{font-weight:600;color:var(--ink)}
+  .mono{font-family:"IBM Plex Mono",monospace}
+
+  .mast{padding:44px 0 22px;border-bottom:2px solid var(--ink)}
+  .mast-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+  .brand{font-family:"IBM Plex Mono",monospace;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+  .brand b{color:var(--ink);font-weight:600}
+  h1{font-size:clamp(2rem,5.5vw,2.9rem);letter-spacing:-.02em}
+  h1 em{font-style:italic;color:var(--oxblood)}
+  .eyebrow{font-family:"IBM Plex Mono",monospace;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--oxblood);margin-bottom:8px}
+
+  .rule{background:var(--ink);color:#EAF0EC;border-radius:14px;padding:22px 26px;margin:22px 0 6px;box-shadow:var(--shadow-lift)}
+  :root[data-theme="dark"] .rule,:root:not([data-theme="light"]) .rule{background:#0A0F0D;border:1px solid var(--hair)}
+  @media (prefers-color-scheme:light){:root:not([data-theme="dark"]) .rule{background:var(--ink)}}
+  .rule .k{font-family:"IBM Plex Mono",monospace;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:#E8A79C;margin-bottom:8px}
+  .rule p{margin:0;font-family:"Newsreader",serif;font-size:1.26rem;line-height:1.4;color:#fff}
+  .rule b{color:#E8A79C;font-weight:600}
+
+  section{padding:32px 0;border-top:1px solid var(--hair)}
+  .sh{display:flex;align-items:baseline;gap:12px;margin-bottom:6px}
+  .sh .n{font-family:"IBM Plex Mono",monospace;font-size:.72rem;font-weight:600;color:var(--oxblood)}
+  .sh h2{font-size:1.42rem;letter-spacing:-.01em}
+  .lede{font-size:.98rem;color:var(--ink-soft);max-width:70ch;margin-bottom:16px}
+
+  /* timeline */
+  .tl{display:flex;flex-direction:column;gap:0;margin-top:4px}
+  .tlrow{display:grid;grid-template-columns:130px 1fr;gap:16px;padding:12px 0;border-top:1px solid var(--hair)}
+  .tlrow:first-child{border-top:none}
+  .tlrow .when{font-family:"IBM Plex Mono",monospace;font-size:.8rem;font-weight:600;color:var(--pine);padding-top:1px}
+  .tlrow .t{font-weight:600;font-size:.94rem;margin-bottom:1px}
+  .tlrow .d{font-size:.88rem;color:var(--ink-soft)}
+
+  .earbox{border:1px solid var(--hair);border-radius:12px;background:var(--surface);box-shadow:var(--shadow);overflow:hidden;margin-top:4px}
+  .earrow{display:grid;grid-template-columns:1fr 1fr;gap:0}
+  .earrow>div{padding:13px 16px;border-bottom:1px solid var(--hair)}
+  .earrow .said{color:var(--oxblood);font-size:.88rem}
+  .earrow .said::before{content:"“ ";font-family:"Newsreader",serif}
+  .earrow .said::after{content:" ”";font-family:"Newsreader",serif}
+  .earrow .real{border-left:1px solid var(--hair);font-size:.86rem;color:var(--ink-soft)}
+  .earrow .real b{color:var(--pine)}
+  .earhead{display:grid;grid-template-columns:1fr 1fr;gap:0;background:var(--surface-2);border-bottom:1px solid var(--hair)}
+  .earhead div{padding:9px 16px;font-family:"IBM Plex Mono",monospace;font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;font-weight:600;color:var(--muted)}
+  .earhead div:last-child{border-left:1px solid var(--hair);color:var(--pine)}
+
+  .roles{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:4px}
+  .rolec{border:1px solid var(--hair);border-radius:12px;background:var(--surface);box-shadow:var(--shadow);padding:15px 17px}
+  .rolec h3{font-size:1.05rem;margin-bottom:3px}
+  .rolec .sub{font-family:"IBM Plex Mono",monospace;font-size:.68rem;letter-spacing:.05em;text-transform:uppercase;color:var(--pine);margin-bottom:8px}
+  .rolec p{font-size:.86rem;color:var(--ink-soft);margin:0}
+
+  .cadence{display:flex;flex-direction:column;gap:0;margin-top:14px}
+  .cad{display:grid;grid-template-columns:150px 1fr;gap:16px;padding:11px 0;border-top:1px solid var(--hair)}
+  .cad:first-child{border-top:none}
+  .cad .p{font-family:"IBM Plex Mono",monospace;font-size:.78rem;font-weight:600;color:var(--brass)}
+  .cad .d{font-size:.89rem;color:var(--ink-soft)}
+  .cad .d b{color:var(--ink)}
+
+  .note{border:1px solid var(--hair);border-left:4px solid var(--brass);background:var(--brass-soft);border-radius:10px;padding:14px 18px;margin-top:16px}
+  .note.pine{border-left-color:var(--pine);background:var(--pine-soft)}
+  .note.ox{border-left-color:var(--oxblood);background:var(--oxblood-soft)}
+  .note .k{display:block;font-family:"IBM Plex Mono",monospace;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:6px;font-weight:600;color:var(--brass)}
+  .note.pine .k{color:var(--pine)}.note.ox .k{color:var(--oxblood)}
+  .note p{margin:0 0 .6em;font-size:.9rem;color:var(--ink-soft)}.note p:last-child{margin-bottom:0}
+
+  .antidotes{list-style:none;margin:14px 0 0;padding:0}
+  .antidotes li{padding:8px 0 8px 22px;position:relative;font-size:.9rem;color:var(--ink-soft);border-top:1px solid var(--hair)}
+  .antidotes li:first-child{border-top:none}
+  .antidotes li::before{content:"→";position:absolute;left:0;color:var(--pine);font-weight:700}
+  .antidotes li b{color:var(--ink)}
+
+  .footer{padding:26px 0 50px;color:var(--muted);font-size:.78rem}.footer b{color:var(--ink)}
+
+  @media (max-width:680px){
+    .roles{grid-template-columns:1fr}
+    .earrow,.earhead{grid-template-columns:1fr}
+    .earrow .real{border-left:none;border-top:1px dashed var(--hair)}
+    .earhead div:last-child{border-left:none}
+    .tlrow,.cad{grid-template-columns:1fr;gap:2px}.tlrow .when{color:var(--pine)}
+    .rule p{font-size:1.1rem}
+  }
+</style>
+
+<div class="wrap">
+
+  <header class="mast">
+    <div class="mast-top">
+      <div class="brand"><b>Acquisition Memo</b> · No.&nbsp;11 — The Reality Check</div>
+      <div class="brand">14 Sep 2026 · read when excited</div>
+    </div>
+    <div class="eyebrow">The sober counterweight to the rest of the playbook</div>
+    <h1>The <em>Reality Check</em></h1>
+  </header>
+
+  <div class="rule">
+    <div class="k">Read this when you're most keen</div>
+    <p>Everything else here is built to make you <b>eager.</b> This memo exists to keep you honest: expect it to take <b>a year-plus</b>, refuse <b>happy ears</b>, and be truthful now about <b>who runs it and how often you're in the UK.</b></p>
+  </div>
+
+  <section>
+    <div class="sh"><span class="n">01</span><h2>The real timeline — it takes longer than you think</h2></div>
+    <p class="lede">A first acquisition is a marathon. Every stage slips, sellers go cold, and a good share of searches never close a first deal. Plan for the long version.</p>
+    <div class="tl">
+      <div class="tlrow"><div class="when">Weeks 0–6</div><div><div class="t">Get ready</div><div class="d">Buy box, advisers lined up, funding route understood. The easy part.</div></div></div>
+      <div class="tlrow"><div class="when">Month 1–6+</div><div><div class="t">Sourcing &amp; outreach</div><div class="d">The hardest, longest phase. Hundreds of letters → a handful of real conversations. Runs continuously in the background the whole way.</div></div></div>
+      <div class="tlrow"><div class="when">Per live target</div><div><div class="t">Calls → Heads of Terms</div><div class="d">Weeks to a couple of months to build trust and agree an outline — <em>if</em> they're a real seller.</div></div></div>
+      <div class="tlrow"><div class="when">1–3 months</div><div><div class="t">Due diligence</div><div class="d">Where deals most often die. Slow, detailed, and where surprises surface.</div></div></div>
+      <div class="tlrow"><div class="when">4–10 weeks</div><div><div class="t">Legals + funding → completion</div><div class="d">Almost always slips. Lenders and lawyers take longer than promised.</div></div></div>
+      <div class="tlrow"><div class="when">Realistic total</div><div><div class="t">12–18 months to a first completed deal</div><div class="d">Some do it in 6–9 with luck; many take 2 years; a large share stop before closing one.</div></div></div>
+    </div>
+    <div class="note ox"><span class="k">The emotional timeline nobody warns you about</span><p>You will fall for a business and watch it collapse in diligence, or the seller go cold after months. It stings. <strong>Don't bet emotionally on any single deal until it's signed</strong> — always keep other conversations alive so no one deal can break your morale or your judgement.</p></div>
+  </section>
+
+  <section>
+    <div class="sh"><span class="n">02</span><h2>Don't get happy ears</h2></div>
+    <p class="lede">"Happy ears" — hearing what you want to hear because you're keen to do a deal. It's the number-one way eager first-timers lose money. The story is always rosier than the numbers.</p>
+    <div class="earbox">
+      <div class="earhead"><div>What you'll hear</div><div>What it really means</div></div>
+      <div class="earrow">
+        <div class="said">It basically runs itself</div>
+        <div class="real">Until you prove it, assume it runs on <b>them</b>. Verify who actually covers holidays and quotes.</div>
+      </div>
+      <div class="earrow">
+        <div class="said">We're about to win a big contract</div>
+        <div class="real">Price the business on <b>what it earns today</b>, never on a promise that may never land.</div>
+      </div>
+      <div class="earrow">
+        <div class="said">The staff will all stay</div>
+        <div class="real">Get it in writing where you can, and <b>meet the key people yourself</b>. The manager is the whole deal.</div>
+      </div>
+      <div class="earrow">
+        <div class="said">Once you strip out my costs it makes loads</div>
+        <div class="real">Add-backs are where sellers inflate profit. Accept only <b>genuine, provable</b> ones — the accountant checks.</div>
+      </div>
+      <div class="earrow">
+        <div class="said">Lots of interest, you'll need to move fast</div>
+        <div class="real">Classic pressure (from broker or seller). Real deals survive you taking the time to do it properly.</div>
+      </div>
+    </div>
+    <p style="font-weight:600;margin:18px 0 0">The antidotes</p>
+    <ul class="antidotes">
+      <li><b>Trust the numbers, not the narrative.</b> Everything material is verified in diligence, or it doesn't count.</li>
+      <li><b>Write your walk-away lines before you fall for a business</b> — the Scorecard's red flags — and hold them.</li>
+      <li><b>One of you is always the sceptic.</b> Split the roles: one gets excited, the other pokes holes. Swap per deal.</li>
+      <li><b>Ask the killer question:</b> "would I still buy this, at this price, if the seller's best case never happens?" If no — renegotiate or walk.</li>
+      <li><b>Patience is the edge.</b> The discipline to pass on the first deal and wait for the right one is what separates winners.</li>
+    </ul>
+  </section>
+
+  <section>
+    <div class="sh"><span class="n">03</span><h2>Two of you, over and back to the UK — the operating reality</h2></div>
+    <p class="lede">You'll own a real UK business with real staff, run by two people based mostly in Ireland. This is workable — the Common Travel Area and cheap short flights make it very doable — but only if you're honest now about how it actually runs.</p>
+
+    <div class="note pine"><span class="k">The one thing everything rests on</span><p><strong>The on-site manager is your anchor.</strong> A capable, retained second-in-command running day-to-day is what makes "over and back" possible. If they're strong and stay, the model works. If they're weak or walk, you're commuting constantly or moving. So the strength of that manager <em>is</em> your travel answer — vet it hard, lock them in with incentives, and have a plan for if they leave.</p></div>
+
+    <p style="font-weight:600;margin:18px 0 10px">Split the roles — don't both do everything</p>
+    <div class="roles">
+      <div class="rolec"><div class="sub">Partner A · Inside</div><h3>The operator</h3><p>Closer to the business, more UK presence. Owns the manager relationship, operations, staff, customers. The face on the ground.</p></div>
+      <div class="rolec"><div class="sub">Partner B · Outside</div><h3>The builder</h3><p>Funding, finance, growth (the 5 Ways), investor relations, and sourcing the next acquisition. Keeps the wider plan moving.</p></div>
+    </div>
+    <p style="font-size:.88rem;color:var(--muted);margin-top:8px">Decide who's who <em>before</em> you buy. Two people both trying to run it whipsaws the staff and the manager.</p>
+
+    <p style="font-weight:600;margin:22px 0 4px">Travel cadence — be honest about the front end</p>
+    <div class="cadence">
+      <div class="cad"><div class="p">First 100 days</div><div class="d"><b>Heavy presence.</b> One of you on-site most weeks (or extended stays). This is not a turn-up-once-a-quarter phase — you're earning the team's trust and learning the operation. Underestimate this and you'll break the business you just bought.</div></div>
+      <div class="cad"><div class="p">Months 3–12</div><div class="d"><b>Taper as it proves out.</b> A steady rhythm — e.g. one partner over a fixed few days each week or fortnight — as the manager and systems earn your confidence.</div></div>
+      <div class="cad"><div class="p">Year 2+</div><div class="d"><b>Monthly / quarterly, if earned.</b> The reel's "show up once a quarter" becomes real only <em>after</em> you've de-risked the business and proven the manager. It's the destination, not the start.</div></div>
+    </div>
+
+    <div class="note"><span class="k">Coverage &amp; the honest question</span>
+      <p><strong>Never both go quiet.</strong> Agree who is "on" for the business each week so the manager always has one clear point of contact. Good reporting, cameras and cloud systems help you watch from Dublin — but early trust and problem-solving need face time, not WhatsApp.</p>
+      <p><strong>The question to answer truthfully now:</strong> is one of you genuinely willing to near-commute or effectively relocate for the first 6–12 months? If neither is, the target has to be exceptionally manager-run (rare, and you'll pay a premium for it) — or this specific model is a stretch for you right now. Better to know that before you spend a penny than after.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="sh"><span class="n">04</span><h2>What actually separates the ones who make it</h2></div>
+    <div class="note pine"><span class="k">The whole memo in five lines</span>
+      <p>1 · <strong>Patience</strong> — wait for the right business, don't force the first.<br>
+      2 · <strong>Quality</strong> — buy something so resilient it never defaults.<br>
+      3 · <strong>Discipline</strong> — don't overpay, don't over-leverage, hold your walk-away lines.<br>
+      4 · <strong>A real operator with real bandwidth</strong> — decided and committed up front.<br>
+      5 · <strong>Honesty</strong> — with the numbers, and with yourselves about the time it takes.</p>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p><b>The Reality Check v1.</b> The counterweight to the whole playbook — revisit it whenever a deal has you excited. None of this says don't do it; it says do it with your eyes open, slowly, and well.</p>
+    <p style="margin-top:10px" class="mono">Honest guidance, not financial advice. Every deal and every seller is different — verify everything.</p>
+  </footer>
+
+</div>
