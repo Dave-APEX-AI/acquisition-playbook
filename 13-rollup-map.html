@@ -1,0 +1,240 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta charset="utf-8">
+<title>The Roll-Up Map</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --paper:#F7F8F6;--surface:#FFFFFF;--surface-2:#EFF1ED;--ink:#14201C;--ink-soft:#3A4640;
+    --muted:#5F6B63;--hair:#DBE0D9;--hair-strong:#C4CCC3;--pine:#1E5E45;--pine-soft:#E4EEE7;
+    --brass:#9C6B1E;--brass-soft:#F3E9D6;--oxblood:#A6382E;--oxblood-soft:#F5E2DE;
+    --shadow:0 1px 2px rgba(20,32,28,.05),0 12px 30px -18px rgba(20,32,28,.20);
+    --shadow-lift:0 2px 4px rgba(20,32,28,.06),0 22px 46px -24px rgba(20,32,28,.28);
+  }
+  :root:not([data-theme="light"]){@media (prefers-color-scheme:dark){
+    --paper:#0F1512;--surface:#161D19;--surface-2:#1D2621;--ink:#E8EDE8;--ink-soft:#C3CCC5;
+    --muted:#8E9A91;--hair:#2A342E;--hair-strong:#3A463F;--pine:#5FB489;--pine-soft:#17271F;
+    --brass:#D2A257;--brass-soft:#2A2214;--oxblood:#E08B7F;--oxblood-soft:#2E1A17;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 14px 34px -18px rgba(0,0,0,.7);--shadow-lift:0 2px 6px rgba(0,0,0,.5),0 24px 48px -24px rgba(0,0,0,.8);
+  }}
+  :root[data-theme="dark"]{
+    --paper:#0F1512;--surface:#161D19;--surface-2:#1D2621;--ink:#E8EDE8;--ink-soft:#C3CCC5;
+    --muted:#8E9A91;--hair:#2A342E;--hair-strong:#3A463F;--pine:#5FB489;--pine-soft:#17271F;
+    --brass:#D2A257;--brass-soft:#2A2214;--oxblood:#E08B7F;--oxblood-soft:#2E1A17;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 14px 34px -18px rgba(0,0,0,.7);--shadow-lift:0 2px 6px rgba(0,0,0,.5),0 24px 48px -24px rgba(0,0,0,.8);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"IBM Plex Sans",system-ui,sans-serif;font-size:15.5px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:900px;margin:0 auto;padding:0 22px}
+  h1,h2,h3{font-family:"Newsreader",Georgia,serif;font-weight:600;text-wrap:balance;line-height:1.12;margin:0}
+  p{margin:0 0 .9em}p:last-child{margin-bottom:0}
+  strong{font-weight:600;color:var(--ink)}
+  .mono{font-family:"IBM Plex Mono",monospace}
+
+  .mast{padding:44px 0 22px;border-bottom:2px solid var(--ink)}
+  .mast-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+  .brand{font-family:"IBM Plex Mono",monospace;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+  .brand b{color:var(--ink);font-weight:600}
+  h1{font-size:clamp(2rem,5.5vw,2.9rem);letter-spacing:-.02em}
+  h1 em{font-style:italic;color:var(--pine)}
+  .eyebrow{font-family:"IBM Plex Mono",monospace;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--pine);margin-bottom:8px}
+
+  .rule{background:var(--ink);color:#EAF0EC;border-radius:14px;padding:22px 26px;margin:22px 0 6px;box-shadow:var(--shadow-lift)}
+  :root[data-theme="dark"] .rule,:root:not([data-theme="light"]) .rule{background:#0A0F0D;border:1px solid var(--hair)}
+  @media (prefers-color-scheme:light){:root:not([data-theme="dark"]) .rule{background:var(--ink)}}
+  .rule .k{font-family:"IBM Plex Mono",monospace;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:#7FC9A3;margin-bottom:8px}
+  .rule p{margin:0;font-family:"Newsreader",serif;font-size:1.26rem;line-height:1.4;color:#fff}
+  .rule b{color:#7FC9A3;font-weight:600}
+
+  section{padding:32px 0;border-top:1px solid var(--hair)}
+  .sh{display:flex;align-items:baseline;gap:12px;margin-bottom:6px}
+  .sh .n{font-family:"IBM Plex Mono",monospace;font-size:.72rem;font-weight:600;color:var(--pine)}
+  .sh h2{font-size:1.42rem;letter-spacing:-.01em}
+  .lede{font-size:.98rem;color:var(--ink-soft);max-width:70ch;margin-bottom:16px}
+
+  /* arbitrage strip */
+  .arb{display:grid;grid-template-columns:1fr auto 1fr;gap:14px;align-items:center;margin-top:6px}
+  .arb .box{border:1px solid var(--hair);border-radius:12px;background:var(--surface);box-shadow:var(--shadow);padding:16px 18px;text-align:center}
+  .arb .box .v{font-family:"IBM Plex Mono",monospace;font-size:1.6rem;font-weight:600;color:var(--pine)}
+  .arb .box .l{font-size:.82rem;color:var(--muted);margin-top:2px}
+  .arb .box.big .v{color:var(--brass)}
+  .arb .ar{font-family:"IBM Plex Mono",monospace;font-size:1.4rem;color:var(--muted);text-align:center}
+
+  /* curve */
+  .curve{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:8px}
+  .stage{border:1px solid var(--hair);border-radius:12px;background:var(--surface);box-shadow:var(--shadow);overflow:hidden}
+  .stage .top{padding:12px 15px;border-bottom:1px solid var(--hair)}
+  .stage .top .lab{font-family:"IBM Plex Mono",monospace;font-size:.64rem;letter-spacing:.08em;text-transform:uppercase;font-weight:600;margin-bottom:2px}
+  .stage.hot .top{background:var(--oxblood-soft)}.stage.hot .lab{color:var(--oxblood)}
+  .stage.mid .top{background:var(--brass-soft)}.stage.mid .lab{color:var(--brass)}
+  .stage.early .top{background:var(--pine-soft)}.stage.early .lab{color:var(--pine)}
+  .stage .top .t{font-weight:600;font-size:.95rem}
+  .stage .top .yr{font-family:"IBM Plex Mono",monospace;font-size:.7rem;color:var(--muted)}
+  .stage ul{list-style:none;margin:0;padding:10px 15px 14px;font-size:.85rem;color:var(--ink-soft)}
+  .stage li{padding:4px 0;border-bottom:1px solid var(--hair);line-height:1.35}
+  .stage li:last-child{border-bottom:none}
+  .curve-axis{display:flex;justify-content:space-between;font-family:"IBM Plex Mono",monospace;font-size:.72rem;color:var(--muted);margin-top:12px;padding:0 4px}
+  .curve-axis b{color:var(--ink-soft)}
+
+  .lens{border:1px solid var(--hair);border-radius:13px;background:var(--surface);box-shadow:var(--shadow);padding:18px 20px;margin-bottom:12px}
+  .lens h3{font-size:1.12rem;margin-bottom:2px}
+  .lens .sub{font-family:"IBM Plex Mono",monospace;font-size:.7rem;letter-spacing:.05em;text-transform:uppercase;color:var(--pine);margin-bottom:10px}
+  .lens p{font-size:.92rem;color:var(--ink-soft);margin:0 0 10px}
+  .lens .pn{display:grid;grid-template-columns:1fr 1fr;gap:10px 16px;font-size:.85rem}
+  .lens .pn .h{font-family:"IBM Plex Mono",monospace;font-size:.62rem;letter-spacing:.06em;text-transform:uppercase;font-weight:600;margin-bottom:3px}
+  .lens .pn .g .h{color:var(--pine)}.lens .pn .r .h{color:var(--oxblood)}
+  .lens .pn p{margin:0;font-size:.85rem}
+
+  .crit{list-style:none;margin:6px 0 0;padding:0}
+  .crit li{display:grid;grid-template-columns:auto 1fr;gap:12px;padding:9px 0;border-top:1px solid var(--hair);font-size:.9rem}
+  .crit li:first-child{border-top:none}
+  .crit .ic{color:var(--pine);font-weight:700}
+  .crit b{color:var(--ink)}
+
+  .note{border:1px solid var(--hair);border-left:4px solid var(--brass);background:var(--brass-soft);border-radius:10px;padding:14px 18px;margin-top:16px}
+  .note.pine{border-left-color:var(--pine);background:var(--pine-soft)}
+  .note.ox{border-left-color:var(--oxblood);background:var(--oxblood-soft)}
+  .note .k{display:block;font-family:"IBM Plex Mono",monospace;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:6px;font-weight:600;color:var(--brass)}
+  .note.pine .k{color:var(--pine)}.note.ox .k{color:var(--oxblood)}
+  .note p{margin:0 0 .6em;font-size:.9rem;color:var(--ink-soft)}.note p:last-child{margin-bottom:0}
+
+  .footer{padding:26px 0 50px;color:var(--muted);font-size:.78rem}.footer b{color:var(--ink)}
+  .footer .src{font-family:"IBM Plex Mono",monospace;font-size:.72rem;line-height:1.85;margin-top:6px}
+
+  @media (max-width:680px){
+    .curve{grid-template-columns:1fr}
+    .lens .pn{grid-template-columns:1fr}
+    .arb{grid-template-columns:1fr}.arb .ar{transform:rotate(90deg)}
+    .rule p{font-size:1.1rem}
+  }
+</style>
+
+<div class="wrap">
+
+  <header class="mast">
+    <div class="mast-top">
+      <div class="brand"><b>Acquisition Memo</b> · No.&nbsp;13 — The Roll-Up Map</div>
+      <div class="brand">14 Sep 2026 · strategy</div>
+    </div>
+    <div class="eyebrow">Buy where private equity is heading</div>
+    <h1>The Roll-Up <em>Map</em></h1>
+  </header>
+
+  <div class="rule">
+    <div class="k">The whole thesis in one line</div>
+    <p>Small trades sell for <b>3–5× profit</b>; consolidated groups sell for <b>8–18×</b>. Buy into a <b>fragmenting sector before or during</b> private equity's roll-up, and you either sell into that rising tide — or ride it yourself.</p>
+  </div>
+
+  <section>
+    <div class="sh"><span class="n">01</span><h2>Why roll-ups mint money — multiple arbitrage</h2></div>
+    <p class="lede">PE buys dozens of small, boring, essential-service businesses cheap, bolts them into one professional group, and sells the whole thing at a far higher multiple. The gap <em>is</em> the profit.</p>
+    <div class="arb">
+      <div class="box"><div class="v">3–5×</div><div class="l">what a single small trade sells for (profit multiple)</div></div>
+      <div class="ar">──▶</div>
+      <div class="box big"><div class="v">8–18×</div><div class="l">what the consolidated group sells for</div></div>
+    </div>
+    <div class="note"><span class="k">The scale of it</span><p>Blackstone paid an estimated <strong>~18.5× EBITDA (~$2.5bn)</strong> for the Champions home-services group; Apollo's Apex Service Partners platform reached <strong>~$10bn</strong>; and <strong>Guild Garage</strong> (garage-door installers) sold for <strong>~$800m</strong>. Every one is the same trick — aggregate the unglamorous, sell the scale.</p></div>
+  </section>
+
+  <section>
+    <div class="sh"><span class="n">02</span><h2>The consolidation curve — where each sector sits</h2></div>
+    <p class="lede">Sectors roll up in waves. HVAC went 2018–22; roofing is going 2024–26; the next wave is forming now. Where a sector sits sets both your <em>entry price</em> and your <em>exit certainty</em>.</p>
+    <div class="curve">
+      <div class="stage hot">
+        <div class="top"><div class="lab">Stage 1 · Hot / saturated</div><div class="t">PE already here</div><div class="yr">expensive to enter</div></div>
+        <ul>
+          <li>HVAC &amp; plumbing</li>
+          <li>Dental &amp; veterinary*</li>
+          <li>Pest control</li>
+          <li>Insurance brokers</li>
+          <li>Wealth mgmt / IFAs</li>
+          <li>Garage doors (US)</li>
+        </ul>
+      </div>
+      <div class="stage mid">
+        <div class="top"><div class="lab">Stage 2 · Mid-wave · now</div><div class="t">Platforms forming</div><div class="yr">the sweet spot</div></div>
+        <ul>
+          <li>Roofing</li>
+          <li>Electrical contracting</li>
+          <li>Accountancy (UK, hot)</li>
+          <li>IT managed services (MSPs)</li>
+          <li>Fire &amp; security / compliance</li>
+          <li>Testing &amp; inspection</li>
+        </ul>
+      </div>
+      <div class="stage early">
+        <div class="top"><div class="lab">Stage 3 · Pre-cycle · early</div><div class="t">Barely touched</div><div class="yr">cheap to enter</div></div>
+        <ul>
+          <li>Grounds &amp; landscaping</li>
+          <li>Specialist / commercial cleaning</li>
+          <li>Water hygiene &amp; legionella</li>
+          <li>Drainage, flooring, scaffolding</li>
+          <li>Painting &amp; decorating</li>
+          <li>Eldercare, funeral services</li>
+        </ul>
+      </div>
+    </div>
+    <div class="curve-axis"><span><b>Enter:</b> costly, competitive</span><span>→</span><span><b>Enter:</b> cheap, uncontested</span></div>
+    <p style="font-size:.78rem;color:var(--muted);margin-top:10px">*Placement is directional and shifts over time. UK note: some late-stage roll-ups (e.g. vets) now attract CMA scrutiny — very-mature waves can draw regulators.</p>
+  </section>
+
+  <section>
+    <div class="sh"><span class="n">03</span><h2>Your two lenses</h2></div>
+
+    <div class="lens">
+      <div class="sub">Lens 1</div>
+      <h3>Buy what PE wants soon — ride the wave</h3>
+      <p>Buy a solid business in a <strong>Stage 1–2</strong> sector, run it well, and become an attractive <strong>bolt-on</strong> a consolidator buys — or simply sell into multiples that are rising as the wave matures.</p>
+      <div class="pn">
+        <div class="g"><div class="h">For</div><p>A clear, hungry buyer pool and a real exit; rising multiples do some of the work for you.</p></div>
+        <div class="r"><div class="h">Against</div><p>You compete with well-funded PE for the same small deals — entry is pricier and harder, and much of the multiple expansion may already be priced in.</p></div>
+      </div>
+    </div>
+
+    <div class="lens">
+      <div class="sub">Lens 2</div>
+      <h3>Be early — become the consolidator</h3>
+      <p>Buy in a <strong>Stage 3</strong> sector before PE arrives, cheaply, prove you can run it, then bolt on a few more. When the wave reaches your sector in a few years, <em>you</em> own the platform they want.</p>
+      <div class="pn">
+        <div class="g"><div class="h">For</div><p>Cheap, uncontested entry; you capture the multiple expansion yourself; biggest upside.</p></div>
+        <div class="r"><div class="h">Against</div><p>You carry the execution and the wait; no guaranteed exit; you're betting the wave arrives. More risk, more patience.</p></div>
+      </div>
+    </div>
+
+    <div class="note pine"><span class="k">The sweet spot — the best of both</span><p>A <strong>Stage 2 / early-Stage-3 sector</strong>: you buy cheap-ish and uncontested <em>and</em> there's a visible wave coming to buy your group in 2–4 years. You're early enough to capture the arbitrage, late enough that an exit is realistic. That's where to aim.</p></div>
+  </section>
+
+  <section>
+    <div class="sh"><span class="n">04</span><h2>How to spot a roll-up sector yourself</h2></div>
+    <p class="lede">The pattern behind every one of these. If a sector ticks most of these, PE will come — or you can lead.</p>
+    <ul class="crit">
+      <li><span class="ic">✓</span><div><b>Highly fragmented</b> — thousands of small owner-operators, no dominant player.</div></li>
+      <li><span class="ic">✓</span><div><b>Essential &amp; recurring</b> — often compliance- or necessity-driven (safety, maintenance, health). Demand doesn't switch off.</div></li>
+      <li><span class="ic">✓</span><div><b>Ageing owners, no successors</b> — a steady supply of motivated sellers (your buy box already targets this).</div></li>
+      <li><span class="ic">✓</span><div><b>Boring &amp; hard to disrupt</b> — no tech cliff; the same work in 10 years.</div></li>
+      <li><span class="ic">✓</span><div><b>Scale actually helps</b> — buying power, shared back-office, national accounts, cross-sell.</div></li>
+      <li><span class="ic">✓</span><div><b>Low customer concentration &amp; cash-generative</b> — many small customers, real cash conversion.</div></li>
+    </ul>
+  </section>
+
+  <section>
+    <div class="sh"><span class="n">05</span><h2>What this means for you</h2></div>
+    <div class="note pine"><span class="k">Your buy box already sits on the curve</span><p>Your Tier-1 sectors span it: <strong>electrical contracting, fire &amp; security, testing/inspection</strong> are mid-wave (Stage 2); <strong>grounds/landscaping, specialist cleaning, water hygiene, drainage</strong> are pre-cycle (Stage 3). You don't need a new hunting ground — you need to <em>choose where on the curve you want to be</em>.</p></div>
+    <div class="note ox"><span class="k">The honest reality check</span><p>Becoming the next £800m platform is the rare, headline outcome — don't buy on that fantasy (see Memo 11). As a first-timer, the realistic wins are: <strong>(a)</strong> buy one good business, run it well, and be a <strong>bolt-on</strong> a consolidator pays a premium for; or <strong>(b)</strong> build a small group of 2–4 over years and sell it at an expanded multiple. Both are excellent. The roll-up lens is a <em>tailwind to pick your sector by</em> — not a get-rich-quick plan.</p></div>
+  </section>
+
+  <footer class="footer">
+    <p><b>The Roll-Up Map v1.</b> Use it to bias your sector choice within the Buy Box (Memo 02). Pair with the Reality Check (Memo 11) so the exit stays a tailwind, not a fantasy.</p>
+    <p><b style="color:var(--ink)">Sources (Sep 2026):</b></p>
+    <div class="src">
+      CT Acquisitions — PE roll-up platform &amp; fragmented-industry trackers 2026<br>
+      Brodies / Norton Rose / Shoosmiths / Crowe — UK private equity trends 2026<br>
+      Beancount / American Prospect — HVAC &amp; home-services roll-up deals (Champions, Apex, Guild Garage)
+    </div>
+    <p style="margin-top:14px" class="mono">Educational strategy, not investment advice. Sector placement is directional and moves over time — verify current activity before committing.</p>
+  </footer>
+
+</div>
