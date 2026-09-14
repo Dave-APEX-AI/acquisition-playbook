@@ -1,0 +1,219 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta charset="utf-8">
+<title>Sector Proposal</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --paper:#F7F8F6;--surface:#FFFFFF;--surface-2:#EFF1ED;--ink:#14201C;--ink-soft:#3A4640;
+    --muted:#5F6B63;--hair:#DBE0D9;--hair-strong:#C4CCC3;--pine:#1E5E45;--pine-soft:#E4EEE7;
+    --brass:#9C6B1E;--brass-soft:#F3E9D6;--oxblood:#A6382E;--oxblood-soft:#F5E2DE;
+    --shadow:0 1px 2px rgba(20,32,28,.05),0 12px 30px -18px rgba(20,32,28,.20);
+    --shadow-lift:0 2px 4px rgba(20,32,28,.06),0 22px 46px -24px rgba(20,32,28,.28);
+  }
+  :root:not([data-theme="light"]){@media (prefers-color-scheme:dark){
+    --paper:#0F1512;--surface:#161D19;--surface-2:#1D2621;--ink:#E8EDE8;--ink-soft:#C3CCC5;
+    --muted:#8E9A91;--hair:#2A342E;--hair-strong:#3A463F;--pine:#5FB489;--pine-soft:#17271F;
+    --brass:#D2A257;--brass-soft:#2A2214;--oxblood:#E08B7F;--oxblood-soft:#2E1A17;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 14px 34px -18px rgba(0,0,0,.7);--shadow-lift:0 2px 6px rgba(0,0,0,.5),0 24px 48px -24px rgba(0,0,0,.8);
+  }}
+  :root[data-theme="dark"]{
+    --paper:#0F1512;--surface:#161D19;--surface-2:#1D2621;--ink:#E8EDE8;--ink-soft:#C3CCC5;
+    --muted:#8E9A91;--hair:#2A342E;--hair-strong:#3A463F;--pine:#5FB489;--pine-soft:#17271F;
+    --brass:#D2A257;--brass-soft:#2A2214;--oxblood:#E08B7F;--oxblood-soft:#2E1A17;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 12px 30px -18px rgba(0,0,0,.7);--shadow-lift:0 2px 6px rgba(0,0,0,.5),0 24px 48px -24px rgba(0,0,0,.8);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"IBM Plex Sans",system-ui,sans-serif;font-size:15.5px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:920px;margin:0 auto;padding:0 22px}
+  h1,h2,h3{font-family:"Newsreader",Georgia,serif;font-weight:600;text-wrap:balance;line-height:1.12;margin:0}
+  p{margin:0 0 .9em}p:last-child{margin-bottom:0}
+  strong{font-weight:600;color:var(--ink)}
+  .mono{font-family:"IBM Plex Mono",monospace}
+
+  .mast{padding:44px 0 22px;border-bottom:2px solid var(--ink)}
+  .mast-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+  .brand{font-family:"IBM Plex Mono",monospace;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+  .brand b{color:var(--ink);font-weight:600}
+  h1{font-size:clamp(2rem,5.5vw,2.9rem);letter-spacing:-.02em}
+  h1 em{font-style:italic;color:var(--pine)}
+  .eyebrow{font-family:"IBM Plex Mono",monospace;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--pine);margin-bottom:8px}
+
+  .rule{background:var(--ink);color:#EAF0EC;border-radius:14px;padding:24px 26px;margin:22px 0 6px;box-shadow:var(--shadow-lift)}
+  :root[data-theme="dark"] .rule,:root:not([data-theme="light"]) .rule{background:#0A0F0D;border:1px solid var(--hair)}
+  @media (prefers-color-scheme:light){:root:not([data-theme="dark"]) .rule{background:var(--ink)}}
+  .rule .k{font-family:"IBM Plex Mono",monospace;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:#7FC9A3;margin-bottom:8px}
+  .rule h2{color:#fff;font-size:1.5rem;margin:8px 0 12px}
+  .rule p{color:#C9D4CD;font-size:.98rem}
+  .rule .big{font-family:"Newsreader",serif;font-size:1.2rem;line-height:1.42;color:#fff;border-left:3px solid var(--pine);padding-left:18px;margin:16px 0 0;font-weight:400}
+  .rule .big b{color:#7FC9A3;font-weight:600}
+
+  section{padding:32px 0;border-top:1px solid var(--hair)}
+  .sh{display:flex;align-items:baseline;gap:12px;margin-bottom:6px}
+  .sh .n{font-family:"IBM Plex Mono",monospace;font-size:.72rem;font-weight:600;color:var(--pine)}
+  .sh h2{font-size:1.42rem;letter-spacing:-.01em}
+  .lede{font-size:.98rem;color:var(--ink-soft);max-width:72ch;margin-bottom:16px}
+
+  /* matrix */
+  .mx{width:100%;border-collapse:collapse;font-size:.86rem;margin-top:4px}
+  .mx th,.mx td{padding:9px 8px;border-bottom:1px solid var(--hair);text-align:center}
+  .mx thead th{font-family:"IBM Plex Mono",monospace;font-size:.6rem;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);font-weight:600;vertical-align:bottom}
+  .mx td:first-child,.mx th:first-child{text-align:left;font-weight:600;color:var(--ink);width:26%}
+  .mx tbody tr:last-child td{border-bottom:none}
+  .sc{display:inline-block;width:22px;height:22px;line-height:22px;border-radius:6px;font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:.78rem}
+  .s5{background:var(--pine);color:#fff}.s4{background:var(--pine-soft);color:var(--pine)}
+  .s3{background:var(--brass-soft);color:var(--brass)}.s2{background:var(--oxblood-soft);color:var(--oxblood)}
+  .s1{background:var(--oxblood);color:#fff}
+  .vd{font-family:"IBM Plex Mono",monospace;font-size:.62rem;letter-spacing:.03em;text-transform:uppercase;font-weight:600;padding:3px 7px;border-radius:5px;white-space:nowrap}
+  .vd.top{background:var(--pine);color:#fff}.vd.strong{background:var(--pine-soft);color:var(--pine)}
+  .vd.ride{background:var(--brass-soft);color:var(--brass)}.vd.care{background:var(--oxblood-soft);color:var(--oxblood)}
+  .mx-scroll{overflow-x:auto}
+  .mx-note{font-size:.76rem;color:var(--muted);margin-top:10px}
+
+  /* pick cards */
+  .pick{border:1px solid var(--hair);border-radius:13px;background:var(--surface);box-shadow:var(--shadow);overflow:hidden;margin-bottom:14px}
+  .pick .ph{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;padding:15px 18px 8px}
+  .pick .rank{font-family:"IBM Plex Mono",monospace;font-size:.72rem;font-weight:600;color:#fff;background:var(--pine);padding:3px 9px;border-radius:6px}
+  .pick.two .rank{background:var(--pine)}.pick.three .rank{background:var(--brass)}
+  .pick h3{font-size:1.2rem;flex:1;min-width:0}
+  .pick .mult{font-family:"IBM Plex Mono",monospace;font-size:.76rem;color:var(--pine);font-weight:600;white-space:nowrap}
+  .pick .pb{padding:0 18px 16px}
+  .pick .pb p{font-size:.92rem;color:var(--ink-soft);margin:0 0 8px}
+  .pick .facts{display:flex;flex-wrap:wrap;gap:6px 16px;margin:8px 0;font-family:"IBM Plex Mono",monospace;font-size:.74rem;color:var(--muted)}
+  .pick .facts b{color:var(--ink-soft);font-weight:600}
+  .pick .risk{font-size:.85rem;color:var(--oxblood);border-left:2px solid var(--oxblood);padding-left:11px;margin-top:8px}
+  .pick .edge{font-size:.85rem;color:var(--pine);border-left:2px solid var(--pine);padding-left:11px;margin-top:8px}
+
+  .avoid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:6px}
+  .av{border:1px solid var(--hair);border-left:4px solid var(--oxblood);border-radius:10px;background:var(--surface);box-shadow:var(--shadow);padding:12px 15px}
+  .av .t{font-weight:600;font-size:.92rem;margin-bottom:2px}
+  .av .d{font-size:.83rem;color:var(--ink-soft)}
+
+  .note{border:1px solid var(--hair);border-left:4px solid var(--brass);background:var(--brass-soft);border-radius:10px;padding:14px 18px;margin-top:16px}
+  .note.pine{border-left-color:var(--pine);background:var(--pine-soft)}
+  .note .k{display:block;font-family:"IBM Plex Mono",monospace;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:6px;font-weight:600;color:var(--brass)}
+  .note.pine .k{color:var(--pine)}
+  .note p{margin:0 0 .6em;font-size:.9rem;color:var(--ink-soft)}.note p:last-child{margin-bottom:0}
+
+  .footer{padding:26px 0 50px;color:var(--muted);font-size:.78rem}.footer b{color:var(--ink)}
+  .footer .src{font-family:"IBM Plex Mono",monospace;font-size:.72rem;line-height:1.85;margin-top:6px}
+
+  @media (max-width:680px){
+    .avoid{grid-template-columns:1fr}
+    .rule .big{font-size:1.08rem}
+  }
+</style>
+
+<div class="wrap">
+
+  <header class="mast">
+    <div class="mast-top">
+      <div class="brand"><b>Acquisition Memo</b> · No.&nbsp;14 — Sector Proposal</div>
+      <div class="brand">Analyst's desk · 14 Sep 2026</div>
+    </div>
+    <div class="eyebrow">Investment committee — UK roll-up sector screen</div>
+    <h1>Sector <em>Proposal</em></h1>
+  </header>
+
+  <div class="rule">
+    <div class="k">Recommendation to the committee</div>
+    <h2>Buy the boring compliance annuity — and the most fragmented sector in Britain.</h2>
+    <p>Screening UK service sectors against fragmentation, recurring demand, succession supply, durability, scale-logic and — weighted heaviest for a first-time, debt-funded buyer — <strong style="color:#fff">entry value and ease of acquisition</strong>, two theses dominate: <strong style="color:#fff">regulation-driven compliance services</strong> and <strong style="color:#fff">commercial grounds maintenance</strong>.</p>
+    <div class="big">The winning pattern is <b>"built by regulation, bought by everyone"</b>: mandated, non-discretionary inspections that recur forever, sold by thousands of ageing owner-operators at <b>3–5×</b>, that consolidators buy at <b>8–11×</b>. Enter the <em>cool</em> corners of it — before PE bids the small end up.</div>
+  </div>
+
+  <section>
+    <div class="sh"><span class="n">01</span><h2>The screen — eight sectors, scored 1–5</h2></div>
+    <p class="lede">Higher is better on every column — including <strong>Value</strong> (5 = cheap to enter) and <strong>Ease</strong> (5 = thousands of small targets, little buyer competition). <strong>Exit</strong> = how hungry PE/trade buyers are to take it off you.</p>
+    <div class="mx-scroll">
+      <table class="mx">
+        <thead><tr>
+          <th>Sector</th><th>Frag /<br>ease</th><th>Recurring /<br>essential</th><th>Durable</th><th>Scale<br>logic</th><th>Value<br>(cheap)</th><th>Exit<br>appetite</th><th>Verdict</th>
+        </tr></thead>
+        <tbody>
+          <tr><td>Compliance testing &amp; inspection*</td><td><span class="sc s5">5</span></td><td><span class="sc s5">5</span></td><td><span class="sc s5">5</span></td><td><span class="sc s5">5</span></td><td><span class="sc s4">4</span></td><td><span class="sc s5">5</span></td><td><span class="vd top">Top pick</span></td></tr>
+          <tr><td>Commercial grounds maintenance</td><td><span class="sc s5">5</span></td><td><span class="sc s4">4</span></td><td><span class="sc s4">4</span></td><td><span class="sc s4">4</span></td><td><span class="sc s4">4</span></td><td><span class="sc s4">4</span></td><td><span class="vd strong">Strong</span></td></tr>
+          <tr><td>Fire &amp; water safety compliance</td><td><span class="sc s4">4</span></td><td><span class="sc s5">5</span></td><td><span class="sc s5">5</span></td><td><span class="sc s5">5</span></td><td><span class="sc s3">3</span></td><td><span class="sc s5">5</span></td><td><span class="vd ride">Ride wave</span></td></tr>
+          <tr><td>HVAC / refrigeration servicing</td><td><span class="sc s4">4</span></td><td><span class="sc s4">4</span></td><td><span class="sc s4">4</span></td><td><span class="sc s4">4</span></td><td><span class="sc s2">2</span></td><td><span class="sc s5">5</span></td><td><span class="vd ride">Pricey</span></td></tr>
+          <tr><td>Drainage / industrial cleaning</td><td><span class="sc s4">4</span></td><td><span class="sc s3">3</span></td><td><span class="sc s4">4</span></td><td><span class="sc s3">3</span></td><td><span class="sc s4">4</span></td><td><span class="sc s3">3</span></td><td><span class="vd strong">Early</span></td></tr>
+          <tr><td>Commercial cleaning</td><td><span class="sc s5">5</span></td><td><span class="sc s4">4</span></td><td><span class="sc s4">4</span></td><td><span class="sc s3">3</span></td><td><span class="sc s4">4</span></td><td><span class="sc s3">3</span></td><td><span class="vd ride">Thin margin</span></td></tr>
+          <tr><td>Domiciliary home care</td><td><span class="sc s4">4</span></td><td><span class="sc s4">4</span></td><td><span class="sc s4">4</span></td><td><span class="sc s3">3</span></td><td><span class="sc s4">4</span></td><td><span class="sc s4">4</span></td><td><span class="vd care">Hard to run</span></td></tr>
+          <tr><td>Pest control</td><td><span class="sc s2">2</span></td><td><span class="sc s5">5</span></td><td><span class="sc s5">5</span></td><td><span class="sc s5">5</span></td><td><span class="sc s1">1</span></td><td><span class="sc s5">5</span></td><td><span class="vd care">Too late</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="mx-note">*Cool sub-niches: fixed-wire / EICR testing, PAT, LOLER lifting inspection, water hygiene &amp; legionella, backflow. Scores are analyst judgement on current UK conditions and move over time.</p>
+  </section>
+
+  <section>
+    <div class="sh"><span class="n">02</span><h2>The recommended plays</h2></div>
+
+    <div class="pick">
+      <div class="ph"><span class="rank">Pick 1</span><h3>Compliance testing &amp; inspection</h3><span class="mult">buy ~3–5× · exit 8–11×</span></div>
+      <div class="pb">
+        <p>The purest expression of the thesis. Law <em>forces</em> the customer to buy — fixed-wire electrical testing (EICR), PAT, lifting-equipment inspection (LOLER), water hygiene &amp; legionella (ACoP L8), fire equipment servicing. Miss it and you're breaking regulations, so demand is <strong>non-discretionary and recurs on a legal clock</strong>. The market is enormous and barely concentrated — the global TICC market tops £200bn with the <strong>top ten holding only ~12%</strong>.</p>
+        <div class="facts"><span><b>Fragmentation:</b> extreme</span><span><b>Revenue:</b> mandated, recurring</span><span><b>PE:</b> actively building platforms (Complii, Axis CLC)</span></div>
+        <p class="edge"><b>Your edge:</b> fixed-wire/EICR and PAT sit squarely in David's electrical wheelhouse — you can judge quality and run it. Accreditations (UKAS, NICEIC) are transferable moats.</p>
+        <p class="risk"><b>Watch:</b> the <em>hot</em> corners (fire, water hygiene) already draw PE — enter the cooler niches (LOLER, fixed-wire, backflow) where the small end is still cheap and uncontested, then ride the compliance wave up.</p>
+      </div>
+    </div>
+
+    <div class="pick two">
+      <div class="ph"><span class="rank">Pick 2</span><h3>Commercial grounds maintenance</h3><span class="mult">buy ~3–4× · quality 7–9×</span></div>
+      <div class="pb">
+        <p>The <strong>easiest sector in Britain to actually buy into</strong>: <strong>21,359 firms, the largest holding just ~1.3%</strong>. Commercial contracts (not domestic gardening) are subscription-like — multi-year, annual price escalators, recurring monthly revenue — and the sector is growing 4.6–7% a year. Value sits in the contract book and the crews, not a founder, so it's genuinely manager-runnable (good for over-and-back).</p>
+        <div class="facts"><span><b>Targets:</b> 21,359 UK firms</span><span><b>Contracts:</b> multi-year, escalating</span><span><b>Consolidators:</b> idverde, Ground Control, Nurture</span></div>
+        <p class="edge"><b>Why it fits:</b> maximum choice of cheap small targets = you can be picky and disciplined on price — exactly what a first-timer needs.</p>
+        <p class="risk"><b>Watch:</b> labour-intensive, seasonal, weather-exposed, moderate margins. Buy the <em>commercial-contract</em> books, avoid one-van domestic gardeners.</p>
+      </div>
+    </div>
+
+    <div class="pick three">
+      <div class="ph"><span class="rank">Pick 3</span><h3>Fire &amp; water safety compliance</h3><span class="mult">buy ~4–6× · exit 8–11×</span></div>
+      <div class="pb">
+        <p>The strongest <em>exit</em> story — a Building Safety Act / post-Grenfell regulatory supercycle, and PE is buying visibly (Ansor/Complii, H.I.G./Axis CLC). Recurring, essential, fragmented. This is the classic <strong>"ride the wave"</strong> pick: buy a solid small operator and become a bolt-on a platform pays a premium for.</p>
+        <div class="facts"><span><b>Tailwind:</b> Building Safety Act</span><span><b>Exit:</b> best-in-class</span><span><b>Entry:</b> getting competitive</span></div>
+        <p class="risk"><b>Watch:</b> because the exit is so clear, the small end is bidding up — you'll compete with well-funded platforms to buy. Better for value if you get in early or via an off-market owner.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sh"><span class="n">03</span><h2>Second tier &amp; the "not now" list</h2></div>
+    <div class="avoid">
+      <div class="av" style="border-left-color:var(--brass)"><div class="t">HVAC / refrigeration servicing</div><div class="d">Great business, durable service contracts — but <b>hot and pricey</b> (UK/US multiples ~9.5×; small still 4–7×) and PE-crowded. Fine if you find one off-market cheap; don't overpay into the auction.</div></div>
+      <div class="av" style="border-left-color:var(--brass)"><div class="t">Drainage / industrial cleaning</div><div class="d">Fragmented, essential, early and cheap — but grittier, more capex (jetting trucks), less clean recurring revenue. A value play for the operationally hands-on.</div></div>
+      <div class="av"><div class="t">Domiciliary home care</div><div class="d">Huge, cheap (3–5×), ageing-demand tailwind — but <b>CQC-regulated, chronic labour crisis, thin council-funded margins, reputational risk.</b> Attractive on paper, hard to run — especially over-and-back. Not for a first deal.</div></div>
+      <div class="av"><div class="t">Pest control · vets · dental</div><div class="d">Textbook roll-up traits, but <b>already consolidated</b> — Rentokil/Anticimex, IVC, Bupa got there. Entry is expensive and competitive; late to the party.</div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sh"><span class="n">04</span><h2>The committee's steer for this buyer</h2></div>
+    <div class="note pine">
+      <span class="k">If value &amp; ease decide it</span>
+      <p><strong>Lead with Pick 1 in David's electrical lane</strong> — a small <strong>fixed-wire / EICR / PAT testing</strong> business, or a <strong>LOLER lifting-inspection</strong> firm. You get: mandated recurring revenue, extreme fragmentation (easy to buy, cheap to enter), a transferable-accreditation moat, an operating edge you actually have, and a live PE exit forming above you. It scores top on <em>both</em> value and ease — the two things that matter most on a first, debt-funded deal.</p>
+      <p><strong>Back it up with Pick 2 (grounds maintenance)</strong> as your widest, cheapest hunting ground if compliance targets are thin in your patch — 21,000 firms means you'll always find one, and you can be ruthless on price.</p>
+    </div>
+    <div class="note">
+      <span class="k">Analyst's honest caveat</span>
+      <p>Multiples and "heat" move quarter to quarter; treat the scores as directional, not gospel, and re-check current activity before you commit. And remember the meta-point from the Reality Check: the sector is a <em>tailwind you pick by</em> — the deal is still won on price discipline, business quality and not catching happy ears.</p>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p><b>Sector Proposal v1.</b> Feeds the sector choice in the Buy Box (Memo 02) and the timing lens in the Roll-Up Map (Memo 13). Screen individual targets on the Scorecard (Memo 06).</p>
+    <p><b style="color:var(--ink)">Sources (Sep 2026):</b></p>
+    <div class="src">
+      Crowe UK &amp; The M Group — UK TICC / compliance M&amp;A (£200bn market, top-10 ~12%)<br>
+      MainSights / CT Acquisitions — Complii/Sweetbriar, Axis CLC/Fieldway compliance deals<br>
+      IBISWorld / Grand View / CT Acquisitions — landscaping (21,359 firms, idverde ~1.3%, 7–9× commercial)<br>
+      Capstone / DealFlowAgent — HVAC &amp; refrigeration multiples; IBISWorld / Hendon — domiciliary care (£6.7bn, 10,681 firms)
+    </div>
+    <p style="margin-top:14px" class="mono">Educational sector analysis, not investment advice. Multiples illustrative and time-sensitive; verify current market conditions and take professional advice before acquiring.</p>
+  </footer>
+
+</div>
