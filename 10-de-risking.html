@@ -1,0 +1,171 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta charset="utf-8">
+<title>De-Risking the Deal</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --paper:#F7F8F6;--surface:#FFFFFF;--surface-2:#EFF1ED;--ink:#14201C;--ink-soft:#3A4640;
+    --muted:#5F6B63;--hair:#DBE0D9;--hair-strong:#C4CCC3;--pine:#1E5E45;--pine-soft:#E4EEE7;
+    --brass:#9C6B1E;--brass-soft:#F3E9D6;--oxblood:#A6382E;--oxblood-soft:#F5E2DE;
+    --shadow:0 1px 2px rgba(20,32,28,.05),0 12px 30px -18px rgba(20,32,28,.20);
+    --shadow-lift:0 2px 4px rgba(20,32,28,.06),0 22px 46px -24px rgba(20,32,28,.28);
+  }
+  :root:not([data-theme="light"]){@media (prefers-color-scheme:dark){
+    --paper:#0F1512;--surface:#161D19;--surface-2:#1D2621;--ink:#E8EDE8;--ink-soft:#C3CCC5;
+    --muted:#8E9A91;--hair:#2A342E;--hair-strong:#3A463F;--pine:#5FB489;--pine-soft:#17271F;
+    --brass:#D2A257;--brass-soft:#2A2214;--oxblood:#E08B7F;--oxblood-soft:#2E1A17;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 14px 34px -18px rgba(0,0,0,.7);--shadow-lift:0 2px 6px rgba(0,0,0,.5),0 24px 48px -24px rgba(0,0,0,.8);
+  }}
+  :root[data-theme="dark"]{
+    --paper:#0F1512;--surface:#161D19;--surface-2:#1D2621;--ink:#E8EDE8;--ink-soft:#C3CCC5;
+    --muted:#8E9A91;--hair:#2A342E;--hair-strong:#3A463F;--pine:#5FB489;--pine-soft:#17271F;
+    --brass:#D2A257;--brass-soft:#2A2214;--oxblood:#E08B7F;--oxblood-soft:#2E1A17;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 14px 34px -18px rgba(0,0,0,.7);--shadow-lift:0 2px 6px rgba(0,0,0,.5),0 24px 48px -24px rgba(0,0,0,.8);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"IBM Plex Sans",system-ui,sans-serif;font-size:15.5px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:880px;margin:0 auto;padding:0 22px}
+  h1,h2,h3{font-family:"Newsreader",Georgia,serif;font-weight:600;text-wrap:balance;line-height:1.12;margin:0}
+  p{margin:0 0 .9em}p:last-child{margin-bottom:0}
+  strong{font-weight:600;color:var(--ink)}
+  .mono{font-family:"IBM Plex Mono",monospace}
+
+  .mast{padding:44px 0 22px;border-bottom:2px solid var(--ink)}
+  .mast-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+  .brand{font-family:"IBM Plex Mono",monospace;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+  .brand b{color:var(--ink);font-weight:600}
+  h1{font-size:clamp(2rem,5.5vw,2.9rem);letter-spacing:-.02em}
+  h1 em{font-style:italic;color:var(--pine)}
+  .eyebrow{font-family:"IBM Plex Mono",monospace;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--pine);margin-bottom:8px}
+
+  .rule{background:var(--ink);color:#EAF0EC;border-radius:14px;padding:22px 26px;margin:22px 0 6px;box-shadow:var(--shadow-lift)}
+  :root[data-theme="dark"] .rule,:root:not([data-theme="light"]) .rule{background:#0A0F0D;border:1px solid var(--hair)}
+  @media (prefers-color-scheme:light){:root:not([data-theme="dark"]) .rule{background:var(--ink)}}
+  .rule .k{font-family:"IBM Plex Mono",monospace;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:#7FC9A3;margin-bottom:8px}
+  .rule p{margin:0;font-family:"Newsreader",serif;font-size:1.26rem;line-height:1.4;color:#fff}
+  .rule b{color:#7FC9A3;font-weight:600}
+
+  section{padding:32px 0;border-top:1px solid var(--hair)}
+  .sh{display:flex;align-items:baseline;gap:12px;margin-bottom:6px}
+  .sh .n{font-family:"IBM Plex Mono",monospace;font-size:.72rem;font-weight:600;color:var(--pine)}
+  .sh h2{font-size:1.42rem;letter-spacing:-.01em}
+  .sh .q{margin-left:auto;font-size:.82rem;color:var(--muted);font-style:italic;text-align:right}
+  .lede{font-size:.98rem;color:var(--ink-soft);max-width:70ch;margin-bottom:16px}
+
+  .tac{list-style:none;margin:0;padding:0}
+  .tac li{display:grid;grid-template-columns:auto 1fr;gap:12px;padding:11px 0;border-top:1px solid var(--hair)}
+  .tac li:first-child{border-top:none}
+  .tac .ic{font-family:"IBM Plex Mono",monospace;font-weight:700;color:var(--pine);font-size:.9rem;padding-top:1px}
+  .tac .t{font-weight:600;font-size:.94rem;margin-bottom:1px}
+  .tac .d{font-size:.88rem;color:var(--ink-soft)}
+  .tac .d b{color:var(--pine)}
+
+  .note{border:1px solid var(--hair);border-left:4px solid var(--brass);background:var(--brass-soft);border-radius:10px;padding:14px 18px;margin-top:16px}
+  .note.pine{border-left-color:var(--pine);background:var(--pine-soft)}
+  .note.ox{border-left-color:var(--oxblood);background:var(--oxblood-soft)}
+  .note .k{display:block;font-family:"IBM Plex Mono",monospace;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:6px;font-weight:600;color:var(--brass)}
+  .note.pine .k{color:var(--pine)}.note.ox .k{color:var(--oxblood)}
+  .note p{margin:0;font-size:.89rem;color:var(--ink-soft)}
+
+  .lever{background:var(--pine-soft);border:1px solid var(--hair);border-radius:13px;padding:20px 24px;box-shadow:var(--shadow);margin-top:8px}
+  .lever .k{font-family:"IBM Plex Mono",monospace;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--pine);font-weight:600;margin-bottom:8px}
+  .lever p{margin:0;font-size:1.05rem;color:var(--ink-soft);line-height:1.5}
+  .lever b{color:var(--ink)}
+  .lever .mini{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+  .lever .chip{font-family:"IBM Plex Mono",monospace;font-size:.72rem;padding:5px 11px;border-radius:100px;background:var(--surface);border:1px solid var(--hair-strong);color:var(--ink-soft)}
+  .lever .chip b{color:var(--pine)}
+
+  .footer{padding:26px 0 50px;color:var(--muted);font-size:.78rem}.footer b{color:var(--ink)}
+
+  @media (max-width:680px){
+    .sh .q{display:none}
+    .rule p{font-size:1.1rem}
+  }
+</style>
+
+<div class="wrap">
+
+  <header class="mast">
+    <div class="mast-top">
+      <div class="brand"><b>Acquisition Memo</b> · No.&nbsp;10 — De-Risking</div>
+      <div class="brand">14 Sep 2026 · protect the downside</div>
+    </div>
+    <div class="eyebrow">Exposure · team cost · cash up front</div>
+    <h1>De-Risking <em>the Deal</em></h1>
+  </header>
+
+  <div class="rule">
+    <div class="k">The one lever behind all three</div>
+    <p>The <b>structure of the deal</b> is the master control. More <b>seller finance + investor equity</b> and <b>less bank debt</b> shrinks your guarantee, cuts your cash, and de-risks the whole thing — all at once. Fix that one thing first.</p>
+  </div>
+
+  <section>
+    <div class="sh"><span class="n">01</span><h2>Minimise personal exposure</h2><span class="q">"how do we limit what's on the line?"</span></div>
+    <p class="lede">Exposure comes almost entirely from the personal guarantee on the bank loan. The game is to shrink it, cap it, and insure it — not to pretend you can avoid it.</p>
+    <ul class="tac">
+      <li><span class="ic">01</span><div><div class="t">Buy through a Newco</div><div class="d">The corporate veil means you're only personally exposed <b>where you sign a PG</b> — nowhere else.</div></div></li>
+      <li><span class="ic">02</span><div><div class="t">Cap the guarantee</div><div class="d">Insist on a <b>limited</b> PG (a % or fixed sum, push for ~20%), never unlimited.</div></div></li>
+      <li><span class="ic">03</span><div><div class="t">Several, not joint-and-several</div><div class="d">With your partner, each capped to <b>your own share</b> — so you're not liable for the whole if they can't pay.</div></div></li>
+      <li><span class="ic">04</span><div><div class="t">Keep your home out</div><div class="d">Under GGS a lender <b>can't take your principal residence</b>. Don't volunteer other personal security either.</div></div></li>
+      <li><span class="ic">05</span><div><div class="t">Shrink the guaranteed layer</div><div class="d">The PG attaches to the <b>bank loan only</b>. More seller finance + investor = smaller loan = smaller PG. The seller loan and investor carry no guarantee.</div></div></li>
+      <li><span class="ic">06</span><div><div class="t">Insure it</div><div class="d"><b>Personal Guarantee Insurance</b> (~1–3%/yr) pays out if the PG is called. Cost it in on a first deal.</div></div></li>
+      <li><span class="ic">07</span><div><div class="t">Transfer the "hidden problem" risk</div><div class="d">Strong <b>warranties &amp; indemnities</b>, a deferred seller loan you can <b>offset</b> if they breach, and <b>W&amp;I insurance</b> so an insurer — not you — carries a surprise.</div></div></li>
+      <li><span class="ic">08</span><div><div class="t">Don't over-leverage</div><div class="d">A comfortable debt-service cover (Memo 01's margin rule) means the guarantee <b>never gets called</b> in the first place. The best protection of all.</div></div></li>
+    </ul>
+    <div class="note ox"><span class="k">The honest limit</span><p>As first-time buyers you'll almost certainly have to give <strong>some</strong> PG — you can't eliminate it. And never move assets to dodge a guarantee you've already signed; that's defrauding creditors. Legitimate protection is: cap it, insure it, minimise the bank layer, and keep your home out — all agreed <em>before</em> you sign.</p></div>
+  </section>
+
+  <section>
+    <div class="sh"><span class="n">02</span><h2>A deal team for less</h2><span class="q">"how do we get a team cheaply?"</span></div>
+    <p class="lede">Cheap means <em>right-sized and well-scoped</em>, not skimping on the parts that protect you.</p>
+    <ul class="tac">
+      <li><span class="ic">01</span><div><div class="t">Right-size the team</div><div class="d">The <b>core three</b> only (solicitor, accountant, broker). Skip the corporate-finance lead adviser on a sub-£2m deal.</div></div></li>
+      <li><span class="ic">02</span><div><div class="t">Regional firms, not City / Big-4</div><div class="d">A good regional M&amp;A solicitor and accountant cost <b>a fraction</b> of London rates for an SME deal — and know the local market.</div></div></li>
+      <li><span class="ic">03</span><div><div class="t">Fixed-fee, capped quotes</div><div class="d">Get <b>2–3 quotes</b>; insist on fixed or capped fees; avoid open-ended hourly billing.</div></div></li>
+      <li><span class="ic">04</span><div><div class="t">Do the workstreams you can</div><div class="d">Commercial &amp; operational DD is <b>yours anyway</b>. Organise a tidy data room so advisers bill fewer hours.</div></div></li>
+      <li><span class="ic">05</span><div><div class="t">Scope tightly</div><div class="d">Light-touch DD for a small, clean business; set materiality thresholds; spend the budget on <b>deal-breakers first</b>.</div></div></li>
+      <li><span class="ic">06</span><div><div class="t">Shift risk with warranties</div><div class="d">Cover low-risk items with <b>seller warranties</b> rather than paying to investigate everything exhaustively.</div></div></li>
+      <li><span class="ic">07</span><div><div class="t">Specialists only when triggered</div><div class="d">Surveyor / environmental / pensions actuary — only if that specific risk actually appears.</div></div></li>
+      <li><span class="ic">08</span><div><div class="t">Signal a pipeline</div><div class="d">Tell advisers you're a <b>repeat buyer</b> (buy-and-build) — they'll sharpen rates for ongoing work.</div></div></li>
+    </ul>
+    <div class="note"><span class="k">The one place NOT to cheap out</span><p>The <strong>SPA and legal core</strong>. A weak agreement is how you inherit a lawsuit — it costs many times any fee you saved. Trim everywhere else; never here.</p></div>
+  </section>
+
+  <section>
+    <div class="sh"><span class="n">03</span><h2>Minimise cash up front</h2><span class="q">"how do we keep our own money in?"</span></div>
+    <p class="lede">Two costs hit up front: any buyer contribution, and the fees payable win-or-lose. Attack both with structure and staging.</p>
+    <ul class="tac">
+      <li><span class="ic">01</span><div><div class="t">Max seller finance + investor</div><div class="d">The more the seller leaves in and the investor funds, the <b>smaller the deposit</b> and the loan — and the less of your cash is needed.</div></div></li>
+      <li><span class="ic">02</span><div><div class="t">Investor funds the equity slice</div><div class="d">Your own contribution can approach zero — though lenders often want <b>some operator skin-in-the-game</b>, so negotiate the balance.</div></div></li>
+      <li><span class="ic">03</span><div><div class="t">Fund the fees, don't pay them</div><div class="d">Structure the raise (or the facility, where the lender allows) to <b>cover transaction costs</b>, not just the purchase price.</div></div></li>
+      <li><span class="ic">04</span><div><div class="t">Deferred / success-based fees</div><div class="d">Brokers are often lender- or success-paid; ask advisers to take <b>part of their fee on completion</b>, out of proceeds.</div></div></li>
+      <li><span class="ic">05</span><div><div class="t">Kill abort-cost risk</div><div class="d">The real up-front danger is fees on a deal that <b>dies in DD</b>. Screen cheaply first (Rule Book → Scorecard → First Call) so you only spend real money on deals likely to complete.</div></div></li>
+      <li><span class="ic">06</span><div><div class="t">Stage the diligence</div><div class="d">Run the cheap <b>deal-breaker checks first</b>; commit to expensive full DD and legals only once you're confident it'll close.</div></div></li>
+      <li><span class="ic">07</span><div><div class="t">Get exclusivity &amp; capped aborts</div><div class="d">A lock-out period stops you competing; negotiate <b>capped or deferred abort fees</b> before you start spending.</div></div></li>
+    </ul>
+    <div class="note ox"><span class="k">The honest limit</span><p>Lenders usually want <em>some</em> buyer contribution, and a chunk of fees is payable whether or not the deal completes. Budget a realistic minimum — a few thousand in early costs even on deals that fall through — rather than expecting truly £0.</p></div>
+  </section>
+
+  <section>
+    <div class="sh"><span class="n">04</span><h2>Pull the one lever</h2></div>
+    <div class="lever">
+      <div class="k">Do this and all three improve together</div>
+      <p>Tilt every deal toward <b>more seller finance and investor equity, and the smallest bank loan the affordability allows.</b> The same move shrinks your personal guarantee, lowers your deposit, and cushions the risk — one decision, three wins. Then screen cheaply and stage your spend so you only ever pay real money on a deal that's going to complete.</p>
+      <div class="mini">
+        <span class="chip">Smaller bank loan → <b>smaller PG</b></span>
+        <span class="chip">More seller/investor → <b>less cash</b></span>
+        <span class="chip">Cheap screening → <b>fewer aborts</b></span>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p><b>De-Risking the Deal v1.</b> Pairs with Funding (Memo 08) and the Deal Team (Memo 09). The throughline of the whole playbook: buy well, structure it so the business carries the debt, and keep your own downside capped and insured.</p>
+    <p style="margin-top:10px" class="mono">Educational guidance, not financial or legal advice. PG, insurance and fee arrangements vary — confirm with your broker, solicitor and accountant.</p>
+  </footer>
+
+</div>
