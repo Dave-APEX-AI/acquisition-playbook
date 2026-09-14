@@ -1,0 +1,207 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta charset="utf-8">
+<title>The Deal Team</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --paper:#F7F8F6;--surface:#FFFFFF;--surface-2:#EFF1ED;--ink:#14201C;--ink-soft:#3A4640;
+    --muted:#5F6B63;--hair:#DBE0D9;--hair-strong:#C4CCC3;--pine:#1E5E45;--pine-soft:#E4EEE7;
+    --brass:#9C6B1E;--brass-soft:#F3E9D6;--oxblood:#A6382E;--oxblood-soft:#F5E2DE;
+    --shadow:0 1px 2px rgba(20,32,28,.05),0 12px 30px -18px rgba(20,32,28,.20);
+    --shadow-lift:0 2px 4px rgba(20,32,28,.06),0 22px 46px -24px rgba(20,32,28,.28);
+  }
+  :root:not([data-theme="light"]){@media (prefers-color-scheme:dark){
+    --paper:#0F1512;--surface:#161D19;--surface-2:#1D2621;--ink:#E8EDE8;--ink-soft:#C3CCC5;
+    --muted:#8E9A91;--hair:#2A342E;--hair-strong:#3A463F;--pine:#5FB489;--pine-soft:#17271F;
+    --brass:#D2A257;--brass-soft:#2A2214;--oxblood:#E08B7F;--oxblood-soft:#2E1A17;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 14px 34px -18px rgba(0,0,0,.7);--shadow-lift:0 2px 6px rgba(0,0,0,.5),0 24px 48px -24px rgba(0,0,0,.8);
+  }}
+  :root[data-theme="dark"]{
+    --paper:#0F1512;--surface:#161D19;--surface-2:#1D2621;--ink:#E8EDE8;--ink-soft:#C3CCC5;
+    --muted:#8E9A91;--hair:#2A342E;--hair-strong:#3A463F;--pine:#5FB489;--pine-soft:#17271F;
+    --brass:#D2A257;--brass-soft:#2A2214;--oxblood:#E08B7F;--oxblood-soft:#2E1A17;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 14px 34px -18px rgba(0,0,0,.7);--shadow-lift:0 2px 6px rgba(0,0,0,.5),0 24px 48px -24px rgba(0,0,0,.8);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"IBM Plex Sans",system-ui,sans-serif;font-size:15.5px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:880px;margin:0 auto;padding:0 22px}
+  h1,h2,h3{font-family:"Newsreader",Georgia,serif;font-weight:600;text-wrap:balance;line-height:1.12;margin:0}
+  p{margin:0 0 .9em}p:last-child{margin-bottom:0}
+  strong{font-weight:600;color:var(--ink)}
+  .mono{font-family:"IBM Plex Mono",monospace}
+
+  .mast{padding:44px 0 22px;border-bottom:2px solid var(--ink)}
+  .mast-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+  .brand{font-family:"IBM Plex Mono",monospace;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+  .brand b{color:var(--ink);font-weight:600}
+  h1{font-size:clamp(2rem,5.5vw,2.9rem);letter-spacing:-.02em}
+  h1 em{font-style:italic;color:var(--pine)}
+  .eyebrow{font-family:"IBM Plex Mono",monospace;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--pine);margin-bottom:8px}
+
+  .rule{background:var(--ink);color:#EAF0EC;border-radius:14px;padding:22px 26px;margin:22px 0 6px;box-shadow:var(--shadow-lift)}
+  :root[data-theme="dark"] .rule,:root:not([data-theme="light"]) .rule{background:#0A0F0D;border:1px solid var(--hair)}
+  @media (prefers-color-scheme:light){:root:not([data-theme="dark"]) .rule{background:var(--ink)}}
+  .rule .k{font-family:"IBM Plex Mono",monospace;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:#7FC9A3;margin-bottom:8px}
+  .rule p{margin:0;font-family:"Newsreader",serif;font-size:1.26rem;line-height:1.4;color:#fff}
+  .rule b{color:#7FC9A3;font-weight:600}
+
+  section{padding:32px 0;border-top:1px solid var(--hair)}
+  .sh{display:flex;align-items:baseline;gap:12px;margin-bottom:6px}
+  .sh .n{font-family:"IBM Plex Mono",monospace;font-size:.72rem;font-weight:600;color:var(--pine)}
+  .sh h2{font-size:1.42rem;letter-spacing:-.01em}
+  .lede{font-size:.98rem;color:var(--ink-soft);max-width:70ch;margin-bottom:16px}
+
+  /* role cards */
+  .role{border:1px solid var(--hair);border-radius:12px;background:var(--surface);box-shadow:var(--shadow);overflow:hidden;margin-bottom:12px}
+  .role .rh{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;padding:14px 18px 8px}
+  .role .rh .box{flex:none;width:18px;height:18px;border:2px solid var(--pine);border-radius:5px;align-self:center}
+  .role .rh h3{font-size:1.1rem}
+  .role .rh .cost{margin-left:auto;font-family:"IBM Plex Mono",monospace;font-size:.78rem;color:var(--pine);font-weight:600;white-space:nowrap}
+  .role .rb{padding:0 18px 15px 48px}
+  .role .rb p{font-size:.9rem;color:var(--ink-soft);margin:0 0 8px}
+  .role .meta{display:flex;flex-wrap:wrap;gap:6px 18px;font-family:"IBM Plex Mono",monospace;font-size:.72rem;color:var(--muted)}
+  .role .meta b{color:var(--ink-soft);font-weight:600}
+  .role .tip{font-size:.83rem;color:var(--brass);border-left:2px solid var(--brass);padding-left:11px;margin-top:8px}
+
+  /* DD workstreams */
+  .dd{width:100%;border-collapse:collapse;font-size:.88rem;margin-top:4px}
+  .dd th,.dd td{text-align:left;padding:11px 12px;border-bottom:1px solid var(--hair);vertical-align:top}
+  .dd th{font-family:"IBM Plex Mono",monospace;font-size:.64rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600}
+  .dd td:first-child{font-weight:600;width:26%}
+  .dd td:nth-child(2){width:20%;color:var(--pine);font-weight:600;font-size:.82rem}
+  .dd td:last-child{color:var(--ink-soft)}
+  .dd tr:last-child td{border-bottom:none}
+  .dd-scroll{overflow-x:auto}
+
+  /* situational */
+  .sit{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .sc{border:1px solid var(--hair);border-radius:11px;background:var(--surface);box-shadow:var(--shadow);padding:14px 16px}
+  .sc h3{font-size:1rem;margin-bottom:2px}
+  .sc .trig{font-family:"IBM Plex Mono",monospace;font-size:.68rem;letter-spacing:.04em;text-transform:uppercase;color:var(--oxblood);font-weight:600;margin-bottom:7px}
+  .sc p{font-size:.85rem;color:var(--ink-soft);margin:0}
+  .sc .c{font-family:"IBM Plex Mono",monospace;font-size:.74rem;color:var(--muted);margin-top:6px}
+
+  .note{border:1px solid var(--hair);border-left:4px solid var(--brass);background:var(--brass-soft);border-radius:10px;padding:14px 18px;margin-top:16px}
+  .note.pine{border-left-color:var(--pine);background:var(--pine-soft)}
+  .note .k{display:block;font-family:"IBM Plex Mono",monospace;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:6px;font-weight:600;color:var(--brass)}
+  .note.pine .k{color:var(--pine)}
+  .note p{margin:0 0 .6em;font-size:.9rem;color:var(--ink-soft)}.note p:last-child{margin-bottom:0}
+
+  .tot{border:1px solid var(--hair-strong);border-radius:12px;overflow:hidden;box-shadow:var(--shadow);background:var(--surface)}
+  .tr{display:grid;grid-template-columns:1fr auto;gap:16px;padding:10px 18px;border-bottom:1px solid var(--hair);align-items:baseline;font-size:.9rem}
+  .tr:last-child{border-bottom:none}
+  .tr .l{color:var(--ink-soft)}.tr .v{font-family:"IBM Plex Mono",monospace;font-weight:600;color:var(--pine)}
+  .tr.grand{background:var(--surface-2)}.tr.grand .l{font-weight:600;color:var(--ink)}.tr.grand .v{color:var(--ink)}
+
+  .footer{padding:26px 0 50px;color:var(--muted);font-size:.78rem}.footer b{color:var(--ink)}
+
+  @media (max-width:680px){
+    .sit{grid-template-columns:1fr}
+    .role .rb{padding-left:18px}
+    .rule p{font-size:1.1rem}
+  }
+</style>
+
+<div class="wrap">
+
+  <header class="mast">
+    <div class="mast-top">
+      <div class="brand"><b>Acquisition Memo</b> · No.&nbsp;09 — The Deal Team</div>
+      <div class="brand">14 Sep 2026 · illustrative costs</div>
+    </div>
+    <div class="eyebrow">Who you hire, what they do, when, and what it costs</div>
+    <h1>The <em>Deal Team</em></h1>
+  </header>
+
+  <div class="rule">
+    <div class="k">The whole thing in one line</div>
+    <p>You need a tight <b>core of three</b> — a corporate solicitor, a deal-savvy accountant, and a finance broker — plus <b>specialists only when a specific risk shows up.</b> Their fees are the real cash in a "£0-down" deal, so budget them in.</p>
+  </div>
+
+  <section>
+    <div class="sh"><span class="n">01</span><h2>The core three — every deal</h2></div>
+    <p class="lede">Hire people who do <strong>SME acquisitions every week</strong>, not your local high-street firm. Get fixed-fee or capped quotes where you can, and appoint them once you've agreed Heads of Terms.</p>
+
+    <div class="role">
+      <div class="rh"><span class="box"></span><h3>Corporate / M&amp;A solicitor</h3><span class="cost">£15k–£40k+</span></div>
+      <div class="rb">
+        <p>Runs the legal side end to end: sets up your <b>Newco</b>, drafts and negotiates the <b>Share Purchase Agreement</b> (warranties &amp; indemnities that put historic risk on the seller), the <b>disclosure</b> process, the <b>seller-loan agreement</b>, the <b>shareholders' agreement</b> with your investor, and reviews the lender's <b>security &amp; personal-guarantee</b> documents. Also leads <b>legal due diligence</b>.</p>
+        <div class="meta"><span><b>When:</b> Heads of Terms → completion</span><span><b>Owns:</b> SPA, legal DD, security</span></div>
+        <div class="tip">Non-negotiable. This is the one you never cut corners on — a weak SPA is how you inherit a lawsuit.</div>
+      </div>
+    </div>
+
+    <div class="role">
+      <div class="rh"><span class="box"></span><h3>Accountant — financial &amp; tax due diligence</h3><span class="cost">£5k–£20k+</span></div>
+      <div class="rb">
+        <p>Verifies the numbers you're pricing off: a <b>quality-of-earnings</b> review — real profit vs reported, which <b>add-backs</b> are genuine, <b>working-capital</b> needs, tax exposures. Advises <b>share vs asset purchase</b>, the tax-efficient structure, and builds the model the lender needs. Often the same firm handles tax.</p>
+        <div class="meta"><span><b>When:</b> due-diligence stage</span><span><b>Owns:</b> financial + tax DD, the model</span></div>
+        <div class="tip">Use one experienced in acquisitions — a bookkeeper who files your VAT is not the same thing.</div>
+      </div>
+    </div>
+
+    <div class="role">
+      <div class="rh"><span class="box"></span><h3>Acquisition-finance broker</h3><span class="cost">fee or ~1–2% of facility</span></div>
+      <div class="rb">
+        <p>Sources and packages the debt: which <b>GGS-accredited lenders</b> back first-time buyers, how to structure GGS + seller loan + equity, and negotiating rates and <b>PG terms</b> on your behalf. Worth it as first-timers — they speak the lenders' language.</p>
+        <div class="meta"><span><b>When:</b> funding stage</span><span><b>Owns:</b> the debt raise</span></div>
+        <div class="tip">Some are lender-paid; always ask how they're remunerated so you know whose side they're on.</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sh"><span class="n">02</span><h2>Due diligence — the workstreams &amp; who owns each</h2></div>
+    <p class="lede">"Due diligence" isn't one person — it's several parallel investigations. For a small deal your core three cover most of it; specialists slot in only where a risk is flagged.</p>
+    <div class="dd-scroll">
+      <table class="dd">
+        <thead><tr><th>Workstream</th><th>Who owns it</th><th>What it checks</th></tr></thead>
+        <tbody>
+          <tr><td>Financial DD</td><td>Accountant</td><td>Real profit &amp; margins, add-backs, cash conversion, working capital, debtor/creditor health, forecasts.</td></tr>
+          <tr><td>Tax DD</td><td>Accountant / tax adviser</td><td>PAYE/VAT/CT compliance, hidden liabilities, the most tax-efficient deal structure, stamp duty (0.5% on shares).</td></tr>
+          <tr><td>Legal DD</td><td>Solicitor</td><td>Contracts, customer &amp; supplier terms, the lease, employment/TUPE, litigation, IP, licences, change-of-control clauses.</td></tr>
+          <tr><td>Commercial DD</td><td>You (or a consultant)</td><td>Market, customer concentration, competitive position, why customers stay, pipeline — much of this comes from the First Call &amp; the accounts.</td></tr>
+          <tr><td>Operational DD</td><td>You</td><td>Does it truly run without the owner? Systems, the team, key-person risk — the heart of the Rule Book.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note pine"><span class="k">Diligence is insurance, not a cost</span><p>£10–30k of DD that stops you buying a business with a hidden pension deficit, a fake profit, or one customer about to leave is the cheapest money in the whole deal. Never skip it to save a few thousand.</p></div>
+  </section>
+
+  <section>
+    <div class="sh"><span class="n">03</span><h2>Situational specialists — only when triggered</h2></div>
+    <p class="lede">Don't hire these by default. Bring them in <em>only</em> if the specific risk appears.</p>
+    <div class="sit">
+      <div class="sc"><h3>Chartered surveyor</h3><div class="trig">If freehold or a material lease</div><p>Property valuation, dilapidations survey, lease review — real end-of-lease liabilities that never show on the headline price.</p><div class="c">£1k–£5k</div></div>
+      <div class="sc"><h3>Environmental consultant</h3><div class="trig">If an industrial / factory site</div><p>Phase 1/2 contamination survey. Contamination is a genuine landmine on old manufacturing sites — and lenders may require it.</p><div class="c">£2k–£10k</div></div>
+      <div class="sc"><h3>Pensions actuary</h3><div class="trig">If a defined-benefit scheme exists</div><p>A DB pension deficit can dwarf the purchase price. If one exists, treat it as a red flag and get specialist advice before going further.</p><div class="c">specialist</div></div>
+      <div class="sc"><h3>Employment / HR adviser</h3><div class="trig">If staff-heavy or complex contracts</div><p>TUPE (staff transfer rights), contracts, any restructuring. Usually the solicitor covers it; a specialist for tricky cases.</p><div class="c">within legal, or £2k+</div></div>
+      <div class="sc"><h3>Insurance broker</h3><div class="trig">Always worth a conversation</div><p><b>PG insurance</b> (~1–3%/yr of the guaranteed sum), <b>key-person</b> cover, and <b>W&amp;I insurance</b> (transfers warranty risk to an insurer — more common mid-market, increasingly available below).</p><div class="c">premiums vary</div></div>
+      <div class="sc"><h3>Corporate-finance lead adviser</h3><div class="trig">Usually overkill sub-£2m</div><p>Runs the whole process for you. For a first small deal, the core three + your own effort normally do the job — revisit for larger acquisitions.</p><div class="c">% of deal</div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sh"><span class="n">04</span><h2>Rough total to budget</h2></div>
+    <p class="lede">For a sub-£2m first acquisition. This is your <em>real</em> cash outlay even in a "£0-down" structure — plan for it.</p>
+    <div class="tot">
+      <div class="tr"><span class="l">Corporate solicitor (SPA, legal DD, security)</span><span class="v">£15k–£40k</span></div>
+      <div class="tr"><span class="l">Accountant — financial &amp; tax DD</span><span class="v">£5k–£20k</span></div>
+      <div class="tr"><span class="l">Finance broker</span><span class="v">fee / % (often lender-paid)</span></div>
+      <div class="tr"><span class="l">Situational specialists (if triggered)</span><span class="v">£2k–£15k</span></div>
+      <div class="tr"><span class="l">Lender arrangement &amp; valuation fees</span><span class="v">£2k–£10k</span></div>
+      <div class="tr grand"><span class="l">Typical all-in</span><span class="v">≈ £40k–£100k</span></div>
+    </div>
+    <div class="note"><span class="k">Two first-timer tips</span><p><strong>1 · Interview for deal experience.</strong> Ask any solicitor/accountant how many SME acquisitions they closed last year. The right answer is "lots".</p><p><strong>2 · Get abort-cost clarity.</strong> Agree what you owe if the deal falls through in DD — some fees are payable regardless. Know it before you start spending.</p></div>
+  </section>
+
+  <footer class="footer">
+    <p><b>The Deal Team v1.</b> Assemble the core three at Heads of Terms; add specialists only on a flagged risk. Pairs with Funding (Memo 08) and the coming <b>Valuation &amp; Heads of Terms</b>.</p>
+    <p style="margin-top:10px" class="mono">Illustrative fee ranges for a UK sub-£2m SME deal — not quotes or advice. Get fixed-fee proposals from advisers experienced in acquisitions.</p>
+  </footer>
+
+</div>

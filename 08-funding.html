@@ -1,0 +1,241 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta charset="utf-8">
+<title>Funding &amp; the Stack</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --paper:#F7F8F6;--surface:#FFFFFF;--surface-2:#EFF1ED;--ink:#14201C;--ink-soft:#3A4640;
+    --muted:#5F6B63;--hair:#DBE0D9;--hair-strong:#C4CCC3;--pine:#1E5E45;--pine-soft:#E4EEE7;
+    --brass:#9C6B1E;--brass-soft:#F3E9D6;--oxblood:#A6382E;--oxblood-soft:#F5E2DE;
+    --shadow:0 1px 2px rgba(20,32,28,.05),0 12px 30px -18px rgba(20,32,28,.20);
+    --shadow-lift:0 2px 4px rgba(20,32,28,.06),0 22px 46px -24px rgba(20,32,28,.28);
+  }
+  :root:not([data-theme="light"]){@media (prefers-color-scheme:dark){
+    --paper:#0F1512;--surface:#161D19;--surface-2:#1D2621;--ink:#E8EDE8;--ink-soft:#C3CCC5;
+    --muted:#8E9A91;--hair:#2A342E;--hair-strong:#3A463F;--pine:#5FB489;--pine-soft:#17271F;
+    --brass:#D2A257;--brass-soft:#2A2214;--oxblood:#E08B7F;--oxblood-soft:#2E1A17;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 14px 34px -18px rgba(0,0,0,.7);--shadow-lift:0 2px 6px rgba(0,0,0,.5),0 24px 48px -24px rgba(0,0,0,.8);
+  }}
+  :root[data-theme="dark"]{
+    --paper:#0F1512;--surface:#161D19;--surface-2:#1D2621;--ink:#E8EDE8;--ink-soft:#C3CCC5;
+    --muted:#8E9A91;--hair:#2A342E;--hair-strong:#3A463F;--pine:#5FB489;--pine-soft:#17271F;
+    --brass:#D2A257;--brass-soft:#2A2214;--oxblood:#E08B7F;--oxblood-soft:#2E1A17;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 14px 34px -18px rgba(0,0,0,.7);--shadow-lift:0 2px 6px rgba(0,0,0,.5),0 24px 48px -24px rgba(0,0,0,.8);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"IBM Plex Sans",system-ui,sans-serif;font-size:15.5px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:880px;margin:0 auto;padding:0 22px}
+  h1,h2,h3{font-family:"Newsreader",Georgia,serif;font-weight:600;text-wrap:balance;line-height:1.12;margin:0}
+  p{margin:0 0 .9em}p:last-child{margin-bottom:0}
+  strong{font-weight:600;color:var(--ink)}
+  .mono{font-family:"IBM Plex Mono",monospace}
+
+  .mast{padding:44px 0 22px;border-bottom:2px solid var(--ink)}
+  .mast-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+  .brand{font-family:"IBM Plex Mono",monospace;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+  .brand b{color:var(--ink);font-weight:600}
+  h1{font-size:clamp(2rem,5.5vw,2.9rem);letter-spacing:-.02em}
+  h1 em{font-style:italic;color:var(--pine)}
+  .eyebrow{font-family:"IBM Plex Mono",monospace;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--pine);margin-bottom:8px}
+
+  .rule{background:var(--ink);color:#EAF0EC;border-radius:14px;padding:22px 26px;margin:22px 0 6px;box-shadow:var(--shadow-lift)}
+  :root[data-theme="dark"] .rule,:root:not([data-theme="light"]) .rule{background:#0A0F0D;border:1px solid var(--hair)}
+  @media (prefers-color-scheme:light){:root:not([data-theme="dark"]) .rule{background:var(--ink)}}
+  .rule .k{font-family:"IBM Plex Mono",monospace;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:#7FC9A3;margin-bottom:8px}
+  .rule p{margin:0;font-family:"Newsreader",serif;font-size:1.26rem;line-height:1.4;color:#fff}
+  .rule b{color:#7FC9A3;font-weight:600}
+
+  section{padding:32px 0;border-top:1px solid var(--hair)}
+  .sh{display:flex;align-items:baseline;gap:12px;margin-bottom:6px}
+  .sh .n{font-family:"IBM Plex Mono",monospace;font-size:.72rem;font-weight:600;color:var(--pine)}
+  .sh h2{font-size:1.42rem;letter-spacing:-.01em}
+  .lede{font-size:.98rem;color:var(--ink-soft);max-width:70ch;margin-bottom:16px}
+
+  /* layer rows */
+  .layers{display:flex;flex-direction:column;gap:9px}
+  .layer{display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:center;border:1px solid var(--hair);border-radius:10px;background:var(--surface);box-shadow:var(--shadow);padding:13px 16px}
+  .sw{width:12px;height:36px;border-radius:3px;flex:none}
+  .layer .nm{font-weight:600;font-size:.95rem;line-height:1.2}
+  .layer .ds{font-size:.82rem;color:var(--muted);line-height:1.35;margin-top:2px}
+  .layer .rt{font-family:"IBM Plex Mono",monospace;font-size:.8rem;color:var(--pine);font-weight:600;text-align:right;white-space:nowrap}
+
+  /* facts */
+  .facts{border:1px solid var(--hair-strong);border-radius:12px;overflow:hidden;box-shadow:var(--shadow);background:var(--surface);margin-top:4px}
+  .frow{display:grid;grid-template-columns:1fr auto;gap:16px;padding:11px 18px;border-bottom:1px solid var(--hair);align-items:baseline}
+  .frow:last-child{border-bottom:none}
+  .frow .l{font-size:.9rem;color:var(--ink-soft)}.frow .l b{color:var(--ink)}
+  .frow .v{font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:.9rem;color:var(--pine);white-space:nowrap;text-align:right}
+
+  /* hypotheticals */
+  .hypo{border:1px solid var(--hair);border-radius:13px;background:var(--surface);box-shadow:var(--shadow);overflow:hidden;margin-bottom:16px}
+  .hypo .hh{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap;padding:14px 18px;background:var(--surface-2);border-bottom:1px solid var(--hair)}
+  .hypo .hh .t{font-weight:600;font-size:1.02rem}
+  .hypo .hh .m{font-family:"IBM Plex Mono",monospace;font-size:.78rem;color:var(--muted)}
+  .hypo .hb{padding:16px 18px}
+  .bar{display:flex;height:22px;border-radius:6px;overflow:hidden;border:1px solid var(--hair);margin-bottom:12px}
+  .bar span{display:block}
+  .brk{display:grid;grid-template-columns:1fr 1fr;gap:6px 18px;font-size:.86rem}
+  .brk .r{display:flex;justify-content:space-between;gap:10px;padding:4px 0;border-bottom:1px dotted var(--hair)}
+  .brk .r .k{display:flex;align-items:center;gap:8px;color:var(--ink-soft)}
+  .brk .r .k i{width:10px;height:10px;border-radius:2px;flex:none}
+  .brk .r .v{font-family:"IBM Plex Mono",monospace;font-weight:600}
+  .dscr{margin-top:12px;background:var(--pine-soft);border:1px solid var(--hair);border-left:3px solid var(--pine);border-radius:9px;padding:11px 15px;font-size:.86rem;color:var(--ink-soft)}
+  .dscr b{color:var(--pine)}
+  .dscr .mono{color:var(--ink)}
+
+  .note{border:1px solid var(--hair);border-left:4px solid var(--brass);background:var(--brass-soft);border-radius:10px;padding:14px 18px;margin-top:16px}
+  .note.pine{border-left-color:var(--pine);background:var(--pine-soft)}
+  .note.ox{border-left-color:var(--oxblood);background:var(--oxblood-soft)}
+  .note .k{display:block;font-family:"IBM Plex Mono",monospace;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:6px;font-weight:600;color:var(--brass)}
+  .note.pine .k{color:var(--pine)}.note.ox .k{color:var(--oxblood)}
+  .note p{margin:0 0 .6em;font-size:.9rem;color:var(--ink-soft)}.note p:last-child{margin-bottom:0}
+
+  .pg{display:flex;flex-direction:column;gap:0}
+  .pgrow{display:grid;grid-template-columns:170px 1fr;gap:16px;padding:12px 0;border-top:1px solid var(--hair)}
+  .pgrow:first-child{border-top:none}
+  .pgrow .w{font-weight:600;font-size:.92rem}
+  .pgrow .d{font-size:.89rem;color:var(--ink-soft)}
+  .pgrow .d b{color:var(--pine)}.pgrow .d .bad{color:var(--oxblood);font-weight:600}
+
+  .steps{display:flex;flex-direction:column;gap:0}
+  .stp{display:grid;grid-template-columns:auto 1fr;gap:16px;padding:12px 0;border-top:1px solid var(--hair)}
+  .stp:first-child{border-top:none}
+  .stp .d{font-family:"IBM Plex Mono",monospace;font-size:.72rem;font-weight:600;color:var(--pine);white-space:nowrap;padding-top:2px}
+  .stp .t{font-weight:600;margin-bottom:1px}.stp .x{font-size:.89rem;color:var(--ink-soft)}
+
+  .footer{padding:26px 0 50px;color:var(--muted);font-size:.78rem}.footer b{color:var(--ink)}
+
+  @media (max-width:680px){
+    .brk{grid-template-columns:1fr}
+    .layer{grid-template-columns:auto 1fr}.layer .rt{grid-column:2;text-align:left}
+    .pgrow{grid-template-columns:1fr;gap:2px}.pgrow .w{color:var(--pine)}
+    .rule p{font-size:1.1rem}
+  }
+</style>
+
+<div class="wrap">
+
+  <header class="mast">
+    <div class="mast-top">
+      <div class="brand"><b>Acquisition Memo</b> · No.&nbsp;08 — Funding &amp; the Stack</div>
+      <div class="brand">14 Sep 2026 · illustrative</div>
+    </div>
+    <div class="eyebrow">How we pay for it — and what it puts on the line</div>
+    <h1>Funding &amp; the <em>Stack</em></h1>
+  </header>
+
+  <div class="rule">
+    <div class="k">The whole thing in one line</div>
+    <p>You don't take out <b>one loan</b> — you <b>stack</b> government-backed bank debt, a seller loan and a little investor equity, sized so the <b>business's own profit repays it.</b> The scheme caps at <b>£2m</b>; affordability caps it lower.</p>
+  </div>
+
+  <section>
+    <div class="sh"><span class="n">01</span><h2>How the funding works — the stack</h2></div>
+    <p class="lede">Four layers make up the purchase price. Each covers a slice, which is why you can control a £1m+ business with little of your own cash.</p>
+    <div class="layers">
+      <div class="layer"><span class="sw" style="background:var(--pine)"></span><div><div class="nm">1 · GGS-backed bank term loan</div><div class="ds">The anchor. A high-street/challenger lender funds the bulk; the government guarantees 70% of it <em>to the lender</em>. Up to 10-year term.</div></div><div class="rt">~55–70%</div></div>
+      <div class="layer"><span class="sw" style="background:var(--oxblood)"></span><div><div class="nm">2 · Seller loan (deferred consideration)</div><div class="ds">The seller leaves part of the price in, repaid monthly from profit over ~3–5 yrs. Usually unsecured &amp; subordinated.</div></div><div class="rt">~20–40%</div></div>
+      <div class="layer"><span class="sw" style="background:var(--brass)"></span><div><div class="nm">3 · Investor equity</div><div class="ds">A minority partner puts in cash for a stake. No repayment, no guarantee — they take equity risk.</div></div><div class="rt">~10–20%</div></div>
+      <div class="layer"><span class="sw" style="background:var(--muted)"></span><div><div class="nm">4 · Your cash + fees</div><div class="ds">Aim low, but expect a lender to want <em>some</em> buyer contribution, and budget £30–100k of diligence &amp; legal fees regardless.</div></div><div class="rt">low</div></div>
+    </div>
+    <div class="note pine"><span class="k">Also GGS-eligible</span><p>Asset finance (for vehicles/kit) and invoice finance (against the debtor book) can sit alongside the term loan — useful for the working capital a business needs the day after you own it.</p></div>
+  </section>
+
+  <section>
+    <div class="sh"><span class="n">02</span><h2>The most you can get — the scheme facts</h2></div>
+    <div class="facts">
+      <div class="frow"><div class="l"><b>Maximum facility</b> — per business <em>group</em></div><div class="v">£2,000,000</div></div>
+      <div class="frow"><div class="l">Northern Ireland Protocol borrowers</div><div class="v">£1,000,000</div></div>
+      <div class="frow"><div class="l"><b>Government guarantee</b> (to the lender, not you)</div><div class="v">70%</div></div>
+      <div class="frow"><div class="l">Term — loans &amp; asset finance</div><div class="v">up to 10 yrs</div></div>
+      <div class="frow"><div class="l">Turnover eligibility cap</div><div class="v">≤ £54m</div></div>
+      <div class="frow"><div class="l">Minimum term-loan facility</div><div class="v">£25,001</div></div>
+      <div class="frow"><div class="l">Scheme runs until</div><div class="v">31 Mar 2030</div></div>
+    </div>
+    <div class="note"><span class="k">The number that actually matters</span><p>£2m is the <strong>ceiling</strong>, not the offer. A lender sizes the loan to <strong>affordability</strong> — how comfortably the profit services it (they like debt-service cover ≥1.5–2×). In practice senior debt lands around <strong>2–3× adjusted profit</strong>. So on £400k profit you might get ~£800k–£1.2m of bank debt even though the cap is £2m — the rest of the price is filled by the seller loan and investor. The £2m only bites on bigger businesses (£700k+ profit).</p></div>
+    <div class="note ox"><span class="k">£2m is per GROUP — remember for buy-and-build</span><p>Every business you bolt on shares the same £2m GGS ceiling across the group. Deal two and beyond usually need commercial acquisition finance <em>on top</em> of, or instead of, GGS.</p></div>
+  </section>
+
+  <section>
+    <div class="sh"><span class="n">03</span><h2>Three hypotheticals</h2></div>
+    <p class="lede">Illustrative only — rates assumed ~10% on the bank loan over 10 yrs, seller loan repaid over ~5 yrs. Real terms vary by lender and deal.</p>
+
+    <div class="hypo">
+      <div class="hh"><span class="t">A · Small &amp; clean</span><span class="m">£300k profit · £900k price · 3.0×</span></div>
+      <div class="hb">
+        <div class="bar"><span style="width:61%;background:var(--pine)"></span><span style="width:28%;background:var(--oxblood)"></span><span style="width:11%;background:var(--brass)"></span></div>
+        <div class="brk">
+          <div class="r"><span class="k"><i style="background:var(--pine)"></i>GGS bank loan</span><span class="v">£550k · 61%</span></div>
+          <div class="r"><span class="k"><i style="background:var(--oxblood)"></i>Seller loan</span><span class="v">£250k · 28%</span></div>
+          <div class="r"><span class="k"><i style="background:var(--brass)"></i>Investor equity</span><span class="v">£100k · 11%</span></div>
+          <div class="r"><span class="k"><i style="background:var(--muted)"></i>Your cash at close</span><span class="v">≈ £0 + fees</span></div>
+        </div>
+        <div class="dscr"><b>Debt-service check:</b> bank ≈£87k/yr + seller ≈£53k/yr = <span class="mono">£140k</span>. Cover = 300 ÷ 140 = <b>2.1×</b> — comfortable.</div>
+      </div>
+    </div>
+
+    <div class="hypo">
+      <div class="hh"><span class="t">B · The sweet spot</span><span class="m">£400k profit · £1.4m price · 3.5×</span></div>
+      <div class="hb">
+        <div class="bar"><span style="width:64%;background:var(--pine)"></span><span style="width:25%;background:var(--oxblood)"></span><span style="width:11%;background:var(--brass)"></span></div>
+        <div class="brk">
+          <div class="r"><span class="k"><i style="background:var(--pine)"></i>GGS bank loan</span><span class="v">£900k · 64%</span></div>
+          <div class="r"><span class="k"><i style="background:var(--oxblood)"></i>Seller loan</span><span class="v">£350k · 25%</span></div>
+          <div class="r"><span class="k"><i style="background:var(--brass)"></i>Investor equity</span><span class="v">£150k · 11%</span></div>
+          <div class="r"><span class="k"><i style="background:var(--muted)"></i>Your cash at close</span><span class="v">modest + fees</span></div>
+        </div>
+        <div class="dscr"><b>Debt-service check:</b> bank ≈£143k/yr + seller ≈£74k/yr = <span class="mono">£217k</span>. Cover = 400 ÷ 217 = <b>1.8×</b> — workable; grow it via the 5 Ways for headroom.</div>
+      </div>
+    </div>
+
+    <div class="hypo">
+      <div class="hh"><span class="t">C · Top of our range</span><span class="m">£500k profit · £1.8m price · 3.6×</span></div>
+      <div class="hb">
+        <div class="bar"><span style="width:67%;background:var(--pine)"></span><span style="width:22%;background:var(--oxblood)"></span><span style="width:11%;background:var(--brass)"></span></div>
+        <div class="brk">
+          <div class="r"><span class="k"><i style="background:var(--pine)"></i>GGS bank loan</span><span class="v">£1.2m · 67%</span></div>
+          <div class="r"><span class="k"><i style="background:var(--oxblood)"></i>Seller loan</span><span class="v">£400k · 22%</span></div>
+          <div class="r"><span class="k"><i style="background:var(--brass)"></i>Investor equity</span><span class="v">£200k · 11%</span></div>
+          <div class="r"><span class="k"><i style="background:var(--muted)"></i>Your cash at close</span><span class="v">some + fees</span></div>
+        </div>
+        <div class="dscr"><b>Debt-service check:</b> bank ≈£190k/yr + seller ≈£85k/yr = <span class="mono">£275k</span>. Cover = 500 ÷ 275 = <b>1.8×</b>. Still under the £2m cap — above ~£2.5m price you'd need finance beyond GGS.</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sh"><span class="n">04</span><h2>The personal guarantee — how it works</h2></div>
+    <p class="lede">The big one. Understand this before you sign anything — it's where "the business owes the money" becomes "we owe the money".</p>
+    <div class="pg">
+      <div class="pgrow"><div class="w">What it is</div><div class="d">A personal promise to repay the bank loan if the company (your Newco) can't. The company is 100% liable; the PG extends that liability to <b>you personally</b> on default.</div></div>
+      <div class="pgrow"><div class="w">The 70% myth</div><div class="d">The government guarantee protects the <b>lender</b>, not you. It does <span class="bad">not</span> reduce what you owe — you're still on the hook for 100%, and the PG is how the lender reaches your personal assets.</div></div>
+      <div class="pgrow"><div class="w">Your home is safe</div><div class="d">Under GGS a lender <b>cannot take your principal private residence</b> as security. Other personal assets (savings, other property) can be at risk up to the guarantee.</div></div>
+      <div class="pgrow"><div class="w">Limited vs unlimited</div><div class="d"><b>Limited</b> = capped at a % of the facility or a fixed sum (some lenders as low as ~20%). <b>Unlimited</b> = the full outstanding balance + interest + costs. <b>Always push for a capped, limited PG.</b></div></div>
+      <div class="pgrow"><div class="w">You &amp; your partner</div><div class="d">Both may be asked to sign. <span class="bad">"Joint &amp; several"</span> means the lender can pursue <em>either</em> of you for the whole amount — try to negotiate <b>several</b> liability (each capped to your share).</div></div>
+      <div class="pgrow"><div class="w">What it attaches to</div><div class="d">Normally just the <b>bank debt</b>. The seller loan is usually unsecured/subordinated (no PG); the investor takes equity risk (no PG). So the PG covers one layer, not the whole price.</div></div>
+      <div class="pgrow"><div class="w">You can insure it</div><div class="d"><b>Personal Guarantee Insurance</b> pays out if the guarantee is called after insolvency — premiums ~1–3%/yr of the guaranteed sum. Worth costing in on a first deal.</div></div>
+      <div class="pgrow"><div class="w">Expect one</div><div class="d">As first-time buyers with no track record, a GGS lender will very likely want a PG on an acquisition. Budget for it — capped, home-protected, ideally insured — rather than hoping to avoid it.</div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sh"><span class="n">05</span><h2>How we actually go about it</h2></div>
+    <div class="steps">
+      <div class="stp"><span class="d">FIRST</span><div><div class="t">Get the deal shape</div><div class="x">You need a target, an indicative price, and the seller's openness to leaving money in — lenders fund a <em>structure</em>, not an idea.</div></div></div>
+      <div class="stp"><span class="d">THEN</span><div><div class="t">Use an acquisition-finance broker</div><div class="x">As first-timers this is worth it — they know which GGS lenders back first-time acquirers and how to package GGS + seller loan + equity. Accredited lenders incl. NatWest, Lloyds, HSBC, Allica, ThinCats, Funding Circle.</div></div></div>
+      <div class="stp"><span class="d">THEY ASSESS</span><div><div class="t">Affordability &amp; you</div><div class="x">3 years of accounts, debt-service cover, the deal structure, and your credibility/character. Get an indication → credit approval → formal offer.</div></div></div>
+      <div class="stp"><span class="d">EARLY</span><div><div class="t">Line up the investor in parallel</div><div class="x">Have the equity slice ready so the stack is complete when the lender says yes.</div></div></div>
+    </div>
+    <div class="note ox"><span class="k">One honest caveat</span><p>These figures are illustrative to show how the pieces fit — not a quote or advice. Rates, appetite and PG terms vary a lot by lender and by how strong the target's cashflow is. Get a broker and take professional advice before committing to any facility.</p></div>
+  </section>
+
+  <footer class="footer">
+    <p><b>Funding &amp; the Stack v1.</b> Part of Deal Structures (Memo 04-series). Pairs with Memo 01's margin rule: never let debt service leave you without a buffer. Next when you're ready: <b>valuation &amp; Heads of Terms</b> — turning a target into an offer.</p>
+    <p style="margin-top:10px" class="mono">Illustrative, not financial advice. GGS terms per British Business Bank / accredited lenders, Sep 2026.</p>
+  </footer>
+
+</div>

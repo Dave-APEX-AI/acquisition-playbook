@@ -1,0 +1,250 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta charset="utf-8">
+<title>The Brad Sugars Playbook</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --paper:#F7F8F6;--surface:#FFFFFF;--surface-2:#EFF1ED;--ink:#14201C;--ink-soft:#3A4640;
+    --muted:#5F6B63;--hair:#DBE0D9;--hair-strong:#C4CCC3;--pine:#1E5E45;--pine-soft:#E4EEE7;
+    --brass:#9C6B1E;--brass-soft:#F3E9D6;--oxblood:#A6382E;--oxblood-soft:#F5E2DE;
+    --shadow:0 1px 2px rgba(20,32,28,.05),0 12px 32px -18px rgba(20,32,28,.22);
+    --shadow-lift:0 2px 4px rgba(20,32,28,.06),0 24px 48px -24px rgba(20,32,28,.28);
+  }
+  :root:not([data-theme="light"]){@media (prefers-color-scheme:dark){
+    --paper:#0F1512;--surface:#161D19;--surface-2:#1D2621;--ink:#E8EDE8;--ink-soft:#C3CCC5;
+    --muted:#8E9A91;--hair:#2A342E;--hair-strong:#3A463F;--pine:#5FB489;--pine-soft:#17271F;
+    --brass:#D2A257;--brass-soft:#2A2214;--oxblood:#E08B7F;--oxblood-soft:#2E1A17;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 14px 34px -18px rgba(0,0,0,.7);--shadow-lift:0 2px 6px rgba(0,0,0,.5),0 26px 52px -22px rgba(0,0,0,.8);
+  }}
+  :root[data-theme="dark"]{
+    --paper:#0F1512;--surface:#161D19;--surface-2:#1D2621;--ink:#E8EDE8;--ink-soft:#C3CCC5;
+    --muted:#8E9A91;--hair:#2A342E;--hair-strong:#3A463F;--pine:#5FB489;--pine-soft:#17271F;
+    --brass:#D2A257;--brass-soft:#2A2214;--oxblood:#E08B7F;--oxblood-soft:#2E1A17;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 14px 34px -18px rgba(0,0,0,.7);--shadow-lift:0 2px 6px rgba(0,0,0,.5),0 26px 52px -22px rgba(0,0,0,.8);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"IBM Plex Sans",system-ui,sans-serif;font-size:17px;line-height:1.62;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:820px;margin:0 auto;padding:0 24px}
+  section{padding:50px 0}section+section{border-top:1px solid var(--hair)}
+  h1,h2,h3{font-family:"Newsreader",Georgia,serif;font-weight:600;text-wrap:balance;line-height:1.12;margin:0}
+  h2{font-size:clamp(1.55rem,4vw,2.15rem);letter-spacing:-.01em;margin-bottom:8px}
+  h3{font-size:1.16rem;font-weight:600}
+  p{margin:0 0 1.05em}p:last-child{margin-bottom:0}
+  strong{font-weight:600;color:var(--ink)}
+  a{color:var(--pine)}
+  .sec-eyebrow{display:block;font-family:"IBM Plex Mono",monospace;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+  .lede{font-size:1.1rem;color:var(--ink-soft);max-width:64ch}
+
+  .masthead{padding:56px 0 38px;border-bottom:2px solid var(--ink)}
+  .mast-top{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;margin-bottom:28px}
+  .mast-brand{font-family:"IBM Plex Mono",monospace;font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+  .mast-brand b{color:var(--ink);font-weight:600}
+  .mast-date{font-family:"IBM Plex Mono",monospace;font-size:.74rem;color:var(--muted)}
+  .eyebrow{font-family:"IBM Plex Mono",monospace;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--pine)}
+  h1{font-size:clamp(2.1rem,6vw,3.3rem);letter-spacing:-.02em;line-height:1.04;margin:8px 0 16px}
+  h1 em{font-style:italic;color:var(--pine)}
+  .mast-sub{font-size:1.12rem;color:var(--ink-soft);max-width:60ch;margin:0}
+
+  .tldr{background:var(--ink);color:#EAF0EC;border-radius:16px;padding:32px 32px 28px;box-shadow:var(--shadow-lift)}
+  :root[data-theme="dark"] .tldr,:root:not([data-theme="light"]) .tldr{background:#0A0F0D;border:1px solid var(--hair)}
+  @media (prefers-color-scheme:light){:root:not([data-theme="dark"]) .tldr{background:var(--ink)}}
+  .tldr .eyebrow{color:#7FC9A3}
+  .tldr h2{color:#fff;font-size:1.6rem;margin:10px 0 14px}
+  .tldr p{color:#C9D4CD}
+  .tldr .big{font-family:"Newsreader",serif;font-size:1.25rem;line-height:1.42;color:#fff;border-left:3px solid var(--pine);padding-left:18px;margin:18px 0 0;font-weight:400}
+  .tldr .big b{color:#7FC9A3;font-weight:600}
+
+  .note{border:1px solid var(--hair);background:var(--surface);border-radius:12px;padding:18px 20px;box-shadow:var(--shadow);margin:24px 0}
+  .note.pine{border-left:4px solid var(--pine);background:var(--pine-soft)}
+  .note.brass{border-left:4px solid var(--brass);background:var(--brass-soft)}
+  .note .k{display:block;font-family:"IBM Plex Mono",monospace;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:7px;font-weight:600}
+  .note.pine .k{color:var(--pine)}.note.brass .k{color:var(--brass)}
+  .note p{font-size:.96rem;color:var(--ink-soft)}
+
+  .card{border:1px solid var(--hair);border-radius:12px;background:var(--surface);box-shadow:var(--shadow);padding:20px 22px;margin-top:16px}
+  .card h3{margin-bottom:4px}
+  .card .sm{font-size:.82rem;color:var(--muted);font-family:"IBM Plex Mono",monospace;margin-bottom:10px}
+  .card p{font-size:.96rem;color:var(--ink-soft);margin-bottom:0}
+
+  .ladder{display:flex;flex-direction:column;gap:0;margin-top:6px}
+  .rung{display:grid;grid-template-columns:auto 1fr;gap:16px;padding:11px 0;border-top:1px solid var(--hair);font-size:.95rem;align-items:baseline}
+  .rung:first-child{border-top:none}
+  .rung .lv{font-family:"IBM Plex Mono",monospace;font-size:.74rem;font-weight:600;color:var(--pine);white-space:nowrap}
+  .rung b{font-weight:600}
+  .rung.us{background:var(--pine-soft);border-radius:8px;padding-left:10px;padding-right:10px}
+
+  .verdict{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-top:24px}
+  .vcol{border:1px solid var(--hair);border-radius:12px;background:var(--surface);box-shadow:var(--shadow);overflow:hidden}
+  .vhead{padding:12px 16px;font-family:"IBM Plex Mono",monospace;font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;font-weight:600;border-bottom:1px solid var(--hair)}
+  .vcol.a .vhead{color:var(--pine);background:var(--pine-soft)}
+  .vcol.b .vhead{color:var(--brass);background:var(--brass-soft)}
+  .vcol.c .vhead{color:var(--oxblood);background:var(--oxblood-soft)}
+  .vcol ul{list-style:none;margin:0;padding:6px 16px 14px}
+  .vcol li{padding:9px 0;border-bottom:1px solid var(--hair);font-size:.86rem;line-height:1.45}
+  .vcol li:last-child{border-bottom:none}
+
+  .fiveways{border:1px solid var(--hair-strong);border-radius:12px;background:var(--surface);box-shadow:var(--shadow);overflow:hidden;margin-top:24px}
+  .fw-head{padding:16px 22px;background:var(--surface-2);border-bottom:1px solid var(--hair);font-family:"IBM Plex Mono",monospace;font-size:.85rem;font-weight:600}
+  .fw-row{display:grid;grid-template-columns:auto 1fr;gap:16px;padding:14px 22px;border-bottom:1px solid var(--hair)}
+  .fw-row:last-child{border-bottom:none}
+  .fw-n{font-family:"IBM Plex Mono",monospace;font-weight:600;color:var(--pine);font-size:.8rem;white-space:nowrap}
+  .fw-row .t{font-weight:600;font-size:.96rem}
+  .fw-row .d{font-size:.88rem;color:var(--ink-soft);margin-top:2px}
+  .fw-formula{text-align:center;font-family:"IBM Plex Mono",monospace;font-size:.82rem;color:var(--muted);padding:14px 16px;background:var(--surface-2);line-height:1.9}
+  .fw-formula b{color:var(--pine)}
+
+  .steps{display:flex;flex-direction:column;gap:0;margin-top:18px}
+  .step{display:grid;grid-template-columns:auto 1fr;gap:18px;padding:16px 0;border-top:1px solid var(--hair)}
+  .step:first-child{border-top:none}
+  .step .d100{font-family:"IBM Plex Mono",monospace;font-size:.72rem;font-weight:600;color:var(--brass);white-space:nowrap;padding-top:3px}
+  .step .t{font-weight:600;margin-bottom:2px}
+  .step .x{font-size:.92rem;color:var(--ink-soft)}
+
+  .footer{padding:36px 0 60px;color:var(--muted);font-size:.82rem}
+  .footer .src{font-family:"IBM Plex Mono",monospace;font-size:.74rem;line-height:1.9}
+  .disclaim{border:1px dashed var(--hair-strong);border-radius:10px;padding:15px 18px;font-size:.8rem;color:var(--muted);margin-top:20px;background:var(--surface)}
+
+  @media (max-width:660px){
+    body{font-size:16px}section{padding:38px 0}
+    .verdict{grid-template-columns:1fr}
+    .tldr{padding:24px 22px}.tldr .big{font-size:1.1rem}
+  }
+</style>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <div class="mast-top">
+      <div class="mast-brand"><b>Acquisition Memo</b> · No.&nbsp;03</div>
+      <div class="mast-date">11 Sep 2026 · Private</div>
+    </div>
+    <div class="eyebrow">Competitive read · what the coaches teach</div>
+    <h1>The Brad Sugars <em>Playbook</em></h1>
+    <p class="mast-sub">What ActionCOACH actually teaches about buying businesses — how much of it we're already doing, and the one part worth stealing wholesale.</p>
+  </header>
+
+  <section>
+    <div class="tldr">
+      <div class="eyebrow">The 20-second read</div>
+      <h2>He's teaching our plan back to us — bar one missing piece.</h2>
+      <p>Brad Sugars (founder of ActionCOACH, ~1,000 offices, author of <em>Billionaire in Training</em>) preaches exactly what we've built: <strong style="color:#fff">buy don't build</strong>, target <strong style="color:#fff">fragmented industries with ageing owners</strong>, and engineer a business that <strong style="color:#fff">runs without you</strong>. That's independent validation that our buy box is sound — a coach with a million clients sells this as the strategy.</p>
+      <div class="big">The genuinely useful part for us is the bit our plan was light on: <b>what you do once you own it.</b> His "5 Ways" profit formula and 100-day value levers are a ready-made engine for growing the profit that repays our debt. Take the frameworks — don't buy the coaching.</div>
+    </div>
+  </section>
+
+  <section>
+    <span class="sec-eyebrow">01 — What he teaches</span>
+    <h2>The method, decoded</h2>
+    <p class="lede">Strip the "billionaire" branding and there are four frameworks doing the work. All four are geography-neutral ideas — his funding talk is US/SBA-flavoured, but the operating logic travels.</p>
+
+    <div class="card">
+      <h3>Buy · Build · Sell</h3>
+      <div class="sm">The core thesis</div>
+      <p>Buy a slightly-profitable, established business (proven cash flow, customers, infrastructure) rather than start one. Install systems to lift the profit, then hold it for cash flow or sell at a multiple of the improved profit. His target screen: fragmented industries, ageing-owner demographics, roughly <strong>15–25% margins</strong> — the same succession-gap hunting ground as our buy box.</p>
+    </div>
+
+    <div class="card">
+      <h3>The 5 Levels of Entrepreneur</h3>
+      <div class="sm">A self-diagnostic — and a warning</div>
+      <div class="ladder">
+        <div class="rung"><span class="lv">LVL 1</span><div><b>Employee</b> — does tasks.</div></div>
+        <div class="rung"><span class="lv">LVL 2</span><div><b>Self-employed</b> — owns a job, does everything themselves.</div></div>
+        <div class="rung"><span class="lv">LVL 3</span><div><b>Manager</b> — runs people and processes.</div></div>
+        <div class="rung us"><span class="lv">LVL 4</span><div><b>Owner</b> — thinks in systems &amp; scalability; buys the <em>systems that generate cash</em>. <span style="color:var(--pine);font-weight:600">← where we must operate.</span></div></div>
+        <div class="rung us"><span class="lv">LVL 5</span><div><b>Investor</b> — buys purely for capital appreciation &amp; portfolio.</div></div>
+      </div>
+      <p style="margin-top:12px;font-size:.92rem;color:var(--ink-soft)">His sharpest line: <em>"Most failed acquisitions happen because buyers operate at Level 2–3 while trying to execute a Level 5 strategy."</em> Translation for us below.</p>
+    </div>
+
+    <div class="card">
+      <h3>The 6 Steps to a business that runs itself</h3>
+      <div class="sm">Mastery → Niche → Leverage → Team → Synergy → Results</div>
+      <p>His operating ladder for an owned business: get control of time &amp; numbers (<b>Mastery</b>), sharpen the offer (<b>Niche</b>), systemise (<b>Leverage</b>), build the team (<b>Team</b>), make it run without you (<b>Synergy</b>), then bank the value/freedom (<b>Results</b>). The mantra: <em>"systems run the business, people run the systems."</em></p>
+    </div>
+  </section>
+
+  <section>
+    <span class="sec-eyebrow">02 — The verdict for us</span>
+    <h2>Borrow · Already doing · Skip</h2>
+    <p class="lede">Sorted against the plan we've already built (the Buy Box, the finder, the funding stack).</p>
+    <div class="verdict">
+      <div class="vcol a"><div class="vhead">✓ Already doing</div><ul>
+        <li>Buy-not-build thesis</li>
+        <li>Fragmented sectors, ageing owners (our silver-tsunami buy box)</li>
+        <li>"Runs without you" = our #1 scored criterion (owner-dependence)</li>
+        <li>Diligence on customer concentration &amp; systems</li>
+      </ul></div>
+      <div class="vcol b"><div class="vhead">★ Borrow</div><ul>
+        <li><b>The 5 Ways</b> — our post-purchase profit engine (next section)</li>
+        <li><b>The 4 value levers</b> — turned into our 100-day plan</li>
+        <li><b>The 5 Levels</b> — a partnership discipline: stay at Owner, not technician</li>
+        <li>Screening for "does it already have documented systems?"</li>
+      </ul></div>
+      <div class="vcol c"><div class="vhead">✕ Skip / caution</div><ul>
+        <li>Paying for the ActionCOACH program — frameworks are in a ~£15 book + here</li>
+        <li>US funding talk (SBA) — we have GGS</li>
+        <li>The "billionaire" hype — same "no-money-down" gloss we already dissected</li>
+        <li>His bigger revenue band — we're starting smaller (first deal)</li>
+      </ul></div>
+    </div>
+    <div class="note brass">
+      <span class="k">The Level 2 trap — aimed straight at us</span>
+      <p>With your trades background, the real risk is dropping to <strong>Level 2 (self-employed)</strong> — getting pulled into running the work yourself instead of owning the system. His whole point: we're buying a business precisely so we <em>don't</em> do that. Decide now who holds the "Owner" seat and protect it.</p>
+    </div>
+  </section>
+
+  <section>
+    <span class="sec-eyebrow">03 — The piece worth stealing</span>
+    <h2>The 5 Ways: our profit engine after we buy</h2>
+    <p class="lede">This is the bit our plan was thin on — <em>how</em> we grow the profit that services the debt and builds equity. It's one formula with five levers. Nudge each a little and profit compounds.</p>
+
+    <div class="fiveways">
+      <div class="fw-head">The formula</div>
+      <div class="fw-formula">
+        <b>Leads</b> × Conversion = <b>Customers</b><br>
+        Customers × Avg £ Sale × No. of Transactions = <b>Revenue</b><br>
+        Revenue × Margin = <b>Profit</b>
+      </div>
+      <div class="fw-row"><span class="fw-n">WAY 1</span><div><div class="t">Leads</div><div class="d">More enquiries. A retained cleaning/maintenance firm often does zero marketing — add a simple lead system and you've found free growth the old owner left on the table.</div></div></div>
+      <div class="fw-row"><span class="fw-n">WAY 2</span><div><div class="t">Conversion rate</div><div class="d">Win more of the quotes you already send. Follow-up, better proposals, faster response.</div></div></div>
+      <div class="fw-row"><span class="fw-n">WAY 3</span><div><div class="t">No. of transactions</div><div class="d">Get each customer buying more often — service contracts, planned maintenance, recurring reviews. Turns one-off jobs into an annuity.</div></div></div>
+      <div class="fw-row"><span class="fw-n">WAY 4</span><div><div class="t">Average £ sale</div><div class="d">Raise prices (often under-priced by a retiring owner), bundle, upsell adjacent services.</div></div></div>
+      <div class="fw-row"><span class="fw-n">WAY 5</span><div><div class="t">Margin</div><div class="d">Tighten costs, cut the unprofitable jobs, systemise delivery. Sugars says basic financial controls alone reveal <strong>5–15%</strong> quick wins.</div></div></div>
+    </div>
+    <div class="note pine">
+      <span class="k">Why it matters for the debt</span>
+      <p>A 10% nudge on each of five levers isn't 10% more profit — it compounds. That headroom is exactly what turns a thin-margin, debt-loaded deal (the risk we flagged in Memo 01) into a comfortable one. This formula <em>is</em> the safety margin.</p>
+    </div>
+  </section>
+
+  <section>
+    <span class="sec-eyebrow">04 — Turned into action</span>
+    <h2>Our first-100-days plan, his levers</h2>
+    <p class="lede">Sugars' four post-acquisition value levers, as a checklist to run the day we complete.</p>
+    <div class="steps">
+      <div class="step"><span class="d100">DAYS 1–30</span><div><div class="t">Financial controls first</div><div class="x">Install real reporting — weekly numbers, job-level profitability, cash. This alone surfaces the 5–15% quick wins and tells you which of the 5 Ways to pull.</div></div></div>
+      <div class="step"><span class="d100">DAYS 1–30</span><div><div class="t">Protect the team &amp; the manager</div><div class="x">Keep the people who run it; secure the second-tier manager. The whole deal rests on it not depending on the departed owner.</div></div></div>
+      <div class="step"><span class="d100">DAYS 30–60</span><div><div class="t">Document the systems</div><div class="x">Write down how the work actually gets done — the fastest route to removing owner-dependency and making it sellable/scalable later.</div></div></div>
+      <div class="step"><span class="d100">DAYS 60–100</span><div><div class="t">Switch on marketing</div><div class="x">Add the lead system the old owner never had (Way 1–2). Sugars claims this can double growth rate — the single biggest upside in a sleepy, referral-only SME.</div></div></div>
+      <div class="step"><span class="d100">ONGOING</span><div><div class="t">Then repeat — bolt on the next</div><div class="x">Same as our Memo 01 buy-and-build: a group worth more than the parts.</div></div></div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="disclaim">
+      Summary of publicly-described frameworks for your own strategy, not an endorsement or financial advice. Brad Sugars / ActionCOACH monetise via coaching &amp; franchise programs — treat the marketing accordingly; the frameworks here are the useful residue.
+    </div>
+    <p style="margin-top:18px"><strong style="color:var(--ink)">Sources:</strong></p>
+    <div class="src">
+      bradsugars.com — "Why Billionaires Buy Instead of Build" · <em>Billionaire in Training</em> (book)<br>
+      ActionCOACH — the 5 Ways formula &amp; the 6 Steps (Mastery→Results)<br>
+      Entrepreneur.com — "5 Ways to Grow Your Profits"
+    </div>
+    <p style="margin-top:16px;font-family:'IBM Plex Mono',monospace;font-size:.74rem">Acquisition Memo No. 03 · Prepared for internal discussion.</p>
+  </footer>
+
+</div>

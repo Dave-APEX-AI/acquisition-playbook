@@ -1,0 +1,273 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta charset="utf-8">
+<title>The Scorecard</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --paper:#F7F8F6;--surface:#FFFFFF;--surface-2:#EFF1ED;--ink:#14201C;--ink-soft:#3A4640;
+    --muted:#5F6B63;--hair:#DBE0D9;--hair-strong:#C4CCC3;--pine:#1E5E45;--pine-soft:#E4EEE7;
+    --brass:#9C6B1E;--brass-soft:#F3E9D6;--oxblood:#A6382E;--oxblood-soft:#F5E2DE;
+    --shadow:0 1px 2px rgba(20,32,28,.05),0 12px 30px -18px rgba(20,32,28,.20);
+  }
+  :root:not([data-theme="light"]){@media (prefers-color-scheme:dark){
+    --paper:#0F1512;--surface:#161D19;--surface-2:#1D2621;--ink:#E8EDE8;--ink-soft:#C3CCC5;
+    --muted:#8E9A91;--hair:#2A342E;--hair-strong:#3A463F;--pine:#5FB489;--pine-soft:#17271F;
+    --brass:#D2A257;--brass-soft:#2A2214;--oxblood:#E08B7F;--oxblood-soft:#2E1A17;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 12px 30px -18px rgba(0,0,0,.7);
+  }}
+  :root[data-theme="dark"]{
+    --paper:#0F1512;--surface:#161D19;--surface-2:#1D2621;--ink:#E8EDE8;--ink-soft:#C3CCC5;
+    --muted:#8E9A91;--hair:#2A342E;--hair-strong:#3A463F;--pine:#5FB489;--pine-soft:#17271F;
+    --brass:#D2A257;--brass-soft:#2A2214;--oxblood:#E08B7F;--oxblood-soft:#2E1A17;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 12px 30px -18px rgba(0,0,0,.7);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"IBM Plex Sans",system-ui,sans-serif;font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:900px;margin:0 auto;padding:0 20px 60px}
+  h1,h2{font-family:"Newsreader",Georgia,serif;font-weight:600;margin:0;line-height:1.1}
+  .mono{font-family:"IBM Plex Mono",monospace}
+
+  header{padding:34px 0 16px;border-bottom:2px solid var(--ink)}
+  .brand{font-family:"IBM Plex Mono",monospace;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+  .brand b{color:var(--ink)}
+  h1{font-size:clamp(1.9rem,5vw,2.6rem);letter-spacing:-.02em}
+  h1 em{font-style:italic;color:var(--pine)}
+  .intro{color:var(--ink-soft);font-size:.95rem;margin:10px 0 0;max-width:70ch}
+
+  .toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:18px 0 6px}
+  .toolbar input[type=text]{font-family:inherit;font-size:.95rem;padding:8px 12px;border:1px solid var(--hair-strong);border-radius:9px;background:var(--surface);color:var(--ink);min-width:220px;flex:1}
+  .toolbar input:focus{outline:2px solid var(--pine);outline-offset:-1px}
+  .btn{font-family:inherit;font-size:.85rem;font-weight:500;padding:8px 14px;border-radius:9px;border:1px solid var(--hair-strong);background:var(--surface);color:var(--ink-soft);cursor:pointer}
+  .btn:hover{border-color:var(--pine);color:var(--pine)}
+  .btn.p{background:var(--pine);color:#fff;border-color:var(--pine)}
+  .btn.p:hover{color:#fff;opacity:.92}
+
+  /* sticky score */
+  .scorebar{position:sticky;top:0;z-index:10;background:var(--paper);padding:12px 0;border-bottom:1px solid var(--hair);margin-bottom:8px}
+  .scoreflex{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+  .bignum{font-family:"IBM Plex Mono",monospace;font-size:2.2rem;font-weight:600;letter-spacing:-.02em;line-height:1}
+  .bignum small{font-size:1rem;color:var(--muted);font-weight:400}
+  .verdict{font-family:"Newsreader",serif;font-size:1.35rem;font-weight:600;padding:5px 16px;border-radius:10px}
+  .verdict.pursue{background:var(--pine-soft);color:var(--pine)}
+  .verdict.investigate{background:var(--brass-soft);color:var(--brass)}
+  .verdict.pass{background:var(--surface-2);color:var(--muted)}
+  .verdict.walk{background:var(--oxblood-soft);color:var(--oxblood)}
+  .subscore{font-family:"IBM Plex Mono",monospace;font-size:.82rem;color:var(--muted);margin-left:auto;text-align:right}
+  .subscore b{color:var(--pine)}
+  .track{height:8px;border-radius:5px;background:var(--surface-2);overflow:hidden;margin-top:10px;border:1px solid var(--hair)}
+  .track i{display:block;height:100%;background:var(--pine);transition:width .2s}
+
+  .stage{margin-top:26px}
+  .stage-h{display:flex;align-items:baseline;gap:10px;margin-bottom:4px}
+  .stage-h .tag{font-family:"IBM Plex Mono",monospace;font-size:.64rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#fff;background:var(--pine);padding:3px 8px;border-radius:5px}
+  .stage-h h2{font-size:1.2rem}
+  .stage-h .max{margin-left:auto;font-family:"IBM Plex Mono",monospace;font-size:.75rem;color:var(--muted)}
+  .stage-note{font-size:.82rem;color:var(--muted);margin:0 0 10px}
+
+  .crit{border:1px solid var(--hair);border-radius:11px;background:var(--surface);box-shadow:var(--shadow);padding:12px 15px;margin-bottom:9px}
+  .crit .q{font-weight:600;font-size:.92rem;margin-bottom:8px}
+  .crit .q .n{font-family:"IBM Plex Mono",monospace;color:var(--muted);font-weight:400;font-size:.78rem;margin-right:6px}
+  .opts{display:flex;flex-wrap:wrap;gap:7px}
+  .opt{display:inline-flex;align-items:center;gap:7px;font-size:.83rem;padding:6px 11px;border:1px solid var(--hair-strong);border-radius:8px;background:var(--surface);color:var(--ink-soft);cursor:pointer;user-select:none}
+  .opt:hover{border-color:var(--pine)}
+  .opt.on{background:var(--pine);border-color:var(--pine);color:#fff}
+  .opt .pts{font-family:"IBM Plex Mono",monospace;font-size:.72rem;opacity:.7}
+  .opt.on .pts{opacity:.9}
+
+  .redbox{border:1px solid var(--oxblood);border-radius:12px;background:var(--oxblood-soft);padding:15px 18px;margin-top:26px}
+  .redbox h2{font-size:1.15rem;color:var(--oxblood);margin-bottom:4px}
+  .redbox .rn{font-size:.82rem;color:var(--ink-soft);margin:0 0 12px}
+  .switches{display:grid;grid-template-columns:1fr 1fr;gap:8px 18px}
+  .sw{display:flex;align-items:center;gap:9px;font-size:.86rem;color:var(--ink-soft);cursor:pointer}
+  .sw input{width:16px;height:16px;accent-color:var(--oxblood)}
+
+  .saved{margin-top:28px;border-top:1px solid var(--hair);padding-top:18px}
+  .saved h2{font-size:1.1rem;margin-bottom:10px}
+  .savedrow{display:flex;align-items:center;gap:12px;padding:9px 12px;border:1px solid var(--hair);border-radius:9px;background:var(--surface);margin-bottom:7px;font-size:.88rem}
+  .savedrow .sc{font-family:"IBM Plex Mono",monospace;font-weight:600;min-width:34px}
+  .savedrow .vv{font-family:"IBM Plex Mono",monospace;font-size:.68rem;letter-spacing:.05em;text-transform:uppercase;padding:2px 7px;border-radius:5px}
+  .savedrow .nm{font-weight:600;flex:1}
+  .savedrow .del{margin-left:auto;color:var(--muted);cursor:pointer;font-size:.8rem;border:none;background:none}
+  .empty{color:var(--muted);font-size:.86rem}
+
+  .foot{margin-top:26px;font-size:.78rem;color:var(--muted);border-top:1px solid var(--hair);padding-top:16px}
+
+  @media (max-width:640px){.switches{grid-template-columns:1fr}.subscore{margin-left:0;width:100%;text-align:left}}
+  @media print{
+    .toolbar .btn,.saved,.scorebar{position:static}
+    .btn{display:none}.opt{border-color:#999}
+    body{font-size:12px}.crit{break-inside:avoid}
+  }
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="brand"><b>Acquisition Memo</b> · No.&nbsp;06 — The Scorecard</div>
+    <h1>The <em>Scorecard</em></h1>
+    <p class="intro">Score one company at a time. Tick on screen for a live verdict — or print it blank and circle by hand. Stages A–B you can do <strong>before contact</strong> (from the dashboard + their website); Stage C fills in once you have numbers or a call.</p>
+  </header>
+
+  <div class="toolbar">
+    <input type="text" id="coname" placeholder="Company name…">
+    <button class="btn p" id="save">Save to shortlist</button>
+    <button class="btn" id="reset">Reset</button>
+    <button class="btn" id="print">Print / manual</button>
+  </div>
+
+  <div class="scorebar">
+    <div class="scoreflex">
+      <div class="bignum" id="total">0<small>/100</small></div>
+      <div class="verdict pass" id="verdict">Score it</div>
+      <div class="subscore">Pre-contact (A+B): <b id="ab">0</b>/55 · contact if ≥35<br>Pursue ≥80 · Investigate 65–79 · Pass &lt;65</div>
+    </div>
+    <div class="track"><i id="bar" style="width:0%"></i></div>
+  </div>
+
+  <div id="stages"></div>
+
+  <div class="redbox">
+    <h2>Hard walk-aways</h2>
+    <p class="rn">Any one of these ticked = <strong>WALK</strong>, whatever the score. A high score can't rescue these.</p>
+    <div class="switches" id="reds"></div>
+  </div>
+
+  <div class="saved">
+    <h2>My shortlist</h2>
+    <div id="savedlist"><p class="empty">Nothing saved yet — score a company and hit “Save to shortlist”. (Saved on this device only.)</p></div>
+  </div>
+
+  <div class="foot">
+    The Scorecard v1 — weights follow the Buy Box (owner-independence carries the most). A judgment aid, not a guarantee: every figure is confirmed in due diligence. Saved scores live only in this browser.
+  </div>
+</div>
+
+<script>
+const STAGES = [
+  {tag:"A", name:"From the data — before contact", max:30,
+   note:"Companies House + the dashboard. Do this on every company you consider.",
+   crit:[
+    {id:"sector",q:"Sector fit",opts:[["Tier 1 — facilities / maintenance / contract trades",8],["Tier 2 — distribution / manufacturing",5],["Other",0]]},
+    {id:"age",q:"Owner age",opts:[["65+",6],["58–64",4],["55–57",2],["Under 55",0]]},
+    {id:"indep_data",q:"Owner-independence signals",opts:[["Clean — neutral name, 2+ directors",8],["One flag — eponymous OR sole director",4],["Both flags",0]]},
+    {id:"size",q:"Size / substance (accounts type)",opts:[["Small or full accounts",8],["Medium / group — maybe too big",4],["Micro / dormant / overdue",0]]},
+   ]},
+  {tag:"B", name:"From their website & light research", max:25,
+   note:"A few minutes on their site, LinkedIn and reviews.",
+   crit:[
+    {id:"brand",q:"Brand, not a personal brand",opts:[["Neutral, depersonalised brand",5],["Mixed",3],["All about the founder",0]]},
+    {id:"team",q:"A visible team / manager",opts:[["Named managers / 'meet the team'",5],["Some staff named",3],["Just the owner",0]]},
+    {id:"recurring",q:"Recurring / contract revenue",opts:[["Clearly recurring / contracted",5],["Mixed",3],["One-off / project only",0]]},
+    {id:"customers",q:"Customer spread",opts:[["Diversified — many clients",5],["A few",3],["One dominant client visible",0]]},
+    {id:"circle",q:"Essential & in our circle",opts:[["Boring, essential, we get it",5],["Partly",3],["Faddy / outside our circle",0]]},
+   ]},
+  {tag:"C", name:"First numbers / first call", max:45,
+   note:"Fill once you have accounts or a conversation. This is where a deal is really made or broken.",
+   crit:[
+    {id:"indep_conf",q:"Confirmed: runs without the owner",opts:[["Yes — manager runs it, owner works ON it",15],["Somewhat",8],["No — owner-dependent",0]]},
+    {id:"profit",q:"Profit",opts:[["£250–500k, stable / growing",10],["In range but flat / lumpy",6],["Below, above, or declining",0]]},
+    {id:"concentration",q:"Customer concentration",opts:[["Biggest under 20%",5],["20–30%",2],["Over 30%",0]]},
+    {id:"balance",q:"Balance sheet",opts:[["Clean, low debt",5],["Some debt / items",3],["Landmines",0]]},
+    {id:"seller",q:"The seller",opts:[["Motivated + open to seller finance & handover",5],["Wants a full cash exit",2],["Not really selling",0]]},
+    {id:"upside",q:"Growth upside (the 5 Ways)",opts:[["2+ obvious untapped levers",5],["One",3],["None visible",0]]},
+   ]},
+];
+const REDS = ["The owner IS the business","One customer > 25% of revenue",
+  "Structurally declining / disrupted sector","Distressed / loss-making (GGS-ineligible)",
+  "Hidden liabilities (pension / tax / litigation / dilapidations)","We can't see how to grow it",
+  "Numbers only work at best case"];
+
+const sel = {};      // criterion id -> points
+const redOn = {};    // red index -> bool
+const KEY = "acq_scorecard_shortlist_v1";
+
+// build stages
+const stagesEl = document.getElementById("stages");
+STAGES.forEach(st=>{
+  const d=document.createElement("div"); d.className="stage";
+  d.innerHTML='<div class="stage-h"><span class="tag">Stage '+st.tag+'</span><h2>'+st.name+'</h2><span class="max">'+st.max+' pts</span></div><p class="stage-note">'+st.note+'</p>';
+  st.crit.forEach(c=>{
+    const box=document.createElement("div"); box.className="crit";
+    let h='<div class="q">'+c.q+'</div><div class="opts">';
+    c.opts.forEach((o,i)=>{ h+='<span class="opt" data-c="'+c.id+'" data-p="'+o[1]+'">'+o[0]+' <span class="pts">+'+o[1]+'</span></span>'; });
+    h+='</div>'; box.innerHTML=h; d.appendChild(box);
+  });
+  stagesEl.appendChild(d);
+});
+// reds
+const redsEl=document.getElementById("reds");
+REDS.forEach((r,i)=>{
+  const l=document.createElement("label"); l.className="sw";
+  l.innerHTML='<input type="checkbox" data-r="'+i+'">'+r; redsEl.appendChild(l);
+});
+
+// interactions
+stagesEl.addEventListener("click",e=>{
+  const o=e.target.closest(".opt"); if(!o) return;
+  const cid=o.dataset.c;
+  o.parentElement.querySelectorAll(".opt").forEach(x=>x.classList.remove("on"));
+  o.classList.add("on"); sel[cid]=+o.dataset.p; render();
+});
+redsEl.addEventListener("change",e=>{ if(e.target.dataset.r!==undefined){ redOn[e.target.dataset.r]=e.target.checked; render(); }});
+
+function abScore(){ let s=0; STAGES.slice(0,2).forEach(st=>st.crit.forEach(c=>{ if(sel[c.id]!=null)s+=sel[c.id];})); return s; }
+function total(){ return Object.values(sel).reduce((a,b)=>a+b,0); }
+function anyRed(){ return Object.values(redOn).some(Boolean); }
+
+const cIds=["indep_conf","profit","concentration","balance","seller","upside"];
+function computeVerdict(){
+  const t=total(), ab=abScore(), red=anyRed();
+  const count=Object.keys(sel).length, cDone=cIds.some(id=>sel[id]!=null);
+  if(red) return {cls:"walk",txt:"WALK — hard flag",short:"WALK"};
+  if(count===0) return {cls:"pass",txt:"Score it",short:"—"};
+  if(!cDone){
+    if(ab>=35) return {cls:"pursue",txt:"Contact ✓ (pre-contact)",short:"CONTACT"};
+    if(ab>=25) return {cls:"investigate",txt:"Maybe (pre-contact)",short:"MAYBE"};
+    return {cls:"pass",txt:"Skip (pre-contact)",short:"SKIP"};
+  }
+  if(t>=80) return {cls:"pursue",txt:"Pursue",short:"PURSUE"};
+  if(t>=65) return {cls:"investigate",txt:"Investigate",short:"INVESTIGATE"};
+  return {cls:"pass",txt:"Pass",short:"PASS"};
+}
+function render(){
+  const t=total(), red=anyRed();
+  document.getElementById("total").innerHTML=t+'<small>/100</small>';
+  document.getElementById("ab").textContent=abScore();
+  document.getElementById("bar").style.width=Math.min(t,100)+"%";
+  const vr=computeVerdict(), v=document.getElementById("verdict");
+  v.className="verdict "+vr.cls; v.textContent=vr.txt;
+  document.getElementById("bar").style.background = red?"var(--oxblood)":(t>=80?"var(--pine)":t>=65?"var(--brass)":"var(--muted)");
+}
+
+// save / reset / print
+document.getElementById("save").onclick=()=>{
+  const name=document.getElementById("coname").value.trim(); if(!name){document.getElementById("coname").focus();return;}
+  const vr=computeVerdict(); const item={name,score:total(),verdict:vr.short,date:new Date().toISOString().slice(0,10)};
+  let list=load(); list=list.filter(x=>x.name.toLowerCase()!==name.toLowerCase()); list.unshift(item); save(list); drawSaved();
+};
+document.getElementById("reset").onclick=()=>{
+  for(const k in sel)delete sel[k]; for(const k in redOn)delete redOn[k];
+  document.querySelectorAll(".opt.on").forEach(o=>o.classList.remove("on"));
+  document.querySelectorAll('#reds input').forEach(c=>c.checked=false);
+  document.getElementById("coname").value=""; render();
+};
+document.getElementById("print").onclick=()=>window.print();
+
+function load(){ try{return JSON.parse(localStorage.getItem(KEY))||[];}catch(e){return [];} }
+function save(l){ try{localStorage.setItem(KEY,JSON.stringify(l));}catch(e){} }
+function drawSaved(){
+  const list=load(); const el=document.getElementById("savedlist");
+  if(!list.length){el.innerHTML='<p class="empty">Nothing saved yet — score a company and hit “Save to shortlist”. (Saved on this device only.)</p>';return;}
+  const col={PURSUE:["var(--pine-soft)","var(--pine)"],CONTACT:["var(--pine-soft)","var(--pine)"],INVESTIGATE:["var(--brass-soft)","var(--brass)"],MAYBE:["var(--brass-soft)","var(--brass)"],PASS:["var(--surface-2)","var(--muted)"],SKIP:["var(--surface-2)","var(--muted)"],WALK:["var(--oxblood-soft)","var(--oxblood)"]};
+  el.innerHTML=list.map((x,i)=>{const c=col[x.verdict]||col.PASS;
+    return '<div class="savedrow"><span class="sc">'+x.score+'</span><span class="vv" style="background:'+c[0]+';color:'+c[1]+'">'+x.verdict+'</span><span class="nm">'+esc(x.name)+'</span><span class="mono" style="color:var(--muted);font-size:.72rem">'+x.date+'</span><button class="del" data-i="'+i+'">remove</button></div>';
+  }).join("");
+  el.querySelectorAll(".del").forEach(b=>b.onclick=()=>{let l=load();l.splice(+b.dataset.i,1);save(l);drawSaved();});
+}
+function esc(s){return (s||"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));}
+
+render(); drawSaved();
+</script>

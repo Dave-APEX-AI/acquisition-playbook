@@ -1,0 +1,177 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>The Acquisition Playbook</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --paper:#F7F8F6;--surface:#FFFFFF;--surface-2:#EFF1ED;--ink:#14201C;--ink-soft:#3A4640;
+    --muted:#5F6B63;--hair:#DBE0D9;--hair-strong:#C4CCC3;--pine:#1E5E45;--pine-soft:#E4EEE7;
+    --brass:#9C6B1E;--brass-soft:#F3E9D6;--oxblood:#A6382E;--oxblood-soft:#F5E2DE;
+    --shadow:0 1px 2px rgba(20,32,28,.05),0 12px 30px -18px rgba(20,32,28,.20);
+    --shadow-lift:0 2px 4px rgba(20,32,28,.06),0 24px 48px -24px rgba(20,32,28,.28);
+  }
+  :root:not([data-theme="light"]){@media (prefers-color-scheme:dark){
+    --paper:#0F1512;--surface:#161D19;--surface-2:#1D2621;--ink:#E8EDE8;--ink-soft:#C3CCC5;
+    --muted:#8E9A91;--hair:#2A342E;--hair-strong:#3A463F;--pine:#5FB489;--pine-soft:#17271F;
+    --brass:#D2A257;--brass-soft:#2A2214;--oxblood:#E08B7F;--oxblood-soft:#2E1A17;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 14px 34px -18px rgba(0,0,0,.7);--shadow-lift:0 2px 6px rgba(0,0,0,.5),0 24px 48px -24px rgba(0,0,0,.8);
+  }}
+  :root[data-theme="dark"]{
+    --paper:#0F1512;--surface:#161D19;--surface-2:#1D2621;--ink:#E8EDE8;--ink-soft:#C3CCC5;
+    --muted:#8E9A91;--hair:#2A342E;--hair-strong:#3A463F;--pine:#5FB489;--pine-soft:#17271F;
+    --brass:#D2A257;--brass-soft:#2A2214;--oxblood:#E08B7F;--oxblood-soft:#2E1A17;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 14px 34px -18px rgba(0,0,0,.7);--shadow-lift:0 2px 6px rgba(0,0,0,.5),0 24px 48px -24px rgba(0,0,0,.8);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"IBM Plex Sans",system-ui,sans-serif;font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:960px;margin:0 auto;padding:0 22px}
+  a{color:inherit;text-decoration:none}
+  h1,h2,h3{font-family:"Newsreader",Georgia,serif;font-weight:600;text-wrap:balance;line-height:1.1;margin:0}
+  .mono{font-family:"IBM Plex Mono",monospace}
+
+  /* hero */
+  .hero{padding:64px 0 40px;border-bottom:2px solid var(--ink)}
+  .kicker{font-family:"IBM Plex Mono",monospace;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--pine);margin-bottom:14px}
+  h1{font-size:clamp(2.5rem,7vw,4rem);letter-spacing:-.025em;line-height:1.02}
+  h1 em{font-style:italic;color:var(--pine)}
+  .tag{font-size:1.15rem;color:var(--ink-soft);max-width:62ch;margin:18px 0 0}
+  .meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}
+  .pill{font-family:"IBM Plex Mono",monospace;font-size:.7rem;letter-spacing:.05em;padding:5px 11px;border:1px solid var(--hair-strong);border-radius:100px;color:var(--muted)}
+
+  section{padding:44px 0;border-top:1px solid var(--hair)}
+  section:first-of-type{border-top:none}
+  .sec-eyebrow{display:block;font-family:"IBM Plex Mono",monospace;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+  h2{font-size:1.7rem;letter-spacing:-.01em;margin-bottom:6px}
+  .lede{color:var(--ink-soft);font-size:1.02rem;max-width:70ch;margin-bottom:22px}
+
+  /* quick start */
+  .qs{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  .qstep{border:1px solid var(--hair);border-radius:12px;background:var(--surface);box-shadow:var(--shadow);padding:16px 16px}
+  .qstep .num{font-family:"IBM Plex Mono",monospace;font-size:.72rem;font-weight:600;color:var(--pine);margin-bottom:6px}
+  .qstep .t{font-weight:600;font-size:.96rem;margin-bottom:3px}
+  .qstep .d{font-size:.83rem;color:var(--muted);line-height:1.4}
+
+  /* phase groups */
+  .phase{margin-bottom:30px}
+  .phase-h{display:flex;align-items:baseline;gap:12px;margin-bottom:12px}
+  .phase-h .tag2{font-family:"IBM Plex Mono",monospace;font-size:.66rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#fff;background:var(--pine);padding:4px 10px;border-radius:6px}
+  .phase-h h3{font-size:1.2rem}
+  .phase-h .desc{margin-left:auto;font-size:.85rem;color:var(--muted);text-align:right}
+
+  .cards{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .card{display:block;border:1px solid var(--hair);border-radius:12px;background:var(--surface);box-shadow:var(--shadow);padding:16px 18px;transition:.14s;position:relative}
+  .card:hover{border-color:var(--pine);box-shadow:var(--shadow-lift);transform:translateY(-1px)}
+  .card .no{font-family:"IBM Plex Mono",monospace;font-size:.7rem;color:var(--muted);letter-spacing:.06em}
+  .card h4{font-family:"Newsreader",serif;font-size:1.22rem;font-weight:600;margin:3px 0 5px}
+  .card p{margin:0;font-size:.88rem;color:var(--ink-soft);line-height:1.45}
+  .card .arrow{position:absolute;top:16px;right:18px;color:var(--pine);font-size:1rem;opacity:0;transition:.14s}
+  .card:hover .arrow{opacity:1}
+  .card .kind{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:.62rem;letter-spacing:.06em;text-transform:uppercase;color:var(--brass);margin-top:8px}
+
+  /* tools */
+  .tools{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .tool{border:1px solid var(--hair);border-radius:12px;background:var(--surface);box-shadow:var(--shadow);padding:16px 18px}
+  .tool.live{border-left:4px solid var(--pine)}
+  .tool.private{border-left:4px solid var(--muted);opacity:.9}
+  .tool h4{font-family:"Newsreader",serif;font-size:1.15rem;margin-bottom:4px}
+  .tool p{margin:0;font-size:.86rem;color:var(--ink-soft)}
+  .tool .link{display:inline-block;margin-top:9px;font-family:"IBM Plex Mono",monospace;font-size:.78rem;color:var(--pine);font-weight:600}
+  .tool .badge{font-family:"IBM Plex Mono",monospace;font-size:.62rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+
+  .footer{padding:34px 0 60px;color:var(--muted);font-size:.82rem;border-top:1px solid var(--hair)}
+  .footer b{color:var(--ink)}
+  .disclaim{border:1px dashed var(--hair-strong);border-radius:10px;padding:14px 18px;font-size:.8rem;color:var(--muted);margin-top:16px;background:var(--surface)}
+
+  @media (max-width:720px){
+    .qs{grid-template-columns:1fr 1fr}
+    .cards,.tools{grid-template-columns:1fr}
+    .phase-h .desc{display:none}
+  }
+</style>
+
+<div class="wrap">
+
+  <header class="hero">
+    <div class="kicker">Apex · UK SME Acquisition Programme</div>
+    <h1>The Acquisition <em>Playbook</em></h1>
+    <p class="tag">Everything for buying a profitable UK business through the Growth Guarantee Scheme — the strategy, the screening system, the outreach, and the deal mechanics, in one place.</p>
+    <div class="meta">
+      <span class="pill">9 memos</span>
+      <span class="pill">1,342-target dashboard</span>
+      <span class="pill">Screening tools</span>
+      <span class="pill">Sep 2026 · v1</span>
+    </div>
+  </header>
+
+  <section>
+    <span class="sec-eyebrow">Start here</span>
+    <h2>How to use it</h2>
+    <p class="lede">The short version of the whole system: learn what "good" looks like, screen the list, reach out, and run the call.</p>
+    <div class="qs">
+      <div class="qstep"><div class="num">STEP 1</div><div class="t">Learn the filter</div><div class="d">Read the Rule Book so you can read any company at a glance.</div></div>
+      <div class="qstep"><div class="num">STEP 2</div><div class="t">Screen &amp; score</div><div class="d">Work the dashboard; grade candidates on the Scorecard.</div></div>
+      <div class="qstep"><div class="num">STEP 3</div><div class="t">Reach out</div><div class="d">Post the letter from the Approach to the owners that pass.</div></div>
+      <div class="qstep"><div class="num">STEP 4</div><div class="t">Run the call</div><div class="d">Use the First-Call playbook; then structure funding &amp; team.</div></div>
+    </div>
+  </section>
+
+  <section>
+    <span class="sec-eyebrow">The library</span>
+    <h2>The nine memos</h2>
+
+    <div class="phase">
+      <div class="phase-h"><span class="tag2">Phase 1</span><h3>The thinking</h3><span class="desc">Why, what, and the wisdom behind it</span></div>
+      <div class="cards">
+        <a class="card" href="01-factory-play.html"><span class="arrow">↗</span><div class="no">Memo 01</div><h4>The £0-Down Factory Play</h4><p>The strategy examined honestly — real steps, balanced risks, the funding math stress-tested.</p></a>
+        <a class="card" href="02-buy-box.html"><span class="arrow">↗</span><div class="no">Memo 02</div><h4>The Buy Box</h4><p>What we hunt: criteria, sector steer, and detecting whether a business is just its owner.</p></a>
+        <a class="card" href="03-brad-sugars.html"><span class="arrow">↗</span><div class="no">Memo 03</div><h4>The Brad Sugars Playbook</h4><p>What the coaches teach — and the post-purchase profit engine worth borrowing.</p></a>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-h"><span class="tag2">Phase 2</span><h3>The system</h3><span class="desc">How we pick and reach them</span></div>
+      <div class="cards">
+        <a class="card" href="04-rule-book.html"><span class="arrow">↗</span><div class="no">Memo 04</div><h4>The Rule Book</h4><p>The field manual: reading Companies House &amp; the accounts, sector playbooks, the numbers, the traps.</p><span class="kind">Reference</span></a>
+        <a class="card" href="06-scorecard.html"><span class="arrow">↗</span><div class="no">Memo 06</div><h4>The Scorecard</h4><p>Score a company for a live Pursue / Investigate / Pass verdict. Interactive + printable.</p><span class="kind">Interactive tool</span></a>
+        <a class="card" href="05-approach.html"><span class="arrow">↗</span><div class="no">Memo 05</div><h4>The Approach</h4><p>How to reach owners as individual operators — the letter, email, call opener, and best practice.</p><span class="kind">Templates</span></a>
+        <a class="card" href="07-first-call.html"><span class="arrow">↗</span><div class="no">Memo 07</div><h4>The First Call</h4><p>The buyer's playbook for the first conversation — questions, live flags, and a printable call sheet.</p><span class="kind">Playbook</span></a>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-h"><span class="tag2">Phase 3</span><h3>The deal</h3><span class="desc">Paying for it and closing it</span></div>
+      <div class="cards">
+        <a class="card" href="08-funding.html"><span class="arrow">↗</span><div class="no">Memo 08</div><h4>Funding &amp; the Stack</h4><p>The GGS + seller-loan + investor stack, the £2m ceiling, worked hypotheticals, and how personal guarantees work.</p></a>
+        <a class="card" href="09-deal-team.html"><span class="arrow">↗</span><div class="no">Memo 09</div><h4>The Deal Team</h4><p>Who to hire — solicitor, accountant, broker — the due-diligence workstreams, and the budget.</p></a>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <span class="sec-eyebrow">The tools &amp; data</span>
+    <h2>What powers the search</h2>
+    <div class="tools">
+      <div class="tool live">
+        <span class="badge">Live · public</span>
+        <h4>Target Dashboard</h4>
+        <p>1,342 vetted UK companies — 55+ owner, real trading businesses — filterable by sector, owner age, size and owner-dependence.</p>
+        <a class="link" href="https://dave-apex-ai.github.io/target-dashboard/" target="_blank" rel="noopener">Open the dashboard →</a>
+      </div>
+      <div class="tool private">
+        <span class="badge">Private · with Dave</span>
+        <h4>The finder &amp; contact sheet</h4>
+        <p>The Companies House screening script, and the enriched top-200 sheet (owner names, mailing addresses, contacts). Kept private — shared directly, never posted here.</p>
+        <span class="link" style="color:var(--muted)">Held by Dave</span>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p><b>The Acquisition Playbook</b> — built for Apex, Sep 2026. A living document; memos update in place. Work the system: Rule Book → Dashboard + Scorecard → Approach → First Call → Funding → Deal Team.</p>
+    <div class="disclaim">Educational strategy material to support your own decisions — not financial, legal, tax or investment advice. Figures are illustrative; verify every number and take professional advice before committing to any acquisition, facility, or guarantee.</div>
+  </footer>
+
+</div>

@@ -1,0 +1,243 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta charset="utf-8">
+<title>The Approach</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --paper:#F7F8F6;--surface:#FFFFFF;--surface-2:#EFF1ED;--ink:#14201C;--ink-soft:#3A4640;
+    --muted:#5F6B63;--hair:#DBE0D9;--hair-strong:#C4CCC3;--pine:#1E5E45;--pine-soft:#E4EEE7;
+    --brass:#9C6B1E;--brass-soft:#F3E9D6;--oxblood:#A6382E;--oxblood-soft:#F5E2DE;
+    --shadow:0 1px 2px rgba(20,32,28,.05),0 12px 30px -18px rgba(20,32,28,.20);
+    --shadow-lift:0 2px 4px rgba(20,32,28,.06),0 22px 46px -24px rgba(20,32,28,.28);
+  }
+  :root:not([data-theme="light"]){@media (prefers-color-scheme:dark){
+    --paper:#0F1512;--surface:#161D19;--surface-2:#1D2621;--ink:#E8EDE8;--ink-soft:#C3CCC5;
+    --muted:#8E9A91;--hair:#2A342E;--hair-strong:#3A463F;--pine:#5FB489;--pine-soft:#17271F;
+    --brass:#D2A257;--brass-soft:#2A2214;--oxblood:#E08B7F;--oxblood-soft:#2E1A17;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 14px 34px -18px rgba(0,0,0,.7);--shadow-lift:0 2px 6px rgba(0,0,0,.5),0 24px 48px -24px rgba(0,0,0,.8);
+  }}
+  :root[data-theme="dark"]{
+    --paper:#0F1512;--surface:#161D19;--surface-2:#1D2621;--ink:#E8EDE8;--ink-soft:#C3CCC5;
+    --muted:#8E9A91;--hair:#2A342E;--hair-strong:#3A463F;--pine:#5FB489;--pine-soft:#17271F;
+    --brass:#D2A257;--brass-soft:#2A2214;--oxblood:#E08B7F;--oxblood-soft:#2E1A17;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 14px 34px -18px rgba(0,0,0,.7);--shadow-lift:0 2px 6px rgba(0,0,0,.5),0 24px 48px -24px rgba(0,0,0,.8);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"IBM Plex Sans",system-ui,sans-serif;font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:840px;margin:0 auto;padding:0 22px}
+  h1,h2,h3{font-family:"Newsreader",Georgia,serif;font-weight:600;text-wrap:balance;line-height:1.12;margin:0}
+  p{margin:0 0 1em}p:last-child{margin-bottom:0}
+  strong{font-weight:600;color:var(--ink)}
+  .mono{font-family:"IBM Plex Mono",monospace}
+
+  .mast{padding:48px 0 22px;border-bottom:2px solid var(--ink)}
+  .mast-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+  .brand{font-family:"IBM Plex Mono",monospace;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+  .brand b{color:var(--ink);font-weight:600}
+  .eyebrow{font-family:"IBM Plex Mono",monospace;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--pine);margin-bottom:8px}
+  h1{font-size:clamp(2rem,5.5vw,3rem);letter-spacing:-.02em}
+  h1 em{font-style:italic;color:var(--pine)}
+
+  .thesis{background:var(--ink);color:#EAF0EC;border-radius:14px;padding:22px 26px;margin:22px 0 6px;box-shadow:var(--shadow-lift)}
+  :root[data-theme="dark"] .thesis,:root:not([data-theme="light"]) .thesis{background:#0A0F0D;border:1px solid var(--hair)}
+  @media (prefers-color-scheme:light){:root:not([data-theme="dark"]) .thesis{background:var(--ink)}}
+  .thesis .k{font-family:"IBM Plex Mono",monospace;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:#7FC9A3;margin-bottom:8px}
+  .thesis p{margin:0;font-family:"Newsreader",serif;font-size:1.28rem;line-height:1.42;color:#fff}
+  .thesis b{color:#7FC9A3;font-weight:600}
+
+  section{padding:34px 0;border-top:1px solid var(--hair)}
+  .sh{display:flex;align-items:baseline;gap:12px;margin-bottom:8px}
+  .sh .n{font-family:"IBM Plex Mono",monospace;font-size:.72rem;font-weight:600;color:var(--pine)}
+  .sh h2{font-size:1.5rem;letter-spacing:-.01em}
+  .lede{color:var(--ink-soft);font-size:1.02rem;margin-bottom:18px;max-width:66ch}
+
+  .levers{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .lever{border:1px solid var(--hair);border-radius:10px;background:var(--surface);box-shadow:var(--shadow);padding:13px 15px}
+  .lever .t{font-weight:600;font-size:.95rem;margin-bottom:2px}
+  .lever .d{font-size:.85rem;color:var(--muted);line-height:1.4}
+
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:6px}
+  .col{border:1px solid var(--hair);border-radius:12px;background:var(--surface);box-shadow:var(--shadow);overflow:hidden}
+  .col .head{padding:11px 16px;font-family:"IBM Plex Mono",monospace;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;font-weight:600;border-bottom:1px solid var(--hair)}
+  .col.g .head{color:var(--pine);background:var(--pine-soft)}
+  .col.r .head{color:var(--oxblood);background:var(--oxblood-soft)}
+  .col ul{list-style:none;margin:0;padding:6px 16px 14px}
+  .col li{padding:8px 0 8px 20px;border-bottom:1px solid var(--hair);font-size:.88rem;line-height:1.45;position:relative}
+  .col li:last-child{border-bottom:none}
+  .col.g li::before{content:"✓";position:absolute;left:0;color:var(--pine);font-weight:700;font-size:.82rem}
+  .col.r li::before{content:"✕";position:absolute;left:0;color:var(--oxblood);font-weight:700;font-size:.82rem}
+
+  /* message card */
+  .msg{border:1px solid var(--hair-strong);border-radius:12px;background:var(--surface);box-shadow:var(--shadow);overflow:hidden;margin-top:16px}
+  .msg .mh{display:flex;justify-content:space-between;align-items:baseline;gap:10px;padding:12px 18px;background:var(--surface-2);border-bottom:1px solid var(--hair)}
+  .msg .mh .t{font-weight:600;font-size:.98rem}
+  .msg .mh .tag{font-family:"IBM Plex Mono",monospace;font-size:.66rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+  .msg .body{padding:18px 20px;font-size:.94rem;line-height:1.62;color:var(--ink-soft)}
+  .msg .body .ph{color:var(--brass);font-weight:600}
+  .msg .body p{margin:0 0 .8em}
+  .sign{font-family:"IBM Plex Mono",monospace;font-size:.82rem;color:var(--muted)}
+
+  .note{border:1px solid var(--hair);border-left:4px solid var(--brass);background:var(--brass-soft);border-radius:10px;padding:14px 18px;margin-top:16px}
+  .note.pine{border-left-color:var(--pine);background:var(--pine-soft)}
+  .note .k{display:block;font-family:"IBM Plex Mono",monospace;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:6px;font-weight:600;color:var(--brass)}
+  .note.pine .k{color:var(--pine)}
+  .note p{margin:0;font-size:.9rem;color:var(--ink-soft)}
+
+  .seq{display:flex;flex-direction:column;gap:0;margin-top:6px}
+  .step{display:grid;grid-template-columns:auto 1fr;gap:18px;padding:14px 0;border-top:1px solid var(--hair)}
+  .step:first-child{border-top:none}
+  .step .d{font-family:"IBM Plex Mono",monospace;font-size:.72rem;font-weight:600;color:var(--pine);white-space:nowrap;padding-top:2px}
+  .step .t{font-weight:600;margin-bottom:2px}
+  .step .x{font-size:.9rem;color:var(--ink-soft)}
+
+  .footer{padding:26px 0 50px;color:var(--muted);font-size:.8rem}
+  .footer b{color:var(--ink)}
+
+  @media (max-width:680px){
+    .levers,.cols{grid-template-columns:1fr}
+    .thesis p{font-size:1.1rem}
+    .step{grid-template-columns:1fr;gap:4px}
+  }
+</style>
+
+<div class="wrap">
+
+  <header class="mast">
+    <div class="mast-top">
+      <div class="brand"><b>Acquisition Memo</b> · No.&nbsp;05 — The Approach</div>
+      <div class="brand">Individual-operator play · 14 Sep 2026</div>
+    </div>
+    <div class="eyebrow">How we reach owners — and what we say</div>
+    <h1>The <em>Approach</em></h1>
+  </header>
+
+  <div class="thesis">
+    <div class="k">The whole idea in one line</div>
+    <p>You're not pitching a deal — you're offering someone's life's work <b>a safe pair of hands.</b> Lead with their legacy and their people, never with "I want to buy your business."</p>
+  </div>
+
+  <section>
+    <div class="sh"><span class="n">01</span><h2>Why this works — and why you win as first-timers</h2></div>
+    <p class="lede">These owners are 55+, no successor, and haven't decided to sell. Their deepest fear is handing 20 years of work to a faceless fund that strips it and sacks the staff. Two real people who'll <em>run it themselves</em> is the exact opposite — and your honesty is an asset, not a weakness.</p>
+    <div class="levers">
+      <div class="lever"><div class="t">Legacy &amp; continuity</div><div class="d">What they built keeps going, with their name intact.</div></div>
+      <div class="lever"><div class="t">Their people are safe</div><div class="d">The team they care about is looked after, not cut.</div></div>
+      <div class="lever"><div class="t">Real, local, hands-on</div><div class="d">Human beings who'll be in the business — not a spreadsheet.</div></div>
+      <div class="lever"><div class="t">Discretion &amp; no pressure</div><div class="d">Confidential, unhurried, easy to say no to.</div></div>
+      <div class="lever"><div class="t">Genuine intent</div><div class="d">You want to own and grow it, not flip it in three years.</div></div>
+      <div class="lever"><div class="t">Honest &gt; slick</div><div class="d">"First time, doing it properly" beats a polished predator.</div></div>
+    </div>
+    <div class="note pine">
+      <span class="k">The honesty guardrail</span>
+      <p>Every word must be true. You're serious first-time buyers with the funding route identified but <strong>not yet arranged</strong> — so the copy below never claims cash is ready or that you've done this before. Add a funding line only once it's genuinely in place.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="sh"><span class="n">02</span><h2>Best practice — do &amp; don't</h2></div>
+    <div class="cols">
+      <div class="col g">
+        <div class="head">Do</div>
+        <ul>
+          <li>Address the <b>owner by name</b>; sign with real names</li>
+          <li>Give <b>one genuine, specific reason</b> their firm stood out</li>
+          <li>Keep it <b>short</b> — under ~150 words, a real person's voice</li>
+          <li>Make it easy to reply — phone <em>and</em> email</li>
+          <li>Promise <b>confidence</b> and mean it</li>
+          <li>One soft ask: "would you ever consider…"</li>
+          <li>Post a <b>physical letter</b> first — it beats email for this age group</li>
+        </ul>
+      </div>
+      <div class="col r">
+        <div class="head">Don't</div>
+        <ul>
+          <li>Mention <b>price, valuation or an offer</b> — far too soon</li>
+          <li>Use "synergies / portfolio / acquire / EBITDA" — broker-speak</li>
+          <li>Sound mass-mailed — no "Dear Business Owner"</li>
+          <li>Manufacture <b>urgency</b> or pressure</li>
+          <li>Claim <b>funding or experience</b> you don't have</li>
+          <li>Chase more than <b>twice</b> — respect a silence</li>
+          <li>Lead with yourself — lead with them</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sh"><span class="n">03</span><h2>The letter — your main move</h2></div>
+    <p class="lede">Posted, addressed to the named owner. Fill the <span class="mono" style="color:var(--brass)">[amber]</span> parts per company — the specific reason is what stops it feeling like a mailshot.</p>
+    <div class="msg">
+      <div class="mh"><span class="t">Letter to the owner</span><span class="tag">~140 words · post it</span></div>
+      <div class="body">
+        <p>Dear <span class="ph">[Owner first name]</span>,</p>
+        <p>I'll keep this short and personal. My business partner and I are looking to buy and personally run <strong>one</strong> established <span class="ph">[cleaning / electrical / facilities]</span> business — not to flip it or strip it back, but to take it on, look after the team, and build on what someone has spent years creating.</p>
+        <p><span class="ph">[Company]</span> stood out to us — <span class="ph">[one true, specific reason: e.g. "you've clearly built something solid and well-run over 20-odd years"]</span>. I've no idea whether stepping back has ever crossed your mind, and there's no assumption here — but if it ever might, we'd value a quiet, no-obligation conversation.</p>
+        <p>I'll be straight: this would be our first acquisition, so we'd go about it respectfully and properly, and we'd treat anything you share in complete confidence.</p>
+        <p>If it's not for you, I completely understand and won't trouble you again. If you're open to a chat, you can reach me on <span class="ph">[phone]</span> or <span class="ph">[email]</span>.</p>
+        <p class="sign">With respect,<br><span class="ph">[Your name]</span> &amp; <span class="ph">[Partner name]</span><br><span class="ph">[phone] · [email]</span></p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sh"><span class="n">04</span><h2>Email &amp; LinkedIn — where you have them</h2></div>
+    <div class="msg">
+      <div class="mh"><span class="t">Email</span><span class="tag">shorter · subject matters</span></div>
+      <div class="body">
+        <p><strong>Subject:</strong> <span class="ph">[Company]</span> — a quiet question, no agenda</p>
+        <p>Hi <span class="ph">[first name]</span>,</p>
+        <p>You don't know me, so I'll be brief. My partner and I are looking to buy and personally run one established <span class="ph">[sector]</span> business — to take it on and look after it, not to flip it. <span class="ph">[Company]</span> is one we admired: <span class="ph">[one specific reason]</span>.</p>
+        <p>If passing it on to a safe pair of hands has ever crossed your mind — even as a someday — we'd genuinely value a confidential, no-obligation chat. If not, no problem at all and I won't chase.</p>
+        <p>I'll be honest: it'd be our first acquisition, and we intend to do it properly.</p>
+        <p class="sign"><span class="ph">[Name]</span> · <span class="ph">[phone]</span></p>
+      </div>
+    </div>
+    <div class="msg">
+      <div class="mh"><span class="t">LinkedIn connection note</span><span class="tag">300 characters</span></div>
+      <div class="body">
+        <p>Hi <span class="ph">[first name]</span> — I admire what you've built at <span class="ph">[Company]</span>. My partner and I are hoping to buy and run one good <span class="ph">[sector]</span> business ourselves. No agenda in connecting — but if you'd ever consider passing yours on one day, I'd love a quiet chat.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sh"><span class="n">05</span><h2>The phone opener</h2></div>
+    <p class="lede">If you have a number, a warm call after the letter converts best. Say who you are, disarm fast, make the ask, give them an easy out.</p>
+    <div class="msg">
+      <div class="mh"><span class="t">Cold / follow-up call — first 20 seconds</span><span class="tag">say it, then listen</span></div>
+      <div class="body">
+        <p>"Hi <span class="ph">[name]</span>, my name's <span class="ph">[X]</span> — you don't know me, and I'll be quick so you can tell me to get lost. I'm not a broker and I'm not selling anything.</p>
+        <p>My business partner and I are looking to buy and run one <span class="ph">[sector]</span> business ourselves, and yours is one we really rated. I just wondered — and no pressure at all — whether you'd ever consider passing it on one day to someone who'd genuinely look after it and the team?"</p>
+        <p style="margin-top:4px;color:var(--muted);font-size:.86rem">→ Then <strong>stop talking.</strong> Let them react. If curious → move toward a proper chat (Part 3). If not → "completely understand, thanks for your time," and leave the door open.</p>
+      </div>
+    </div>
+    <div class="note">
+      <span class="k">Before you dial — one legal step</span>
+      <p>Screen any business number against the <strong>CTPS</strong> (Corporate Telephone Preference Service) before cold-calling — calling a registered number can be an ICO offence. Numbers a business publishes for enquiries are generally fine; when in doubt, letter/email first.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="sh"><span class="n">06</span><h2>The sequence — respectful, never a pest</h2></div>
+    <div class="seq">
+      <div class="step"><span class="d">DAY 0</span><div><div class="t">Post the letter</div><div class="x">Personalised, to the named owner. This is the main event.</div></div></div>
+      <div class="step"><span class="d">DAY 10–14</span><div><div class="t">One follow-up</div><div class="x">A warm call if you have a number, or a two-line "just checking my note reached you." That's it — never a third chase.</div></div></div>
+      <div class="step"><span class="d">NO REPLY</span><div><div class="t">Let it rest → nurture</div><div class="x">Silence is an answer. Move them to a light list and revisit in 6–12 months — many owners sell 1–3 years after first being asked.</div></div></div>
+      <div class="step"><span class="d">A REPLY</span><div><div class="t">Book a proper conversation</div><div class="x">Warm, curious, no numbers yet — that's the First Call (Part 3, coming next).</div></div></div>
+    </div>
+    <div class="note pine">
+      <span class="k">The one metric that matters</span>
+      <p>Expect low reply rates (a few %) — that's normal and fine. You need a handful of genuine conversations, not a flood. One warm "yes, tell me more" from 200 letters is a win.</p>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p><b>The Approach v1</b> — individual-operator framing, honest first-time-buyer positioning. Pair with the enriched contact sheet (addresses for post, phones/emails where found). Next: <b>Memo 06 — the First-Call Deck &amp; Checklist.</b></p>
+    <p style="margin-top:10px" class="mono">Templates to send on your own behalf. Keep every claim truthful; screen numbers against CTPS before calling.</p>
+  </footer>
+
+</div>

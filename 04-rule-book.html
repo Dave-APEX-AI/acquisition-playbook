@@ -1,0 +1,316 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta charset="utf-8">
+<title>The Rule Book</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --paper:#F7F8F6;--surface:#FFFFFF;--surface-2:#EFF1ED;--ink:#14201C;--ink-soft:#3A4640;
+    --muted:#5F6B63;--hair:#DBE0D9;--hair-strong:#C4CCC3;--pine:#1E5E45;--pine-soft:#E4EEE7;
+    --brass:#9C6B1E;--brass-soft:#F3E9D6;--oxblood:#A6382E;--oxblood-soft:#F5E2DE;
+    --shadow:0 1px 2px rgba(20,32,28,.05),0 12px 30px -18px rgba(20,32,28,.20);
+    --shadow-lift:0 2px 4px rgba(20,32,28,.06),0 22px 46px -24px rgba(20,32,28,.28);
+  }
+  :root:not([data-theme="light"]){@media (prefers-color-scheme:dark){
+    --paper:#0F1512;--surface:#161D19;--surface-2:#1D2621;--ink:#E8EDE8;--ink-soft:#C3CCC5;
+    --muted:#8E9A91;--hair:#2A342E;--hair-strong:#3A463F;--pine:#5FB489;--pine-soft:#17271F;
+    --brass:#D2A257;--brass-soft:#2A2214;--oxblood:#E08B7F;--oxblood-soft:#2E1A17;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 14px 34px -18px rgba(0,0,0,.7);--shadow-lift:0 2px 6px rgba(0,0,0,.5),0 24px 48px -24px rgba(0,0,0,.8);
+  }}
+  :root[data-theme="dark"]{
+    --paper:#0F1512;--surface:#161D19;--surface-2:#1D2621;--ink:#E8EDE8;--ink-soft:#C3CCC5;
+    --muted:#8E9A91;--hair:#2A342E;--hair-strong:#3A463F;--pine:#5FB489;--pine-soft:#17271F;
+    --brass:#D2A257;--brass-soft:#2A2214;--oxblood:#E08B7F;--oxblood-soft:#2E1A17;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 14px 34px -18px rgba(0,0,0,.7);--shadow-lift:0 2px 6px rgba(0,0,0,.5),0 24px 48px -24px rgba(0,0,0,.8);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"IBM Plex Sans",system-ui,sans-serif;font-size:15.5px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:900px;margin:0 auto;padding:0 22px}
+  h1,h2,h3{font-family:"Newsreader",Georgia,serif;font-weight:600;text-wrap:balance;line-height:1.12;margin:0}
+  p{margin:0 0 .9em}p:last-child{margin-bottom:0}
+  strong{font-weight:600;color:var(--ink)}
+  .mono{font-family:"IBM Plex Mono",monospace}
+
+  .mast{padding:44px 0 22px;border-bottom:2px solid var(--ink)}
+  .mast-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+  .brand{font-family:"IBM Plex Mono",monospace;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+  .brand b{color:var(--ink);font-weight:600}
+  h1{font-size:clamp(2rem,5.5vw,2.9rem);letter-spacing:-.02em}
+  h1 em{font-style:italic;color:var(--pine)}
+  .eyebrow{font-family:"IBM Plex Mono",monospace;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--pine);margin-bottom:8px}
+
+  .rule{background:var(--ink);color:#EAF0EC;border-radius:14px;padding:22px 26px;margin:22px 0 6px;box-shadow:var(--shadow-lift)}
+  :root[data-theme="dark"] .rule,:root:not([data-theme="light"]) .rule{background:#0A0F0D;border:1px solid var(--hair)}
+  @media (prefers-color-scheme:light){:root:not([data-theme="dark"]) .rule{background:var(--ink)}}
+  .rule .k{font-family:"IBM Plex Mono",monospace;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:#7FC9A3;margin-bottom:8px}
+  .rule p{margin:0;font-family:"Newsreader",serif;font-size:1.3rem;line-height:1.4;color:#fff}
+  .rule b{color:#7FC9A3;font-weight:600}
+
+  section{padding:32px 0;border-top:1px solid var(--hair)}
+  .sh{display:flex;align-items:baseline;gap:12px;margin-bottom:6px}
+  .sh .n{font-family:"IBM Plex Mono",monospace;font-size:.72rem;font-weight:600;color:var(--pine);letter-spacing:.05em}
+  .sh h2{font-size:1.45rem;letter-spacing:-.01em}
+  .lede{font-size:.98rem;color:var(--ink-soft);max-width:70ch;margin-bottom:16px}
+
+  /* portrait */
+  .portrait{border:1px solid var(--hair);border-left:4px solid var(--pine);border-radius:12px;background:var(--pine-soft);padding:18px 22px;box-shadow:var(--shadow)}
+  .portrait p{margin:0;font-size:1.02rem;color:var(--ink-soft);line-height:1.6}
+  .portrait b{color:var(--ink)}
+
+  /* tells list */
+  .tells{display:flex;flex-direction:column;gap:0;margin-top:4px}
+  .tell{display:grid;grid-template-columns:150px 1fr;gap:16px;padding:11px 0;border-top:1px solid var(--hair)}
+  .tell:first-child{border-top:none}
+  .tell .w{font-weight:600;font-size:.9rem}
+  .tell .d{font-size:.88rem;color:var(--ink-soft)}
+  .tell .d b{color:var(--pine)}
+  .tell .d .bad{color:var(--oxblood);font-weight:600}
+
+  /* accounts table */
+  .acct{width:100%;border-collapse:collapse;font-size:.88rem;margin-top:4px}
+  .acct th,.acct td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--hair);vertical-align:top}
+  .acct th{font-family:"IBM Plex Mono",monospace;font-size:.64rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600}
+  .acct td:first-child{font-weight:600;width:26%}
+  .acct td:last-child{color:var(--ink-soft)}
+  .acct tr:last-child td{border-bottom:none}
+  .acct .flag{color:var(--oxblood);font-weight:600}
+  .acct-scroll{overflow-x:auto}
+
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:4px}
+  .col{border:1px solid var(--hair);border-radius:12px;background:var(--surface);box-shadow:var(--shadow);overflow:hidden}
+  .col .head{padding:11px 16px;font-family:"IBM Plex Mono",monospace;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;font-weight:600;border-bottom:1px solid var(--hair)}
+  .col.g .head{color:var(--pine);background:var(--pine-soft)}
+  .col.r .head{color:var(--oxblood);background:var(--oxblood-soft)}
+  .col ul{list-style:none;margin:0;padding:6px 16px 14px}
+  .col li{padding:9px 0 9px 20px;border-bottom:1px solid var(--hair);font-size:.86rem;line-height:1.45;position:relative}
+  .col li:last-child{border-bottom:none}
+  .col.g li::before{content:"✓";position:absolute;left:0;color:var(--pine);font-weight:700;font-size:.8rem}
+  .col.r li::before{content:"✕";position:absolute;left:0;color:var(--oxblood);font-weight:700;font-size:.8rem}
+  .col li b{font-weight:600}.col li em{font-style:normal;color:var(--muted);font-size:.82rem}
+
+  /* sector cards */
+  .sect{border:1px solid var(--hair);border-radius:12px;background:var(--surface);box-shadow:var(--shadow);padding:16px 18px;margin-bottom:12px}
+  .sect h3{font-size:1.08rem;margin-bottom:3px}
+  .sect .val{font-family:"IBM Plex Mono",monospace;font-size:.74rem;color:var(--pine);margin-bottom:10px}
+  .sgrid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+  .sgrid .b{font-family:"IBM Plex Mono",monospace;font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;font-weight:600;margin-bottom:4px}
+  .sgrid .g .b{color:var(--pine)}.sgrid .r .b{color:var(--oxblood)}.sgrid .u .b{color:var(--brass)}
+  .sgrid p{font-size:.83rem;color:var(--ink-soft);margin:0;line-height:1.4}
+
+  /* numbers */
+  .nums{border:1px solid var(--hair-strong);border-radius:12px;overflow:hidden;box-shadow:var(--shadow);background:var(--surface)}
+  .nrow{display:grid;grid-template-columns:1fr auto;gap:16px;padding:11px 18px;border-bottom:1px solid var(--hair);align-items:baseline}
+  .nrow:last-child{border-bottom:none}
+  .nrow .l{font-size:.89rem;color:var(--ink-soft)}.nrow .l b{color:var(--ink)}
+  .nrow .v{font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:.9rem;color:var(--pine);white-space:nowrap;text-align:right}
+  .nrow .v.warn{color:var(--brass)}
+
+  .math{border:1px solid var(--hair);border-radius:12px;background:var(--surface);box-shadow:var(--shadow);overflow:hidden;margin-top:16px}
+  .math .mh{padding:12px 18px;background:var(--surface-2);border-bottom:1px solid var(--hair);font-weight:600;font-size:.92rem}
+  .math .mb{padding:6px 18px 12px}
+  .mr{display:flex;justify-content:space-between;gap:14px;padding:8px 0;border-bottom:1px solid var(--hair);font-size:.88rem}
+  .mr:last-child{border-bottom:none}
+  .mr .mv{font-family:"IBM Plex Mono",monospace;font-weight:600}
+  .mr.tot{border-top:2px solid var(--ink);border-bottom:none;margin-top:2px;padding-top:10px}
+  .mr.tot .l{font-weight:600}.mr .mv.pos{color:var(--pine)}
+
+  .note{border:1px solid var(--hair);border-left:4px solid var(--brass);background:var(--brass-soft);border-radius:10px;padding:14px 18px;margin-top:16px}
+  .note.pine{border-left-color:var(--pine);background:var(--pine-soft)}
+  .note .k{display:block;font-family:"IBM Plex Mono",monospace;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:6px;font-weight:600;color:var(--brass)}
+  .note.pine .k{color:var(--pine)}
+  .note p{margin:0;font-size:.89rem;color:var(--ink-soft)}
+
+  .traps{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:4px}
+  .trap{border:1px solid var(--hair);border-radius:10px;background:var(--surface);box-shadow:var(--shadow);padding:12px 15px}
+  .trap .t{font-weight:600;font-size:.9rem;margin-bottom:2px}
+  .trap .d{font-size:.83rem;color:var(--ink-soft);line-height:1.4}
+
+  .walk{background:var(--oxblood-soft);border:1px solid var(--oxblood);border-radius:12px;padding:18px 22px;margin-top:8px}
+  .walk .k{font-family:"IBM Plex Mono",monospace;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--oxblood);font-weight:600;margin-bottom:6px}
+  .walk p{margin:0;font-size:.96rem;color:var(--ink-soft)}.walk b{color:var(--oxblood)}
+
+  .footer{padding:26px 0 50px;color:var(--muted);font-size:.78rem}.footer b{color:var(--ink)}
+
+  @media (max-width:680px){
+    .cols,.traps,.sgrid{grid-template-columns:1fr}
+    .tell{grid-template-columns:1fr;gap:2px}
+    .tell .w{color:var(--pine)}
+    .rule p{font-size:1.12rem}
+  }
+</style>
+
+<div class="wrap">
+
+  <header class="mast">
+    <div class="mast-top">
+      <div class="brand"><b>Acquisition Memo</b> · No.&nbsp;04 — The Rule Book</div>
+      <div class="brand">Field Edition · v2 · 14 Sep 2026</div>
+    </div>
+    <div class="eyebrow">The working reference behind the Scorecard</div>
+    <h1>The <em>Rule Book</em></h1>
+    <p class="lede" style="margin-top:12px">The judgment behind every score: how to read a company off Companies House and its accounts before you ever speak to anyone, what "good" and "bad" actually look like sector by sector, the numbers worked through, and the traps that catch first-time buyers.</p>
+  </header>
+
+  <div class="rule">
+    <div class="k">The rule, in one line</div>
+    <p>Buy a <b>boring, essential business that already runs without its owner</b> — proven profit we can grow, at a price the business itself repays. If it's really just the owner, <b>walk.</b></p>
+  </div>
+
+  <section>
+    <div class="sh"><span class="n">01</span><h2>The portrait — what "perfect" looks like</h2></div>
+    <div class="portrait">
+      <p>A <b>15–30-year-old</b> Ltd in <b>facilities, maintenance or contract trades</b>, run day-to-day by a <b>named manager and a PAYE team</b> while a <b>58+ owner</b> with no successor has drifted to two days a week. It earns <b>£250k–£500k</b> a year off <b>contracted, repeat revenue</b> spread across <b>dozens of customers</b> — none over 15–20%. The name is a <b>brand, not the owner's surname</b>. Accounts are filed on time, show <b>rising retained profit and real cash</b>, little debt, and <b>light capex</b>. It's <b>never been marketed</b> and <b>prices haven't moved in years</b> — so the growth is sitting there for us. Priced around <b>3× profit (≤£1.8m)</b>, the seller will <b>leave money in</b> and hand over properly.</p>
+    </div>
+    <div class="note pine"><span class="k">Use the portrait as your yardstick</span><p>You will rarely find all of it. Score how far a target falls short, and whether the shortfalls are fixable (under-marketed = upside) or fatal (owner-dependent = walk).</p></div>
+  </section>
+
+  <section>
+    <div class="sh"><span class="n">02</span><h2>Reading Companies House — before you speak to anyone</h2></div>
+    <p class="lede">Everything below is free and public. Learn to read it and you disqualify 80% of targets in minutes.</p>
+    <div class="tells">
+      <div class="tell"><div class="w">Officers</div><div class="d">Sole director, no secretary → <span class="bad">owner-dependent</span>. Two-three directors incl. a non-family manager → <b>delegated, good</b>. A 30s–40s director sharing the founder's surname → succession planned internally, <span class="bad">probably not for sale</span>. A co-director who just resigned → a partnership split: opportunity or instability — ask.</div></div>
+      <div class="tell"><div class="w">PSC register</div><div class="d">One person with 75%+ → <b>clean control to buy</b>. Several PSCs → more parties to align. A corporate PSC → a holding company sits above; understand the structure before you value it.</div></div>
+      <div class="tell"><div class="w">Filing history</div><div class="d">Accounts on time every year → <b>a disciplined going concern</b>. Overdue / late / newly "dormant" → distress or an owner who's checked out — <span class="bad">could be decay or a motivated seller</span>, find out which.</div></div>
+      <div class="tell"><div class="w">Charges</div><div class="d">An outstanding charge/debenture → existing bank or invoice-finance lending you'll refinance (and someone else holds security). A <b>satisfied</b> charge → debt paid off. None + healthy → unencumbered, the cleanest deal.</div></div>
+      <div class="tell"><div class="w">Incorporation date</div><div class="d">15–30 yrs → reputation, likely systems, an older owner. Under ~8 yrs → founder-era, <span class="bad">higher dependence risk</span>.</div></div>
+      <div class="tell"><div class="w">SIC &amp; office</div><div class="d">One or two focused SIC codes → a real trading business. Many unrelated or property/holding codes → a lifestyle/SPV mix. Registered office at their <b>own premises</b> (not the accountant's) → more substance.</div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sh"><span class="n">03</span><h2>Reading the accounts — the cheat sheet</h2></div>
+    <p class="lede">Small companies file "filleted" accounts — <strong>usually just a balance sheet, no profit figure.</strong> So you infer profit from the story the balance sheet tells across <em>three years</em>. Here's how to read it.</p>
+    <div class="acct-scroll">
+      <table class="acct">
+        <thead><tr><th>Line</th><th>What it tells you</th></tr></thead>
+        <tbody>
+          <tr><td>Retained earnings <span class="mono" style="font-weight:400;color:var(--muted)">(P&amp;L reserve)</span></td><td>The single best signal. <b>Rising year on year</b> = the business makes and keeps profit. <span class="flag">Falling</span> = losses or the owner stripping cash out. Track the 3-year trend first.</td></tr>
+          <tr><td>Cash at bank</td><td>Liquidity and how well it converts profit to cash. Healthy, stable cash = a real business. <span class="flag">Shrinking cash + rising creditors</span> = strain.</td></tr>
+          <tr><td>Debtors</td><td>Money owed to them. Large vs turnover = slow payers or WIP tying up cash. A single huge debtor hints at <span class="flag">customer concentration</span>.</td></tr>
+          <tr><td>Stock</td><td>Distribution/mfg only. High = working capital tied up + <span class="flag">obsolescence risk</span>. Services should have ~none.</td></tr>
+          <tr><td>Creditors &lt; 1yr</td><td>Trade creditors, tax (VAT/PAYE/CT) and short-term debt. Compare to current assets → <b>net current assets</b>. <span class="flag">Negative</span> = possible cash-flow pressure.</td></tr>
+          <tr><td>Creditors &gt; 1yr</td><td>Bank loans / long-term debt you'd inherit or refinance.</td></tr>
+          <tr><td>Director's loan</td><td>If the company <b>owes the director</b> → cash they'll want back on exit (affects price/structure). If the <span class="flag">director owes the company</span> → cash already extracted, sometimes parked as an "asset".</td></tr>
+          <tr><td>Fixed assets</td><td>Plant, vehicles, kit. High &amp; ageing = a <span class="flag">capex treadmill</span>. Low = capital-light — ideal for a services buy.</td></tr>
+          <tr><td>Net assets</td><td>A rough value floor. Price <em>above</em> net assets = goodwill you're paying for — it must be justified by profit, and asset backing helps you borrow.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note"><span class="k">What you can't see — and must ask for</span><p>No turnover, gross margin or net profit is filed for small companies. Get 3 years of <strong>full accounts / management accounts</strong> from the owner or their accountant early — and a VAT-return sense-check of turnover. If they won't share after a good first meeting, that's a signal in itself.</p></div>
+  </section>
+
+  <section>
+    <div class="sh"><span class="n">04</span><h2>Green flags &amp; red flags — with the tell</h2></div>
+    <div class="cols">
+      <div class="col g">
+        <div class="head">Green — the "why" &amp; the tell</div>
+        <ul>
+          <li><b>Contracted recurring revenue</b> <em>— maintenance/servicing/framework language, steady debtors, repeat invoices.</em></li>
+          <li><b>Manager + team run it</b> <em>— named GM on the website/LinkedIn; owner already part-time.</em></li>
+          <li><b>Diversified customers</b> <em>— no single debtor dominating; many logos.</em></li>
+          <li><b>Under-priced / under-marketed</b> <em>— no marketing, prices flat for years = free upside.</em></li>
+          <li><b>Clean, cash-generative balance sheet</b> <em>— rising retained earnings, real cash, low debt.</em></li>
+          <li><b>Transferable accreditations</b> <em>— NICEIC, Gas Safe, ISO tied to the company, not the person.</em></li>
+          <li><b>Fragmented sector</b> <em>— lots of small rivals = bolt-on runway later.</em></li>
+        </ul>
+      </div>
+      <div class="col r">
+        <div class="head">Red — the "why" &amp; the tell</div>
+        <ul>
+          <li><b>The owner IS the business</b> <em>— eponymous name, sole director, reviews name them personally.</em></li>
+          <li><b>Customer concentration</b> <em>— one debtor is a big slice; "our biggest client" talk.</em></li>
+          <li><b>Structural decline / disruption</b> <em>— shrinking sector, tech or regulation about to bite.</em></li>
+          <li><b>Distressed</b> <em>— falling retained earnings, overdue filings, rising creditors. GGS-ineligible.</em></li>
+          <li><b>Add-back games</b> <em>— profit only appears after heroic "adjustments"; growing director's-loan extraction.</em></li>
+          <li><b>Capex treadmill / stock risk</b> <em>— big ageing fixed assets, or obsolete stock.</em></li>
+          <li><b>Key-man or lease landmine</b> <em>— one irreplaceable person; short lease; dilapidations; a personal licence.</em></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sh"><span class="n">05</span><h2>Sector playbooks</h2></div>
+    <p class="lede">The generic rules bend by sector. Where your value sits, and the sector-specific trap.</p>
+
+    <div class="sect">
+      <h3>Facilities &amp; maintenance</h3>
+      <div class="val">Value = the contract book + the crew</div>
+      <div class="sgrid">
+        <div class="g"><div class="b">Good</div><p>Multi-year contracts, retained clients, low capex, recurring monthly revenue.</p></div>
+        <div class="r"><div class="b">Bad</div><p>Wage-cost squeeze (min-wage rises), high staff churn, one big contract (an NHS trust, a council).</p></div>
+        <div class="u"><div class="b">Upside</div><p>Cross-sell services, raise under-priced contracts, add planned maintenance.</p></div>
+      </div>
+    </div>
+
+    <div class="sect">
+      <h3>Contract trades — electrical / mechanical / fire / HVAC</h3>
+      <div class="val">Value = engineers + the servicing base + accreditations</div>
+      <div class="sgrid">
+        <div class="g"><div class="b">Good</div><p>Planned + reactive maintenance contracts, PAYE engineers, a service manager running the diary.</p></div>
+        <div class="r"><div class="b">Bad</div><p>Owner still on the tools; new-build/project reliant (cyclical, retentions, lumpy cash); accreditation tied to the owner.</p></div>
+        <div class="u"><div class="b">Upside</div><p>Convert install customers to service contracts; raise labour rates; add compliance testing.</p></div>
+      </div>
+    </div>
+
+    <div class="sect">
+      <h3>Distribution &amp; niche manufacturing</h3>
+      <div class="val">Value = supplier rights + sticky customers + kit</div>
+      <div class="sgrid">
+        <div class="g"><div class="b">Good</div><p>Exclusive distribution rights, repeat reorders, modern efficient kit.</p></div>
+        <div class="r"><div class="b">Bad</div><p>Stock obsolescence, big working-capital swings, supplier/customer concentration, FX exposure, old machinery.</p></div>
+        <div class="u"><div class="b">Upside</div><p>Pricing, an e-commerce channel, range extension, tighter buying.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sh"><span class="n">06</span><h2>The numbers — with the workings</h2></div>
+    <div class="nums">
+      <div class="nrow"><div class="l"><b>Adjusted profit</b> (SDE — owner earnings + net profit + true add-backs)</div><div class="v">£250k – £500k</div></div>
+      <div class="nrow"><div class="l"><b>Multiple</b> — recurring/manager-run earns the top; owner-dependent/cyclical the bottom</div><div class="v">2–4× · ≤£1.8m</div></div>
+      <div class="nrow"><div class="l"><b>Net margin</b></div><div class="v">15%+</div></div>
+      <div class="nrow"><div class="l"><b>Biggest customer</b></div><div class="v">under 15–20%</div></div>
+      <div class="nrow"><div class="l"><b>Debt-service cover</b> (DSCR) — profit ÷ annual debt repayments</div><div class="v">≥ 1.5–2×</div></div>
+      <div class="nrow"><div class="l"><b>Seller leaves in</b> (deferred / seller loan)</div><div class="v">20–40%</div></div>
+      <div class="nrow"><div class="l"><b>Price vs net assets</b> — the excess is goodwill, must be earned by profit</div><div class="v warn">justify every £</div></div>
+    </div>
+
+    <div class="math">
+      <div class="mh">Worked example — why price discipline is safety</div>
+      <div class="mb">
+        <div class="mr"><span class="l">Adjusted profit</span><span class="mv pos">£350,000</span></div>
+        <div class="mr"><span class="l">Bank (GGS) £700k @ ~10% / 10yr</span><span class="mv">−£111k/yr</span></div>
+        <div class="mr"><span class="l">Seller loan £300k over ~5yr</span><span class="mv">−£66k/yr</span></div>
+        <div class="mr tot"><span class="l">Debt service · DSCR ≈ 2.0×</span><span class="mv pos">£177k · healthy</span></div>
+      </div>
+    </div>
+    <div class="note"><span class="k">The lesson in one line</span><p>At a £1.2m price (≈3.4×) that deal has a comfortable 2× cover. Pay £1.6m (≈4.6×) for the same profit and cover falls toward 1.5× — one bad quarter and you're squeezed. <strong>The multiple you pay is the margin of safety you keep.</strong> Never buy a deal that only works at its best case.</p></div>
+  </section>
+
+  <section>
+    <div class="sh"><span class="n">07</span><h2>The traps that catch first-time buyers</h2></div>
+    <div class="traps">
+      <div class="trap"><div class="t">Add-back inflation</div><div class="d">Sellers pad "adjustments" to lift the profit you're pricing off. Accept only genuine, provable, non-recurring add-backs.</div></div>
+      <div class="trap"><div class="t">WIP / retentions hiding cash</div><div class="d">In trades, unbilled work and held-back retentions can flatter the balance sheet. Ask what's really collectable.</div></div>
+      <div class="trap"><div class="t">The owner's relationships</div><div class="d">If the big customers stay because of <em>them</em>, revenue can walk on completion. Test how contracts are actually held.</div></div>
+      <div class="trap"><div class="t">Working-capital swing</div><div class="d">A debtor-heavy or seasonal business may need a cash injection just to keep running post-deal. Fund for it.</div></div>
+      <div class="trap"><div class="t">Dilapidations &amp; leases</div><div class="d">End-of-lease repair bills and rent reviews are real liabilities that never show on the headline price.</div></div>
+      <div class="trap"><div class="t">Earn-out misalignment</div><div class="d">A seller staying on an earn-out may optimise for the short term. Structure it around what you actually want built.</div></div>
+    </div>
+  </section>
+
+  <div class="walk">
+    <div class="k">When to walk — no exceptions</div>
+    <p>Owner is the business · one customer dominates · declining sector · distressed · hidden liabilities · we can't name two ways to grow it · the numbers only work at best case · <b>or the gut says it's only cheap because something's wrong.</b> A cheap price never rescues a bad business.</p>
+  </div>
+
+  <footer class="footer">
+    <p><b>The Rule Book — Field Edition v2.</b> The reference; the <b>Scorecard</b> (Memo 06) is where you grade against it. Distilled from Memo 01 (strategy &amp; funding math), 02 (buy box), 03 (Brad Sugars / the 5 Ways). Print it, learn it, disqualify fast.</p>
+    <p style="margin-top:10px" class="mono">Educational framework, not financial/accounting advice. Confirm every figure in due diligence with your accountant.</p>
+  </footer>
+
+</div>

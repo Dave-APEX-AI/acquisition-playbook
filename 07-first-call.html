@@ -1,0 +1,347 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta charset="utf-8">
+<title>The First Call</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --paper:#F7F8F6;--surface:#FFFFFF;--surface-2:#EFF1ED;--ink:#14201C;--ink-soft:#3A4640;
+    --muted:#5F6B63;--hair:#DBE0D9;--hair-strong:#C4CCC3;--pine:#1E5E45;--pine-soft:#E4EEE7;
+    --brass:#9C6B1E;--brass-soft:#F3E9D6;--oxblood:#A6382E;--oxblood-soft:#F5E2DE;
+    --shadow:0 1px 2px rgba(20,32,28,.05),0 12px 30px -18px rgba(20,32,28,.20);
+    --shadow-lift:0 2px 4px rgba(20,32,28,.06),0 22px 46px -24px rgba(20,32,28,.28);
+  }
+  :root:not([data-theme="light"]){@media (prefers-color-scheme:dark){
+    --paper:#0F1512;--surface:#161D19;--surface-2:#1D2621;--ink:#E8EDE8;--ink-soft:#C3CCC5;
+    --muted:#8E9A91;--hair:#2A342E;--hair-strong:#3A463F;--pine:#5FB489;--pine-soft:#17271F;
+    --brass:#D2A257;--brass-soft:#2A2214;--oxblood:#E08B7F;--oxblood-soft:#2E1A17;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 14px 34px -18px rgba(0,0,0,.7);--shadow-lift:0 2px 6px rgba(0,0,0,.5),0 24px 48px -24px rgba(0,0,0,.8);
+  }}
+  :root[data-theme="dark"]{
+    --paper:#0F1512;--surface:#161D19;--surface-2:#1D2621;--ink:#E8EDE8;--ink-soft:#C3CCC5;
+    --muted:#8E9A91;--hair:#2A342E;--hair-strong:#3A463F;--pine:#5FB489;--pine-soft:#17271F;
+    --brass:#D2A257;--brass-soft:#2A2214;--oxblood:#E08B7F;--oxblood-soft:#2E1A17;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 14px 34px -18px rgba(0,0,0,.7);--shadow-lift:0 2px 6px rgba(0,0,0,.5),0 24px 48px -24px rgba(0,0,0,.8);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"IBM Plex Sans",system-ui,sans-serif;font-size:15.5px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:880px;margin:0 auto;padding:0 22px}
+  h1,h2,h3{font-family:"Newsreader",Georgia,serif;font-weight:600;text-wrap:balance;line-height:1.12;margin:0}
+  p{margin:0 0 .9em}p:last-child{margin-bottom:0}
+  strong{font-weight:600;color:var(--ink)}
+  .mono{font-family:"IBM Plex Mono",monospace}
+
+  .mast{padding:44px 0 22px;border-bottom:2px solid var(--ink)}
+  .mast-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+  .brand{font-family:"IBM Plex Mono",monospace;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+  .brand b{color:var(--ink);font-weight:600}
+  h1{font-size:clamp(2rem,5.5vw,2.9rem);letter-spacing:-.02em}
+  h1 em{font-style:italic;color:var(--pine)}
+  .eyebrow{font-family:"IBM Plex Mono",monospace;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--pine);margin-bottom:8px}
+
+  .rule{background:var(--ink);color:#EAF0EC;border-radius:14px;padding:22px 26px;margin:22px 0 6px;box-shadow:var(--shadow-lift)}
+  :root[data-theme="dark"] .rule,:root:not([data-theme="light"]) .rule{background:#0A0F0D;border:1px solid var(--hair)}
+  @media (prefers-color-scheme:light){:root:not([data-theme="dark"]) .rule{background:var(--ink)}}
+  .rule .k{font-family:"IBM Plex Mono",monospace;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:#7FC9A3;margin-bottom:8px}
+  .rule p{margin:0;font-family:"Newsreader",serif;font-size:1.26rem;line-height:1.4;color:#fff}
+  .rule b{color:#7FC9A3;font-weight:600}
+
+  section{padding:32px 0;border-top:1px solid var(--hair)}
+  .sh{display:flex;align-items:baseline;gap:12px;margin-bottom:6px}
+  .sh .n{font-family:"IBM Plex Mono",monospace;font-size:.72rem;font-weight:600;color:var(--pine)}
+  .sh h2{font-size:1.42rem;letter-spacing:-.01em}
+  .lede{font-size:.98rem;color:var(--ink-soft);max-width:70ch;margin-bottom:16px}
+
+  .goals{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+  .goal{border:1px solid var(--hair);border-radius:10px;background:var(--surface);box-shadow:var(--shadow);padding:13px 15px}
+  .goal .t{font-weight:600;font-size:.92rem;margin-bottom:2px}
+  .goal .d{font-size:.82rem;color:var(--muted);line-height:1.4}
+
+  .prep{list-style:none;margin:0;padding:0}
+  .prep li{display:flex;gap:11px;align-items:flex-start;padding:9px 0;border-bottom:1px solid var(--hair);font-size:.92rem}
+  .prep li:last-child{border-bottom:none}
+  .prep .box{flex:none;width:17px;height:17px;border:2px solid var(--pine);border-radius:5px;margin-top:2px}
+
+  .flow{display:flex;flex-direction:column;gap:0}
+  .beat{display:grid;grid-template-columns:auto 1fr;gap:18px;padding:15px 0;border-top:1px solid var(--hair)}
+  .beat:first-child{border-top:none}
+  .beat .ti{font-family:"IBM Plex Mono",monospace;font-size:.72rem;font-weight:600;color:var(--pine);white-space:nowrap;padding-top:3px}
+  .beat .t{font-weight:600;margin-bottom:2px}
+  .beat .x{font-size:.9rem;color:var(--ink-soft)}
+
+  .qbank{border:1px solid var(--hair);border-radius:12px;background:var(--surface);box-shadow:var(--shadow);overflow:hidden;margin-bottom:12px}
+  .qbank .qh{padding:11px 16px;background:var(--surface-2);border-bottom:1px solid var(--hair);font-weight:600;font-size:.92rem;display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+  .qbank .qh .tag{font-family:"IBM Plex Mono",monospace;font-size:.64rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600}
+  .qbank ul{list-style:none;margin:0;padding:8px 18px 14px}
+  .qbank li{padding:6px 0 6px 16px;position:relative;font-size:.92rem;color:var(--ink-soft);line-height:1.5}
+  .qbank li::before{content:"“";position:absolute;left:0;color:var(--pine);font-family:"Newsreader",serif;font-weight:600}
+  .qbank li b{color:var(--ink);font-weight:600}
+  .qbank li .why{display:block;font-size:.78rem;color:var(--muted);margin-top:1px;padding-left:0}
+  .qbank li .why::before{content:"→ "}
+
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .col{border:1px solid var(--hair);border-radius:12px;background:var(--surface);box-shadow:var(--shadow);overflow:hidden}
+  .col .head{padding:11px 16px;font-family:"IBM Plex Mono",monospace;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;font-weight:600;border-bottom:1px solid var(--hair)}
+  .col.g .head{color:var(--pine);background:var(--pine-soft)}
+  .col.r .head{color:var(--oxblood);background:var(--oxblood-soft)}
+  .col ul{list-style:none;margin:0;padding:6px 16px 14px}
+  .col li{padding:8px 0 8px 20px;border-bottom:1px solid var(--hair);font-size:.85rem;line-height:1.45;position:relative}
+  .col li:last-child{border-bottom:none}
+  .col.g li::before{content:"✓";position:absolute;left:0;color:var(--pine);font-weight:700;font-size:.8rem}
+  .col.r li::before{content:"✕";position:absolute;left:0;color:var(--oxblood);font-weight:700;font-size:.8rem}
+  .col li em{font-style:italic;color:var(--muted)}
+
+  .note{border:1px solid var(--hair);border-left:4px solid var(--brass);background:var(--brass-soft);border-radius:10px;padding:14px 18px;margin-top:16px}
+  .note.pine{border-left-color:var(--pine);background:var(--pine-soft)}
+  .note.ox{border-left-color:var(--oxblood);background:var(--oxblood-soft)}
+  .note .k{display:block;font-family:"IBM Plex Mono",monospace;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:6px;font-weight:600;color:var(--brass)}
+  .note.pine .k{color:var(--pine)}.note.ox .k{color:var(--oxblood)}
+  .note p{margin:0 0 .6em;font-size:.9rem;color:var(--ink-soft)}.note p:last-child{margin-bottom:0}
+  .note .say{font-family:"Newsreader",serif;font-style:italic;font-size:1.02rem;color:var(--ink)}
+
+  /* call sheet */
+  .sheet{border:2px solid var(--ink);border-radius:12px;background:var(--surface);padding:0;overflow:hidden;margin-top:14px}
+  .sheet .top{background:var(--ink);color:#fff;padding:12px 18px;font-family:"IBM Plex Mono",monospace;font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;display:flex;justify-content:space-between;gap:10px}
+  :root[data-theme="dark"] .sheet .top,:root:not([data-theme="light"]) .sheet .top{background:#0A0F0D}
+  @media (prefers-color-scheme:light){:root:not([data-theme="dark"]) .sheet .top{background:var(--ink)}}
+  .sheet .body{padding:16px 18px}
+  .fld{display:flex;gap:10px;align-items:baseline;padding:7px 0;border-bottom:1px dotted var(--hair-strong);font-size:.86rem}
+  .fld .lab{font-weight:600;min-width:150px;color:var(--ink)}
+  .fld .ln{flex:1;border-bottom:1px solid var(--hair);height:1em}
+  .sheet .row2{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:8px}
+  .sheet .mini{font-family:"IBM Plex Mono",monospace;font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600;margin:6px 0 4px}
+  .flagline{display:flex;gap:8px;align-items:center;font-size:.82rem;padding:4px 0;color:var(--ink-soft)}
+  .flagline .cb{width:14px;height:14px;border:1.5px solid var(--muted);border-radius:4px;flex:none}
+
+  .btnrow{margin:14px 0 0}
+  .btn{font-family:inherit;font-size:.85rem;font-weight:500;padding:8px 14px;border-radius:9px;border:1px solid var(--hair-strong);background:var(--surface);color:var(--ink-soft);cursor:pointer}
+  .btn:hover{border-color:var(--pine);color:var(--pine)}
+
+  .footer{padding:26px 0 50px;color:var(--muted);font-size:.78rem}.footer b{color:var(--ink)}
+
+  @media (max-width:680px){
+    .goals{grid-template-columns:1fr 1fr}
+    .cols,.sheet .row2{grid-template-columns:1fr}
+    .beat{grid-template-columns:1fr;gap:3px}.beat .ti{color:var(--pine)}
+    .rule p{font-size:1.1rem}.fld .lab{min-width:110px}
+  }
+  @media print{.btn{display:none}.rule{box-shadow:none}}
+</style>
+
+<div class="wrap">
+
+  <header class="mast">
+    <div class="mast-top">
+      <div class="brand"><b>Acquisition Memo</b> · No.&nbsp;07 — The First Call</div>
+      <div class="brand">Buyer's playbook · 14 Sep 2026</div>
+    </div>
+    <div class="eyebrow">What to run when an owner says "tell me more"</div>
+    <h1>The <em>First Call</em></h1>
+  </header>
+
+  <div class="rule">
+    <div class="k">The whole call in one line</div>
+    <p>This call is <b>not a negotiation.</b> You're here to <b>listen, build trust, and qualify</b> — and to earn a second conversation and the accounts. <b>Never mention price.</b> Listen 80%, talk 20%.</p>
+  </div>
+
+  <section>
+    <div class="sh"><span class="n">01</span><h2>What "a good call" achieves</h2></div>
+    <p class="lede">Four things — nothing more. If you get these, the call was a success, whatever else happened.</p>
+    <div class="goals">
+      <div class="goal"><div class="t">Rapport</div><div class="d">They liked you and felt heard. Trust is the whole game with this seller.</div></div>
+      <div class="goal"><div class="t">Qualify the seller</div><div class="d">Are they a real, motivated seller — or just flattered and curious?</div></div>
+      <div class="goal"><div class="t">Qualify the business</div><div class="d">Does it match the Rule Book — especially, does it run without them?</div></div>
+      <div class="goal"><div class="t">A next step</div><div class="d">Agree the accounts + a follow-up (ideally a visit). Concrete, dated.</div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sh"><span class="n">02</span><h2>Before you dial — 10 minutes</h2></div>
+    <ul class="prep">
+      <li><span class="box"></span><span>Read their <b>Companies House</b> — officers, incorporation date, charges, filing history (Rule Book §02).</span></li>
+      <li><span class="box"></span><span>Skim the <b>balance-sheet trend</b> and their <b>website / team page</b>. Pre-score <b>Stage A+B</b> on the Scorecard.</span></li>
+      <li><span class="box"></span><span>Have <b>two genuine, specific things</b> you admire about the business ready to say.</span></li>
+      <li><span class="box"></span><span>Know your <b>one honest line</b>: first acquisition, doing it properly, funding route identified.</span></li>
+      <li><span class="box"></span><span>Quiet room, the <b>call sheet</b> printed, 45 minutes clear, no rush.</span></li>
+    </ul>
+  </section>
+
+  <section>
+    <div class="sh"><span class="n">03</span><h2>The flow — roughly 30–45 minutes</h2></div>
+    <div class="flow">
+      <div class="beat"><span class="ti">0–3 min</span><div><div class="t">Open &amp; disarm</div><div class="x">Thank them for the time. "I'm not a broker, there's no agenda today — I just wanted to get to know you and what you've built." Lower the temperature immediately.</div></div></div>
+      <div class="beat"><span class="ti">3–15 min</span><div><div class="t">Their story — let them talk</div><div class="x">"Tell me how it all started." Then get out of the way. This builds rapport <em>and</em> teaches you the business. Warm follow-ups only.</div></div></div>
+      <div class="beat"><span class="ti">15–28 min</span><div><div class="t">How it runs &amp; who they are</div><div class="x">Gently work through the question bank — how the business runs day-to-day (the big one), customers, team, and what's got them thinking about the future.</div></div></div>
+      <div class="beat"><span class="ti">28–35 min</span><div><div class="t">Reassure on fit</div><div class="x">Surface the two things they fear for: their people and their legacy. Say plainly you'd want to keep the team and build on what they made — not strip it.</div></div></div>
+      <div class="beat"><span class="ti">35–40 min</span><div><div class="t">Close to a next step</div><div class="x">Ask for the accounts, propose a visit, agree who follows up and when. No price, no pressure. Thank them again.</div></div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sh"><span class="n">04</span><h2>The question bank</h2></div>
+    <p class="lede">Not a script — pick what fits the flow. The italic note is <em>what each question is really testing</em>.</p>
+
+    <div class="qbank">
+      <div class="qh"><span>How it runs — the owner-dependence test</span><span class="tag">the one that matters most</span></div>
+      <ul>
+        <li>Walk me through <b>a normal week for you</b> — what do you actually do day to day?<span class="why">Are they the operator, or working on it?</span></li>
+        <li>Who <b>runs things when you're on holiday?</b><span class="why">Is there a real second-in-command?</span></li>
+        <li>If you didn't come in <b>for a month</b>, what would break?<span class="why">The honest owner-dependence answer.</span></li>
+        <li>How do <b>new customers find you</b> — is that you, or a team/system?<span class="why">Is sales owner-tied?</span></li>
+      </ul>
+    </div>
+
+    <div class="qbank">
+      <div class="qh"><span>The work &amp; the customers</span></div>
+      <ul>
+        <li>How much of the work is <b>repeat or on contract</b> vs one-off?<span class="why">Recurring revenue quality.</span></li>
+        <li>Who's your <b>biggest customer</b> — roughly what share of the work?<span class="why">Concentration risk.</span></li>
+        <li>How far out does the <b>order / contract book</b> go?<span class="why">Forward visibility.</span></li>
+        <li>What's <b>grown or gone quiet</b> over the last few years?<span class="why">Trajectory &amp; honesty.</span></li>
+      </ul>
+    </div>
+
+    <div class="qbank">
+      <div class="qh"><span>The team</span></div>
+      <ul>
+        <li>Who are the <b>two or three people</b> the business couldn't lose?<span class="why">Key-man risk — and who you'd rely on.</span></li>
+        <li>How long have the <b>key people</b> been with you?<span class="why">Stability of the team you're buying.</span></li>
+      </ul>
+    </div>
+
+    <div class="qbank">
+      <div class="qh"><span>Them &amp; their motivation</span><span class="tag">read this carefully</span></div>
+      <ul>
+        <li>What's got you <b>thinking about the future now?</b><span class="why">Is the motivation real? Retirement, health, tiredness?</span></li>
+        <li>What matters <b>most to you</b> in who takes it on?<span class="why">Legacy / staff / price / speed — their real driver.</span></li>
+        <li>Afterwards — would you want to be <b>fully out, or stay involved</b> for a while?<span class="why">Handover &amp; seller-finance appetite.</span></li>
+        <li>Have you had <b>conversations with anyone else?</b><span class="why">Broker involved? Competing buyers?</span></li>
+      </ul>
+    </div>
+
+    <div class="qbank">
+      <div class="qh"><span>The numbers — light touch only</span></div>
+      <ul>
+        <li>Roughly what does it <b>turn over</b>, and what does it make once you strip out what you take?<span class="why">SDE / scale — a gauge, not a haggle.</span></li>
+        <li>Would you be comfortable sharing <b>three years of accounts</b> so I can understand it properly?<span class="why">The real ask of the call.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <div class="sh"><span class="n">05</span><h2>What to listen for — live</h2></div>
+    <p class="lede">Their words score the company for you. Tick these on the call sheet as you hear them.</p>
+    <div class="cols">
+      <div class="col g">
+        <div class="head">Green — lean in</div>
+        <ul>
+          <li>"<em>The lads run it</em>" · "<em>I'm only in a couple of days</em>"</li>
+          <li>Names a manager / second-in-command without prompting</li>
+          <li>Talks about <b>systems, contracts, repeat customers</b></li>
+          <li>Customers spread across many names</li>
+          <li>Wants the <b>staff looked after</b>; cares about legacy</li>
+          <li>A genuine, human <b>"why now"</b> (retiring, health, tired)</li>
+        </ul>
+      </div>
+      <div class="col r">
+        <div class="head">Red — go careful</div>
+        <ul>
+          <li>"<em>The customers deal with me</em>" · "<em>I do all the quotes</em>"</li>
+          <li>"<em>I'm here every day</em>" · can't say who'd cover them</li>
+          <li>One <b>big customer</b> named again and again</li>
+          <li><b>Evasive on numbers</b> or won't share accounts</li>
+          <li>Only interested in <b>top price</b>; a broker pushing</li>
+          <li>Not actually sure they want to sell — just flattered</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sh"><span class="n">06</span><h2>Handling the tricky moments</h2></div>
+    <div class="note">
+      <span class="k">If they ask "so what would you pay?"</span>
+      <p class="say">"Honestly, far too early — I'd need to properly understand the business first, and I'd never insult what you've built with a number plucked from the air. Let me learn it properly, then we can both have a sensible conversation."</p>
+    </div>
+    <div class="note ox">
+      <span class="k">Don't — the five ways to blow it</span>
+      <p>Talk price or throw out a number · over-promise on staff/price · dominate the call · push when they hesitate · pretend you've done this before or that funds are sitting ready. <strong>Honesty and patience win this seller.</strong></p>
+    </div>
+  </section>
+
+  <section>
+    <div class="sh"><span class="n">07</span><h2>The close &amp; after</h2></div>
+    <div class="note pine">
+      <span class="k">Close it warmly, concretely</span>
+      <p class="say">"This has been really good of you — thank you. Everything stays between us. Could you send three years of accounts when you get a moment? And I'd love to come and see the place — would [day] suit? Either way, no pressure at all."</p>
+    </div>
+    <p style="margin-top:14px;font-size:.92rem;color:var(--ink-soft)"><strong>Within an hour of hanging up:</strong> fill in <b>Stage C</b> on the Scorecard while it's fresh, log your notes, and decide the next step — pursue, park, or politely close. A quick thank-you message the same day cements the relationship.</p>
+  </section>
+
+  <section>
+    <div class="sh"><span class="n">08</span><h2>The call sheet — print &amp; keep in front of you</h2></div>
+    <div class="btnrow"><button class="btn" onclick="window.print()">Print this sheet</button></div>
+    <div class="sheet">
+      <div class="top"><span>First-Call Sheet</span><span>Company / Owner / Date</span></div>
+      <div class="body">
+        <div class="fld"><span class="lab">Company</span><span class="ln"></span></div>
+        <div class="fld"><span class="lab">Owner</span><span class="ln"></span></div>
+        <div class="fld"><span class="lab">Pre-score (A+B)</span><span class="ln"></span></div>
+
+        <div class="row2">
+          <div>
+            <div class="mini">How it runs (owner-dependence)</div>
+            <div class="fld"><span class="ln"></span></div>
+            <div class="fld"><span class="ln"></span></div>
+            <div class="mini">Customers / concentration</div>
+            <div class="fld"><span class="ln"></span></div>
+            <div class="mini">Team / key people</div>
+            <div class="fld"><span class="ln"></span></div>
+          </div>
+          <div>
+            <div class="mini">Motivation / why now</div>
+            <div class="fld"><span class="ln"></span></div>
+            <div class="fld"><span class="ln"></span></div>
+            <div class="mini">Numbers (turnover / take)</div>
+            <div class="fld"><span class="ln"></span></div>
+            <div class="mini">Anyone else involved?</div>
+            <div class="fld"><span class="ln"></span></div>
+          </div>
+        </div>
+
+        <div class="row2" style="margin-top:10px">
+          <div>
+            <div class="mini" style="color:var(--pine)">Green heard</div>
+            <div class="flagline"><span class="cb"></span>Runs without them / names a manager</div>
+            <div class="flagline"><span class="cb"></span>Recurring / contract revenue</div>
+            <div class="flagline"><span class="cb"></span>Diversified customers</div>
+            <div class="flagline"><span class="cb"></span>Cares about staff / legacy · real "why now"</div>
+          </div>
+          <div>
+            <div class="mini" style="color:var(--oxblood)">Red heard</div>
+            <div class="flagline"><span class="cb"></span>"Customers deal with me" / does the quotes</div>
+            <div class="flagline"><span class="cb"></span>In every day / no cover</div>
+            <div class="flagline"><span class="cb"></span>One big customer</div>
+            <div class="flagline"><span class="cb"></span>Evasive on numbers · price-only · broker</div>
+          </div>
+        </div>
+
+        <div style="margin-top:10px">
+          <div class="mini">Next step agreed</div>
+          <div class="fld"><span class="lab" style="min-width:120px">Accounts?</span><span class="ln"></span></div>
+          <div class="fld"><span class="lab" style="min-width:120px">Visit / follow-up</span><span class="ln"></span></div>
+          <div class="fld"><span class="lab" style="min-width:120px">Verdict</span><span class="ln"></span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p><b>The First Call v1.</b> Pairs with the Approach (Memo 05) before, and the Scorecard (Memo 06) after. Next in the play: <b>Deal Structures</b> — valuation &amp; the GGS + seller-loan + investor stack — once you've got live conversations going.</p>
+    <p style="margin-top:10px" class="mono">A guide for your own calls. Keep every claim truthful; take professional advice before any offer.</p>
+  </footer>
+
+</div>
