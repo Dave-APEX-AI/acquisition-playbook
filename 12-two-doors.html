@@ -1,0 +1,206 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta charset="utf-8">
+<title>Two Front Doors</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --paper:#F7F8F6;--surface:#FFFFFF;--surface-2:#EFF1ED;--ink:#14201C;--ink-soft:#3A4640;
+    --muted:#5F6B63;--hair:#DBE0D9;--hair-strong:#C4CCC3;--pine:#1E5E45;--pine-soft:#E4EEE7;
+    --brass:#9C6B1E;--brass-soft:#F3E9D6;--oxblood:#A6382E;--oxblood-soft:#F5E2DE;
+    --shadow:0 1px 2px rgba(20,32,28,.05),0 12px 30px -18px rgba(20,32,28,.20);
+    --shadow-lift:0 2px 4px rgba(20,32,28,.06),0 22px 46px -24px rgba(20,32,28,.28);
+  }
+  :root:not([data-theme="light"]){@media (prefers-color-scheme:dark){
+    --paper:#0F1512;--surface:#161D19;--surface-2:#1D2621;--ink:#E8EDE8;--ink-soft:#C3CCC5;
+    --muted:#8E9A91;--hair:#2A342E;--hair-strong:#3A463F;--pine:#5FB489;--pine-soft:#17271F;
+    --brass:#D2A257;--brass-soft:#2A2214;--oxblood:#E08B7F;--oxblood-soft:#2E1A17;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 14px 34px -18px rgba(0,0,0,.7);--shadow-lift:0 2px 6px rgba(0,0,0,.5),0 24px 48px -24px rgba(0,0,0,.8);
+  }}
+  :root[data-theme="dark"]{
+    --paper:#0F1512;--surface:#161D19;--surface-2:#1D2621;--ink:#E8EDE8;--ink-soft:#C3CCC5;
+    --muted:#8E9A91;--hair:#2A342E;--hair-strong:#3A463F;--pine:#5FB489;--pine-soft:#17271F;
+    --brass:#D2A257;--brass-soft:#2A2214;--oxblood:#E08B7F;--oxblood-soft:#2E1A17;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 14px 34px -18px rgba(0,0,0,.7);--shadow-lift:0 2px 6px rgba(0,0,0,.5),0 24px 48px -24px rgba(0,0,0,.8);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"IBM Plex Sans",system-ui,sans-serif;font-size:15.5px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:880px;margin:0 auto;padding:0 22px}
+  h1,h2,h3{font-family:"Newsreader",Georgia,serif;font-weight:600;text-wrap:balance;line-height:1.12;margin:0}
+  p{margin:0 0 .9em}p:last-child{margin-bottom:0}
+  strong{font-weight:600;color:var(--ink)}
+  .mono{font-family:"IBM Plex Mono",monospace}
+
+  .mast{padding:44px 0 22px;border-bottom:2px solid var(--ink)}
+  .mast-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+  .brand{font-family:"IBM Plex Mono",monospace;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+  .brand b{color:var(--ink);font-weight:600}
+  h1{font-size:clamp(2rem,5.5vw,2.9rem);letter-spacing:-.02em}
+  h1 em{font-style:italic;color:var(--pine)}
+  .eyebrow{font-family:"IBM Plex Mono",monospace;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--pine);margin-bottom:8px}
+
+  .rule{background:var(--ink);color:#EAF0EC;border-radius:14px;padding:22px 26px;margin:22px 0 6px;box-shadow:var(--shadow-lift)}
+  :root[data-theme="dark"] .rule,:root:not([data-theme="light"]) .rule{background:#0A0F0D;border:1px solid var(--hair)}
+  @media (prefers-color-scheme:light){:root:not([data-theme="dark"]) .rule{background:var(--ink)}}
+  .rule .k{font-family:"IBM Plex Mono",monospace;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:#7FC9A3;margin-bottom:8px}
+  .rule p{margin:0;font-family:"Newsreader",serif;font-size:1.26rem;line-height:1.4;color:#fff}
+  .rule b{color:#7FC9A3;font-weight:600}
+
+  section{padding:32px 0;border-top:1px solid var(--hair)}
+  .sh{display:flex;align-items:baseline;gap:12px;margin-bottom:6px}
+  .sh .n{font-family:"IBM Plex Mono",monospace;font-size:.72rem;font-weight:600;color:var(--pine)}
+  .sh h2{font-size:1.42rem;letter-spacing:-.01em}
+  .lede{font-size:.98rem;color:var(--ink-soft);max-width:70ch;margin-bottom:16px}
+
+  /* compare table */
+  .cmp{width:100%;border-collapse:collapse;font-size:.88rem;margin-top:4px}
+  .cmp th,.cmp td{text-align:left;padding:11px 13px;border-bottom:1px solid var(--hair);vertical-align:top}
+  .cmp thead th{font-family:"IBM Plex Mono",monospace;font-size:.66rem;letter-spacing:.06em;text-transform:uppercase;font-weight:600}
+  .cmp thead th:nth-child(2){color:var(--pine)}
+  .cmp thead th:nth-child(3){color:var(--brass)}
+  .cmp td:first-child{font-weight:600;width:22%;color:var(--ink)}
+  .cmp td:nth-child(2){width:39%;color:var(--ink-soft)}
+  .cmp td:nth-child(3){width:39%;color:var(--ink-soft);border-left:1px solid var(--hair)}
+  .cmp tr:last-child td{border-bottom:none}
+  .cmp-scroll{overflow-x:auto}
+
+  .flow{display:flex;flex-direction:column;gap:0;margin-top:8px}
+  .step{display:grid;grid-template-columns:auto 1fr;gap:16px;padding:12px 0;border-top:1px solid var(--hair)}
+  .step:first-child{border-top:none}
+  .step .no{font-family:"IBM Plex Mono",monospace;font-size:.74rem;font-weight:600;color:var(--pine);white-space:nowrap;padding-top:2px}
+  .step .t{font-weight:600;margin-bottom:1px}
+  .step .d{font-size:.89rem;color:var(--ink-soft)}
+  .step .d b{color:var(--pine)}
+
+  .msg{border:1px solid var(--hair-strong);border-radius:12px;background:var(--surface);box-shadow:var(--shadow);overflow:hidden;margin-top:14px}
+  .msg .mh{display:flex;justify-content:space-between;align-items:baseline;gap:10px;padding:12px 18px;background:var(--surface-2);border-bottom:1px solid var(--hair)}
+  .msg .mh .t{font-weight:600;font-size:.95rem}
+  .msg .mh .tag{font-family:"IBM Plex Mono",monospace;font-size:.66rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+  .msg .body{padding:16px 18px;font-size:.92rem;line-height:1.6;color:var(--ink-soft)}
+  .msg .body .ph{color:var(--brass);font-weight:600}
+
+  .note{border:1px solid var(--hair);border-left:4px solid var(--brass);background:var(--brass-soft);border-radius:10px;padding:14px 18px;margin-top:16px}
+  .note.pine{border-left-color:var(--pine);background:var(--pine-soft)}
+  .note.ox{border-left-color:var(--oxblood);background:var(--oxblood-soft)}
+  .note .k{display:block;font-family:"IBM Plex Mono",monospace;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:6px;font-weight:600;color:var(--brass)}
+  .note.pine .k{color:var(--pine)}.note.ox .k{color:var(--oxblood)}
+  .note p{margin:0 0 .6em;font-size:.9rem;color:var(--ink-soft)}.note p:last-child{margin-bottom:0}
+  .note ul{margin:6px 0 0;padding-left:20px;font-size:.88rem;color:var(--ink-soft)}
+  .note li{margin:4px 0}
+
+  .footer{padding:26px 0 50px;color:var(--muted);font-size:.78rem}.footer b{color:var(--ink)}
+
+  @media (max-width:680px){
+    .cmp td:nth-child(3){border-left:none;border-top:1px dashed var(--hair)}
+    .step{grid-template-columns:1fr;gap:2px}.step .no{color:var(--pine)}
+    .rule p{font-size:1.1rem}
+  }
+</style>
+
+<div class="wrap">
+
+  <header class="mast">
+    <div class="mast-top">
+      <div class="brand"><b>Acquisition Memo</b> · No.&nbsp;12 — Two Front Doors</div>
+      <div class="brand">On-market vs off-market · 14 Sep 2026</div>
+    </div>
+    <div class="eyebrow">How you approach depends entirely on which door</div>
+    <h1>Two Front <em>Doors</em></h1>
+  </header>
+
+  <div class="rule">
+    <div class="k">The whole idea in one line</div>
+    <p>A business that's <b>not for sale</b> and one that's <b>publicly listed</b> are two completely different approaches: with the first you go to the <b>owner</b> and create the opportunity; with the second you go through a <b>broker</b> and compete for it.</p>
+  </div>
+
+  <section>
+    <div class="sh"><span class="n">01</span><h2>The two doors, side by side</h2></div>
+    <p class="lede">Same goal, opposite tactics. Know which door you're at before you say a word.</p>
+    <div class="cmp-scroll">
+      <table class="cmp">
+        <thead><tr><th></th><th>Off-market · not for sale</th><th>On-market · publicly listed</th></tr></thead>
+        <tbody>
+          <tr><td>Where</td><td>Your target list, Companies House, direct mail</td><td>BusinessesForSale, Rightbiz, Daltons; business brokers</td></tr>
+          <tr><td>First contact</td><td>The <b>owner</b>, personally</td><td>A <b>broker</b> — the listing is usually anonymised</td></tr>
+          <tr><td>Temperature</td><td>Cold — you create the opportunity</td><td>Warm — they've already decided to sell</td></tr>
+          <tr><td>Competition</td><td>Little or none</td><td>A field of other buyers</td></tr>
+          <tr><td>Price</td><td>Better — no auction, no adviser pricing it up</td><td>Higher — marketed to maximise, expectations set</td></tr>
+          <tr><td>Pace</td><td>Slow nurture — months, sometimes years</td><td>Faster, structured, sometimes to a deadline</td></tr>
+          <tr><td>Information</td><td>You extract it, piece by piece</td><td>An Information Memorandum is handed to you (a sales doc)</td></tr>
+          <tr><td>Your posture</td><td>Patient relationship-builder, legacy-led</td><td>Credible, serious, moves-with-the-process buyer</td></tr>
+          <tr><td>Best for</td><td><b>The best deals</b> — your real edge</td><td><b>Deal flow, speed, learning</b> the process</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <div class="sh"><span class="n">02</span><h2>Door one · not for sale (off-market)</h2></div>
+    <p class="lede">This is the play the whole playbook is built around — and it's covered in depth in <strong>Memo 05 · The Approach</strong>. In one line:</p>
+    <div class="note pine">
+      <span class="k">The off-market approach</span>
+      <p>Write to the <strong>owner by name</strong>, as individual operators offering their life's work a safe pair of hands. Lead with legacy and their people, never price. One soft ask, one follow-up, then nurture. Low reply rates are normal — you only need a handful of real conversations. <em>You are creating an opportunity that doesn't exist yet.</em></p>
+    </div>
+    <p style="margin-top:14px;font-size:.9rem;color:var(--muted)">Full letter, email, call opener and sequence: Memo 05. This memo focuses on the door most people <em>don't</em> know how to work — the listed one.</p>
+  </section>
+
+  <section>
+    <div class="sh"><span class="n">03</span><h2>Door two · publicly for sale (on-market)</h2></div>
+    <p class="lede">Here the business wants a buyer, but a broker guards the gate and other buyers are circling. Your job is to look serious fast, get behind the curtain, and run the process well — without catching auction fever.</p>
+
+    <p style="font-weight:600;margin:6px 0 4px">How the process runs</p>
+    <div class="flow">
+      <div class="step"><div class="no">1</div><div><div class="t">Find &amp; register interest</div><div class="d">On the portals or via a broker. The listing is anonymous — sector, region, rough turnover, a reference number.</div></div></div>
+      <div class="step"><div class="no">2</div><div><div class="t">Sign an NDA</div><div class="d">Standard, to unlock the details. <b>Read it</b> (nothing that unreasonably restricts you), then it releases the pack.</div></div></div>
+      <div class="step"><div class="no">3</div><div><div class="t">Receive the Information Memorandum (IM)</div><div class="d">The sales pack — company name revealed, financials, the story. Remember: <b>it's a sales document</b>, written to flatter.</div></div></div>
+      <div class="step"><div class="no">4</div><div><div class="t">Questions, then a meeting / viewing</div><div class="d">A call with the broker, then ideally the owner and the site. Run your First-Call playbook (Memo 07) once you meet the owner.</div></div></div>
+      <div class="step"><div class="no">5</div><div><div class="t">Indicative (non-binding) offer</div><div class="d">A short letter: rough price/range, structure, key conditions (subject to DD &amp; funding), timeline, and why you. Non-binding — it gets you to the table.</div></div></div>
+      <div class="step"><div class="no">6</div><div><div class="t">Exclusivity → DD → completion</div><div class="d">If accepted, a lock-out period, then the same diligence, legals and funding as any deal (Memos 08–09).</div></div></div>
+    </div>
+
+    <p style="font-weight:600;margin:20px 0 4px">Getting past the gatekeeper</p>
+    <p style="font-size:.92rem;color:var(--ink-soft)">Brokers work for the seller and screen buyers hard — they prioritise people who look <strong>serious and able to close</strong>, and quietly ignore tyre-kickers. As honest first-timers, you win them over with <strong>clarity and professionalism</strong>, not bravado: a clear buying thesis, sector knowledge, a real funding route, and fast, courteous responses. Keep the broker warm — they control access and can favour you.</p>
+
+    <div class="msg">
+      <div class="mh"><span class="t">Enquiry to a broker</span><span class="tag">short · serious · honest</span></div>
+      <div class="body">
+        <p>Hi <span class="ph">[broker]</span>, I'd like to look at <span class="ph">[listing / ref]</span>.</p>
+        <p>Quick background: my business partner and I are actively looking to acquire and personally run one established <span class="ph">[sector]</span> business, funding route identified (Growth Guarantee Scheme + seller finance), and we can move properly on the right one. Could you send the NDA and information memorandum so we can take a serious look? Happy to jump on a call.</p>
+        <p>Thanks, <span class="ph">[name] · [phone]</span></p>
+      </div>
+    </div>
+    <p style="font-size:.82rem;color:var(--muted);margin-top:8px">Keep it truthful — "funding route identified", not "cash ready". Brokers spot bluffing instantly, and honesty from a credible first-timer beats a hollow boast.</p>
+
+    <div class="note ox">
+      <span class="k">On-market watch-outs</span>
+      <ul>
+        <li><b>The IM has happy ears built in</b> — it's marketing. Verify everything (Memo 11).</li>
+        <li><b>Competition inflates price</b> — set your walk-away number before you engage, and hold it. Don't get auction fever.</li>
+        <li><b>The broker isn't on your side</b> — they're paid by the seller to get the highest price. Courteous, not confiding.</li>
+        <li><b>Stale &amp; overpriced listings</b> are common — a business sitting unsold for a year is a signal (see the smart play below).</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <div class="sh"><span class="n">04</span><h2>The smart play — work both doors</h2></div>
+    <div class="note pine">
+      <span class="k">Run them in parallel</span>
+      <p><strong>Off-market is your edge</strong> — the best deals at the best prices, less competition. <strong>On-market is your training ground and deal flow</strong> — it teaches you the process, brokers, IMs and offers on live deals, and occasionally throws up a gem.</p>
+      <p>Spend the majority of your effort off-market (where the value is), but actively work on-market listings that fit the buy box — especially for your <em>first</em> deal, where learning the mechanics on a real transaction is worth a lot.</p>
+    </div>
+    <div class="note">
+      <span class="k">The hybrid worth knowing</span>
+      <p>A listing that's <strong>sat unsold for 6–12 months</strong> is a motivated seller hiding in plain sight — the broker process has failed them. Approach it with off-market patience and warmth (legacy, their people, a fair deal that completes) rather than as a competitive bid, and you often get off-market terms on an on-market business.</p>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p><b>Two Front Doors v1.</b> Off-market messaging lives in Memo 05; the first conversation in Memo 07; funding &amp; team in 08–09; the honesty guardrails in 11. Know your door, then use the right playbook.</p>
+    <p style="margin-top:10px" class="mono">Guidance for your own outreach — keep every claim truthful; read any NDA before signing and take advice on binding documents.</p>
+  </footer>
+
+</div>
